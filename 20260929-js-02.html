@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>OpenData - 地方美食資料練習</title>
+    <link rel="stylesheet" href="css/style.css">
+
+    <style>
+        .demo {
+            display: flex;
+            flex-wrap: wrap;
+            padding: 0 20px;
+        }
+
+        .card {
+            background: #eee;
+            border-radius: 20px;
+            display: inline-flex;
+            flex-wrap: wrap;
+            width: calc(100% / 3 - 20px);
+            margin: 10px;
+            padding: 10px;
+        }
+
+
+        .card p {
+            width: 100%;
+        }
+
+        img {
+            border-radius: 10px;
+            height: 70%;
+            overflow: hidden;
+            margin-bottom: 10px;
+        }
+
+        @media screen and (max-width: 768px) {
+            .card {
+                width: calc(100% / 2 - 20px);
+            }
+        }
+
+        @media screen and (max-width: 320px) {
+            .card {
+                width: calc(100% - 20px);
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <div class="wrapper">
+        <div class="demo"></div>
+    </div>
+
+    <script src="js/jquery-4.0.0.js"></script>
+    <script src="js/travelFood.js"></script>
+
+    <script>
+
+        // let str = "<ul>";
+
+        // food.forEach(item => {
+        //     // console.log(item.Name);
+
+        //     str += `<li>${item.Name} - ${item.City} - ${item.Email} </li>`
+        // });
+
+        // $('.demo').append(str + '</ul>');
+
+
+        let str = "";
+        food.forEach(item => {
+            str += `<div class='card'><img src='${item.PicURL}'><p>店家: ${item.Name}</p><p>電話: ${item.Tel}</p></div>`
+        });
+
+        $('.demo').append(str);
+
+    </script>
+</body>
+
+</html>

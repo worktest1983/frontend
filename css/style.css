@@ -1,0 +1,44 @@
+@charset 'UTF-8';
+
+@import url(base.css);
+
+/* Title */
+.title {
+    font-weight: bold;
+    letter-spacing: 4px;
+    margin: 20px 0;
+    padding: 0 10px;
+    text-align: center;
+}
+
+.title-01 {
+    color: var(--title-01);
+    font-size: 26px;
+}
+
+.title-02 {
+    color: var(--title-02);
+    font-size: 48px;
+}
+
+.title-03 {
+    color: var(--title-03);
+    font-size: 48px;
+}
+
+
+/* 常用設定 */
+
+ul {
+    display: flex;
+    flex-wrap: wrap;
+    align-content: center;
+    margin: 10px;
+}
+
+li {
+    display: inline-flex;
+    align-items: center;
+    flex: 1 1 100%;
+    padding: 5px 0;
+}
