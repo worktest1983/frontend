@@ -6,13 +6,50 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>學習歷程首頁</title>
     <link rel="stylesheet" href="css/style.css">
+    <style>
+        .content {
+            display: flex;
+            align-items: center;
+            flex-direction: column;
+        }
+
+        ul {
+            align-items: center;
+            flex-direction: column;
+            width: 100%;
+        }
+
+        li {
+            flex: none;
+            width: 100%;
+        }
+
+        .btn {
+            background-color: var(--btn-bg);
+            color: var(--btn-text);
+            padding: 10px;
+            width: 100%;
+            display: flex;
+            justify-content: center;
+            transition: all .3s ease-in-out;
+        }
+
+        .btn:hover {
+            background-color: var(--primary-color);
+        }
+    </style>
 </head>
 
 <body>
-    <ul>
-        <li><a href="practice-rwd.html" target="_blank">HTML and CSS 排版練習</a></li>
-        <li><a href="20260929-js-02.html" target="_blank">JS語法練習 - 地方美食 OpenData </a></li>
-    </ul>
+    <div class="wrapper">
+        <div class="content">
+            <h1 class="title-02">學習歷程筆記展示</h1>
+            <ul>
+                <li><a class="btn" href="practice-rwd.html" target="_blank">HTML and CSS 排版練習</a></li>
+                <li><a class="btn" href="20260929-js-02.html" target="_blank">JS語法練習 - 地方美食 OpenData </a></li>
+            </ul>
+        </div>
+    </div>
 
     <script src="js/jquery-4.0.0.js"></script>
 </body>
