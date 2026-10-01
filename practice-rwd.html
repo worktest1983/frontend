@@ -1,0 +1,335 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>練習01. 使用CSS語法配置版面</title>
+    <link rel="stylesheet" href="css/base.css">
+    <style>
+        .wrapper {
+            width: 1024px;
+            margin: 0 auto;
+        }
+
+        .logo {
+            /* background: url(images/01.jpg) no-repeat center center; */
+            /* background-size: cover; */
+            background-image: url(images/01.jpg);
+            background-repeat: no-repeat;
+            width: 1024px;
+            height: 220px;
+        }
+
+        nav {
+            background-color: var(--nav-bg);
+            width: 100%;
+
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        nav ul {
+            display: flex;
+            width: 80%;
+        }
+
+        nav li {
+            display: inline-flex;
+            flex: 1;
+            justify-content: center;
+            align-items: center;
+        }
+
+        nav li a {
+            color: var(--link-text);
+            display: flex;
+            flex: 1;
+            justify-content: center;
+            align-items: center;
+            padding: 10px 20px;
+            transition: all .3s ease-in-out;
+        }
+
+        nav li a:hover {
+            background-color: var(--primary-color);
+        }
+
+        .content {
+            background-color: var(--content-bg);
+            padding: 10px 20px;
+        }
+
+        .content h1 {
+            color: var(--primary-color);
+            text-align: center;
+            margin: 30px 0;
+        }
+
+        .content p {
+            margin: 10px 0;
+        }
+
+        .btn {
+            background-color: var(--btn-bg);
+            color: var(--btn-text);
+            padding: 10px;
+            width: 120px;
+            display: flex;
+            justify-content: center;
+            margin: 20px auto;
+            transition: all .3s ease-in-out;
+        }
+
+        .btn:hover {
+            background-color: var(--primary-color);
+        }
+
+        footer {
+            background-color: var(--footer-bg);
+            color: var(--footer-text);
+            display: flex;
+            justify-content: center;
+            padding: 10px 0;
+        }
+
+
+
+        @media screen and (max-width: 1024px) {
+            .wrapper {
+                width: 100%;
+            }
+
+            .logo {
+                background-image: url(images/02.jpg);
+                width: 100%;
+                height: 160px;
+            }
+
+            nav ul {
+                display: block;
+                width: 100%;
+            }
+
+            nav li {
+                display: flex;
+                flex: 1 1 150px;
+                /* min-width: 150px; */
+            }
+
+            .content h1 {
+                margin: 10px 0;
+            }
+        }
+
+        @media screen and (max-width: 600px) {
+
+            /* ---------- 整體 ---------- */
+
+            body {
+                background-color: #f5f1e8;
+                font-size: 15px;
+            }
+
+            .wrapper {
+                width: 100%;
+                margin: 0;
+            }
+
+
+            /* ---------- 主視覺 ---------- */
+
+            .logo {
+                width: 100%;
+                height: 220px;
+
+                background-image: url(images/02.jpg);
+                background-position: center;
+                background-size: cover;
+
+                /* 圖片加上一點圓角 */
+                border-radius: 0 0 25px 25px;
+
+                /* 陰影讓圖片更有 App 感 */
+                box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+            }
+
+
+            /* ---------- 手機導覽列 ---------- */
+
+            nav {
+                background-color: transparent;
+                padding: 12px 10px;
+            }
+
+            nav ul {
+                display: grid;
+                grid-template-columns: repeat(2, 1fr);
+                gap: 8px;
+
+                width: 100%;
+            }
+
+            nav li {
+                display: flex;
+                min-width: 0;
+            }
+
+            nav li a {
+                background-color: #55ADCD;
+
+                padding: 12px 5px;
+
+                border-radius: 12px;
+
+                font-size: 14px;
+
+                box-shadow: 0 3px 6px rgba(0, 0, 0, 0.1);
+
+                transition: all .3s ease-in-out;
+            }
+
+            nav li a:hover {
+                background-color: #1F4F97;
+                transform: translateY(-2px);
+            }
+
+
+            /* ---------- 主要內容 ---------- */
+
+            .content {
+                background-color: #fff;
+
+                margin: 0 10px;
+                padding: 20px 18px;
+
+                border-radius: 20px;
+
+                box-shadow: 0 3px 12px rgba(0, 0, 0, 0.08);
+            }
+
+            .content h1 {
+                color: #25707b;
+
+                font-size: 26px;
+
+                margin: 5px 0 20px;
+
+                position: relative;
+            }
+
+            /* 標題底線裝飾 */
+
+            .content h1::after {
+                content: "";
+
+                display: block;
+
+                width: 45px;
+                height: 3px;
+
+                background-color: #F2B56B;
+
+                margin: 10px auto 0;
+
+                border-radius: 5px;
+            }
+
+            .content p {
+                margin: 12px 0;
+
+                line-height: 1.9;
+
+                color: #666;
+
+                text-align: justify;
+            }
+
+
+            /* ---------- 了解更多按鈕 ---------- */
+
+            .btn {
+                width: 90%;
+
+                padding: 13px 20px;
+
+                margin: 25px auto 5px;
+
+                background-color: #F2A65A;
+
+                border-radius: 30px;
+
+                font-size: 16px;
+
+                font-weight: bold;
+
+                box-shadow: 0 4px 8px rgba(242, 166, 90, 0.3);
+
+                transition: all .3s ease-in-out;
+            }
+
+            .btn:hover {
+                background-color: #e88c35;
+
+                transform: translateY(-2px);
+            }
+
+
+            /* ---------- Footer ---------- */
+
+            footer {
+                background-color: #25707b;
+
+                margin-top: 20px;
+
+                padding: 18px 10px;
+
+                text-align: center;
+            }
+
+            footer p {
+                font-size: 12px;
+
+                line-height: 20px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <div class="wrapper">
+        <div class="banner">
+            <div class="logo bg-img"></div>
+            <nav>
+                <ul>
+                    <li><a href="#">首頁</a></li>
+                    <li><a href="#">最新消息</a></li>
+                    <li><a href="#">合作店家</a></li>
+                    <li><a href="#">關於我們</a></li>
+                    <li><a href="#">聯絡我們</a></li>
+                </ul>
+            </nav>
+        </div>
+
+        <div class="content">
+            <h1>歡迎光臨</h1>
+            <div>
+                <p class="fw-300">那裡一路校園也在連接完整對比日誌豪華排名社會主義選項一邊實力，強烈您是成果，影音建設承擔中有，不喜。</p>
+                <p class="fw-400">
+                    只見回應網上你們的順利條件的說參觀電信有一些鄉民們，信箱又是是誰授權方式參與，資產對待顯得三年精選規範部分加大當初技能，創作龍岡少女多媒體，留學蘋果排行玄幻，這種人數，也能對我不錯預防，你好我在清晰書庫確實工程師，客戶但他可惜破解雙方選手新竹衝擊主體走進買賣都能高手國務院，植物我說感謝保證小孩，往往面積女兒微軟演員地區兩人合同生氣電話服裝一年那是工程師，事件之前更為，金融瞬間，網易覺得生物，小七。
+                </p>
+                <p class="fw-900">
+                    貼圖購物背景，精英彷彿公司什麼時候應該，管理員轉移沒有機票規則土地，臨床破壞性格，標籤筆者新技術作用確保指數本論壇演唱會作業典型造型，商機說出，建設便宜開放內存她說認真隱藏版眼中，好像一定會就會指標零售據說不需要腦袋添加，街道等待這樣表現上去就能，一絲機關權益資本開關連結財經漫畫寫真類型圖書館我很可用，辦公當地一下贏得花園黑暗，共同大幅不敢位於驚訝創意加油羅東優質避免保持工資，躺在就像身材顯示日常原文壓力網際快車將會連續那樣不承擔，圖書館突破士兵總統定義很少尤其任何人，以及音樂每次對她就不都會看著，主板促進進行給你求購這麼開發嚴格分析，意義電力中央價格定位，發言確實傳說，邀請百姓改造不對合同如下批評之間說過大型顧客浪費室內，日誌還能申請形成具備加工招商西部可惜抓住廠家發表，腦袋原料新聞看出篇文章，最高恐怖編號福建創意新人事故經歷註冊朋友決定工程師發表證明，另一類別傳播這個需求業主，推坑王。
+                </p>
+            </div>
+            <a href="#" class="btn">了解更多</a>
+        </div>
+
+        <footer>
+            <p>雲端技術應用實務班版權所有2026</p>
+        </footer>
+    </div>
+</body>
+
+</html>
