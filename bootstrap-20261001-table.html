@@ -1,17 +1,52 @@
 <!DOCTYPE html>
 <html lang="zh-TW">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Bootstrap - Table</title>
     <link rel="stylesheet" href="css/bootstrap.min.css">
     <link rel="stylesheet" href="css/style.css">
+
+    <style>
+        @media screen and (max-width: 768px) {
+            .table-rwd thead {
+                display: none;
+            }
+
+            .table-rwd tbody tr {
+                display: block;
+            }
+
+            .table-rwd tbody tr td {
+                display: block;
+                overflow: hidden;
+            }
+
+            .table-rwd tbody tr td::before {
+                content: attr(data-th) " : ";
+                font-weight: 900;
+                display: block;
+                float: left;
+                width: 30%;
+                text-align: right;
+                padding-right: 10px;
+            }
+
+            .table-rwd tbody tr span {
+                display: block;
+                float: left;
+                width: 70%;
+            }
+        }
+    </style>
 </head>
+
 <body>
     <div class="container">
-        <div class="display-2 text-center mt-4">產品列表</div> 
-        
-        <table class="table mt-4 table-bordered text-center table-striped table-hover table-sm">
+        <div class="display-2 text-center mt-4">產品列表</div>
+
+        <table class="table mt-4 table-bordered table-hover table-sm table-rwd">
             <thead class="table-dark">
                 <tr>
                     <th>產品編號</th>
@@ -23,25 +58,31 @@
             </thead>
             <tbody>
                 <tr>
-                    <td>01</td>
-                    <td>美式咖啡</td>
-                    <td>60</td>
-                    <td>10</td>
-                    <td>無糖去冰</td>
+                    <td data-th="產品編號"><span>01</span></td>
+                    <td data-th="產品名稱"><span>美式咖啡</span></td>
+                    <td data-th="產品價格"><span>60</span></td>
+                    <td data-th="產品數量"><span>10</span></td>
+                    <td data-th="產品備註">
+                        <span>每日昨天，財政優化禮物期間股市語言網址好評回去山西，屏幕精品本文最新航空文章實現充滿說到這個問題，日月潭合同便是那種隱藏版加油上門都說高級加速抽菸區追求，貸款資料床上查找提示眾多人大更多品牌我還，顯。</span>
+                    </td>
+                </tr>
+                <tr class="table-warning">
+                    <td data-th="產品編號"><span>02</span></td>
+                    <td data-th="產品名稱"><span>拿鐵咖啡</span></td>
+                    <td data-th="產品價格"><span>60</span></td>
+                    <td data-th="產品數量"><span>10</span></td>
+                    <td data-th="產品備註">
+                        <span>每日昨天，財政優化禮物期間股市語言網址好評回去山西，屏幕精品本文最新航空文章實現充滿說到這個問題，日月潭合同便是那種隱藏版加油上門都說高級加速抽菸區追求，貸款資料床上查找提示眾多人大更多品牌我還，顯。</span>
+                    </td>
                 </tr>
                 <tr>
-                    <td>02</td>
-                    <td>拿鐵咖啡</td>
-                    <td>60</td>
-                    <td>10</td>
-                    <td>無糖去冰</td>
-                </tr>
-                <tr>
-                    <td>03</td>
-                    <td>西西里咖啡</td>
-                    <td>60</td>
-                    <td>10</td>
-                    <td>無糖去冰</td>
+                    <td data-th="產品編號"><span>03</span></td>
+                    <td data-th="產品名稱"><span>西西里咖啡</span></td>
+                    <td data-th="產品價格"><span>60</span></td>
+                    <td data-th="產品數量"><span>10</span></td>
+                    <td data-th="產品備註">
+                        <span>每日昨天，財政優化禮物期間股市語言網址好評回去山西，屏幕精品本文最新航空文章實現充滿說到這個問題，日月潭合同便是那種隱藏版加油上門都說高級加速抽菸區追求，貸款資料床上查找提示眾多人大更多品牌我還，顯。</span>
+                    </td>
                 </tr>
             </tbody>
         </table>
@@ -49,7 +90,8 @@
 
     <script src="js/bootstrap.min.js"></script>
     <script src="js/jquery-4.0.0.js"></script>
-    
+
     <script></script>
 </body>
+
 </html>
