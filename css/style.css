@@ -29,16 +29,4 @@
 
 /* 常用設定 */
 
-ul {
-    display: flex;
-    flex-wrap: wrap;
-    align-content: center;
-    margin: 10px;
-}
-
-li {
-    display: inline-flex;
-    align-items: center;
-    flex: 1 1 100%;
-    padding: 5px 0;
-}
+…

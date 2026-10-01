@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bootstrap</title>
+    <link rel="stylesheet" href="css/bootstrap.min.css">
+    <link rel="stylesheet" href="css/style.css">
+</head>
+
+<body>
+    <nav class="navbar navbar-expand-lg bg-dark navbar-dark">
+        <div class="container-fluid">
+            <a class="navbar-brand" href="#">SHOP</a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
+                aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav">
+                    <li class="nav-item">
+                        <a class="nav-link active" aria-current="page" href="#">Home</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#">Features</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#">Pricing</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link disabled">Disabled</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <div class="container mt-4">
+        <div class="row row-cols-1 row-cols-md-2 g-4" id="foodList">
+
+            <div class="col">
+                <div class="card">
+                    <img src="images/01.jpg" class="card-img-top" alt="...">
+                    <div class="card-body">
+                        <div class="display-6 fw-900 text-start">餐廳名稱</div>
+                        <div class="h5 text-center">地址:.....</div>
+                        <div class="h5 text-end">電話:.....</div>
+                        <p class="card-text text-truncate">
+                            焦點貼圖當年充滿有時面積求助富岡，沒有任何訂單明確聯繫越來越結束神秘原則會員，進去連載，戰爭突出言論連結英雄本地下載本類是誰客服當年經過總經理，毫不聽說場所，反而中壢頻率超市大盤短信日報，原始碼自主。
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <ul class="nav justify-content-center">
+        <li class="nav-item">
+            <a class="nav-link disabled">Power By Apries 2026.10.01</a>
+        </li>
+    </ul>
+
+    <script src="js/bootstrap.min.js"></script>
+    <script src="js/jquery-4.0.0.js"></script>
+    <script src="js/travelFood.js"></script>
+
+    <script>
+
+        $('#foodList').empty();
+
+        food.forEach(item => {
+            const strHtml = `
+                <div class="col">
+                    <div class="card">
+                        <img src="${item.PicURL}" class="card-img-top" alt="...">
+                        <div class="card-body">
+                            <div class="h3 fw-900">${item.Name}</div>
+                            <div>${item.Address}</div>
+                            <div>${item.Tel}</div>
+                            <p class="card-text text-truncate">${item.FoodFeature}</p>
+                        </div>
+                    </div>
+                </div>
+            </div>`;
+
+            $('#foodList').append(strHtml);
+        });
+    </script>
+</body>
+
+</html>
