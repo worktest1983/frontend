@@ -1,0 +1,124 @@
+{
+    "travelFood": [
+        {
+            "ID": "01_001",
+            "Name": "臺中國家歌劇院",
+            "Address": "臺中市西屯區惠來路二段101號",
+            "Tel": "04-2251-1777",
+            "HostWords": "臺中國家歌劇院由日本建築師伊東豊雄設計，以美聲涵洞為概念，採用曲牆、孔洞與管狀空間打造特殊建築外觀，是臺中最具代表性的現代建築地標之一。",
+            "City": "台中市",
+            "Town": "西屯區",
+            "PicURL": "https://unsplash.com/photos/a-building-with-a-glass-front-RcGQ1VItZ_E",
+            "Latitude": "24.162649",
+            "Longitude": "120.640300"
+        },
+        {
+            "ID": "01_002",
+            "Name": "高美濕地",
+            "Address": "臺中市清水區大甲溪出海口",
+            "Tel": "04-2611-1566",
+            "HostWords": "高美濕地位於臺中市清水區大甲溪出海口南側，擁有豐富的濕地生態與鳥類資源，也是臺中著名的夕陽景點，木棧道與風車景觀相當具有代表性。",
+            "City": "台中市",
+            "Town": "清水區",
+            "PicURL": "https://unsplash.com/photos/a-wooden-walkway-leading-to-a-body-of-water-fOFUdWcu6f8",
+            "Latitude": "24.311951",
+            "Longitude": "120.549810"
+        },
+        {
+            "ID": "01_003",
+            "Name": "彩虹眷村",
+            "Address": "臺中市南屯區春安路56巷25號",
+            "Tel": "04-2228-9111",
+            "HostWords": "彩虹眷村以繽紛彩繪牆面聞名，原為眷村聚落，經彩虹爺爺黃永阜先生彩繪後成為臺中熱門旅遊景點，充滿童趣與藝術氣息。",
+            "City": "台中市",
+            "Town": "南屯區",
+            "PicURL": "https://unsplash.com/photos/red-and-white-wall-with-graffiti-V2v9Y7N1980",
+            "Latitude": "24.133681",
+            "Longitude": "120.609830"
+        },
+        {
+            "ID": "01_004",
+            "Name": "審計新村",
+            "Address": "臺中市西區民生路368巷",
+            "Tel": "",
+            "HostWords": "審計新村原為臺灣省政府審計處員工宿舍，經活化後成為青年創業與文創聚落，保留老宿舍建築特色，聚集特色小店、咖啡館、甜點及文創品牌。",
+            "City": "台中市",
+            "Town": "西區",
+            "PicURL": "https://unsplash.com/s/photos/audit-village-taichung",
+            "Latitude": "24.146700",
+            "Longitude": "120.663000"
+        },
+        {
+            "ID": "01_005",
+            "Name": "逢甲觀光夜市",
+            "Address": "臺中市西屯區文華路",
+            "Tel": "",
+            "HostWords": "逢甲觀光夜市是臺中最具代表性的夜市之一，鄰近逢甲大學，聚集大量特色小吃、飲料、服飾及娛樂商店，是體驗臺中夜間美食與城市活力的熱門地點。",
+            "City": "台中市",
+            "Town": "西屯區",
+            "PicURL": "https://unsplash.com/photos/street-food-stall-with-people-preparing-food-_2z5W7i-Mwk",
+            "Latitude": "24.179600",
+            "Longitude": "120.646700"
+        },
+        {
+            "ID": "01_006",
+            "Name": "臺中公園",
+            "Address": "臺中市北區雙十路一段65號",
+            "Tel": "04-2228-9111",
+            "HostWords": "臺中公園是臺中市區著名的歷史公園，園內最具代表性的景觀為湖心亭，周邊綠意與湖景適合散步休憩，也是臺中重要的城市歷史地標。",
+            "City": "台中市",
+            "Town": "北區",
+            "PicURL": "https://unsplash.com/photos/a-beautiful-pavilion-reflected-in-still-water-at-night-M8EScS2AgvU",
+            "Latitude": "24.143900",
+            "Longitude": "120.686900"
+        },
+        {
+            "ID": "01_007",
+            "Name": "大坑風景區",
+            "Address": "臺中市北屯區東山路一段383巷",
+            "Tel": "04-2228-9111",
+            "HostWords": "大坑風景區位於臺中市北屯區，以山林景觀與登山步道聞名，擁有多條難度不同的登山路線，是臺中市民與遊客親近自然、健行與欣賞山景的熱門去處。",
+            "City": "台中市",
+            "Town": "北屯區",
+            "PicURL": "https://unsplash.com/photos/a-set-of-stairs-leading-up-to-a-forest-8CQ-cBQZLZs",
+            "Latitude": "24.181000",
+            "Longitude": "120.779000"
+        },
+        {
+            "ID": "01_008",
+            "Name": "武陵農場",
+            "Address": "臺中市和平區武陵路3-1號",
+            "Tel": "04-2590-1259",
+            "HostWords": "武陵農場位於臺中市和平區山區，以高山自然景觀、櫻花、楓葉、果園與雪山山景著名，四季皆有不同景色，是臺中著名的高山旅遊目的地。",
+            "City": "台中市",
+            "Town": "和平區",
+            "PicURL": "https://unsplash.com/photos/brown-and-gray-hose-near-green-leafed-tree-under-sky-sGblr5yVXiM",
+            "Latitude": "24.353000",
+            "Longitude": "121.309000"
+        },
+        {
+            "ID": "01_009",
+            "Name": "新社古堡花園",
+            "Address": "臺中市新社區協中街23號",
+            "Tel": "",
+            "HostWords": "新社古堡花園以歐式城堡、湖泊、庭園與綠意景觀聞名，園區融合歐洲古堡建築與自然景觀，是臺中新社地區相當受歡迎的拍照與休閒旅遊景點。",
+            "City": "台中市",
+            "Town": "新社區",
+            "PicURL": "https://unsplash.com/s/photos/xinshe-castle-taichung",
+            "Latitude": "24.213600",
+            "Longitude": "120.827700"
+        },
+        {
+            "ID": "01_010",
+            "Name": "宮原眼科",
+            "Address": "臺中市中區中山路72號",
+            "Tel": "",
+            "HostWords": "宮原眼科為臺中著名歷史建築與觀光景點，原為日治時期眼科診所，經重新設計後成為結合歷史建築、甜點、冰淇淋與伴手禮的熱門旅遊地標。",
+            "City": "台中市",
+            "Town": "中區",
+            "PicURL": "https://unsplash.com/photos/hand-holds-a-large-ice-cream-sundae-outside-Wuu1BNbrAK8",
+            "Latitude": "24.141900",
+            "Longitude": "120.682800"
+        }
+    ]
+}
