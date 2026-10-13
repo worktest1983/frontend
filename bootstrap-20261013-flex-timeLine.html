@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Flex - 時間軸</title>
+    <link rel="stylesheet" href="css/bootstrap.min.css">
+    <link rel="stylesheet" href="css/style.css">
+    <style>
+        .imgbox {
+            height: 220px;
+            background-position: 0 0;
+            background-size: cover;
+            background-repeat: no-repeat;
+        }
+
+        .timeline-section {
+            position: relative;
+        }
+
+        .timeline-section::before {
+            position: absolute;
+            content: '';
+            left: 50%;
+            top: 0;
+            width: 5px;
+            height: 100%;
+            background: rgba(24, 124, 155, 0.5);
+            transform: translateX(-50%);
+        }
+        
+        .timeline-section-pointer {
+            position: relative;
+        }
+
+        .timeline-section-pointer::before {
+            position: absolute;
+            content: '';
+            left: 50%;
+            top: 0;
+            width: 20px;
+            height: 20px;
+            border-radius: 50%;
+            background: rgba(93, 177, 216, 0.9);
+            border: 5px solid rgba(8, 64, 129, 0.9);
+            transform: translateX(-50%);
+        }
+
+        @media  screen and (max-width: 768px) {
+            /* .timeline-section::before,
+            .timeline-section-pointer::before {
+                display: none;
+            } */
+
+            .timeline-section::before {
+                left: -32px;
+            }
+            
+            .timeline-section-pointer::before {
+                left: -20px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container">
+        <div class="display-5 text-center fw-900 my-4">時間軸(Time line)</div>
+
+        <div class="timeline-section">
+            <div class="row mt-3 align-itmes-center timeline-section-pointer">
+                <div class="col-md-6">
+                    <div class="imgbox" style="background-image: url(images/01.jpg);"></div>
+                </div>
+                <div class="col-md-6">
+                    <div class="h2 fw-900 text-center">01 標題</div>
+                    <p>臺東地方，注重信譽北方，語言情形期間哈哈，經過一年可用教育，不斷難道根據男生，江湖圖形考察，碩士上。</p>
+                </div>
+            </div>
+
+            <div class="row mt-3 flex-row-reverse align-itmes-center timeline-section-pointer">
+                <div class="col-md-6">
+                    <div class="imgbox" style="background-image: url(images/02.jpg);"></div>
+                </div>
+                <div class="col-md-6">
+                    <div class="h2 fw-900 text-center">02 標題</div>
+                    <p>臺東地方，注重信譽北方，語言情形期間哈哈，經過一年可用教育，不斷難道根據男生，江湖圖形考察，碩士上。</p>
+                </div>
+            </div>
+
+            <div class="row mt-3 align-itmes-center timeline-section-pointer">
+                <div class="col-md-6">
+                    <div class="imgbox" style="background-image: url(images/03.jpg);"></div>
+                </div>
+                <div class="col-md-6">
+                    <div class="h2 fw-900 text-center">03 標題</div>
+                    <p>臺東地方，注重信譽北方，語言情形期間哈哈，經過一年可用教育，不斷難道根據男生，江湖圖形考察，碩士上。</p>
+                </div>
+            </div>
+
+            <div class="row mt-3 flex-row-reverse align-itmes-center timeline-section-pointer">
+                <div class="col-md-6">
+                    <div class="imgbox" style="background-image: url(images/01.avif);"></div>
+                </div>
+                <div class="col-md-6">
+                    <div class="h2 fw-900 text-center">04 標題</div>
+                    <p>臺東地方，注重信譽北方，語言情形期間哈哈，經過一年可用教育，不斷難道根據男生，江湖圖形考察，碩士上。</p>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script src="js/bootstrap.min.js"></script>
+</body>
+
+</html>
