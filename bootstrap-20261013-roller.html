@@ -11,24 +11,6 @@
         .box {
             height: 180px;
         }
-
-        .roller {
-            position: relative;
-            overflow: hidden;
-        }
-
-        .roller .rollerBox {
-            position: absolute;
-            width: 100%;
-            height: 100%;
-            background: rgba(233, 233, 233, .3);
-            transform: translateX(-100%);
-        }
-
-        .roller:hover .rollerBox  {
-            transform: translateX(0);
-            transition: transform .5s ease-in;
-        }
     </style>
 </head>
 <body>
@@ -36,9 +18,39 @@
     <div class="container">
         <div class="row">
             <div class="col-6 mt-3">
-                <div class="box bg-info roller">
+                <div class="box bg-info roller roller-l">
                     <div class="rollerBox">
-                        天氣湖口，中壢昨日。
+                        <button class="btn btn-dark">查看更多</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-6 mt-3">
+                <div class="box bg-info roller roller-r">
+                    <div class="rollerBox">
+                        <button class="btn btn-dark">查看更多</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-6 mt-3">
+                <div class="box bg-info roller roller-t">
+                    <div class="rollerBox">
+                        <button class="btn btn-dark">查看更多</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-6 mt-3">
+                <div class="box bg-info roller roller-b">
+                    <div class="rollerBox">
+                        <button class="btn btn-dark">查看更多</button>
                     </div>
                 </div>
             </div>

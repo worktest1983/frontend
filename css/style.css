@@ -29,4 +29,51 @@
 
 /* 常用設定 */
 
-…
+
+/* 動畫設定 - 滑入滑出*/
+
+.roller {
+    position: relative;
+    overflow: hidden;
+}
+
+.roller .rollerBox {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, .3);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.roller:hover .rollerBox {
+    transform: translateX(0);
+    transition: transform .5s ease-in;
+}
+
+.roller-t .rollerBox {
+    transform: translateY(-100%);
+}
+
+.roller-b .rollerBox {
+    transform: translateY(100%);
+}
+
+.roller-t:hover .rollerBox,
+.roller-b:hover .rollerBox {
+    transform: translateY(0);
+}
+
+.roller-l .rollerBox {
+    transform: translateX(-100%);
+}
+
+.roller-r .rollerBox {
+    transform: translateX(100%);
+}
+
+.roller-l:hover .rollerBox,
+.roller-r:hover .rollerBox {
+    transform: translateX(0);
+}
