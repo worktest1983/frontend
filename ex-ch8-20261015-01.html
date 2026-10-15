@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ch8 表單排版(JS)</title>
+    <link rel="stylesheet" href="css/bootstrap.min.css">
+    <link rel="stylesheet" href="css/style.css">
+</head>
+
+<body>
+    <div class="container">
+        <div class="row">
+            <div class="col-12">
+                <div class="display-4 text-bg-warning fw-900 text-center py-3 my-3">課程線上報名表</div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-12">
+                <div class="mb-3">
+                    <label for="username" class="form-label">姓名</label>
+                    <input type="text" class="form-control form-control-lg" id="username">
+                    <div class="valid-feedback">符合規定</div>
+                    <div class="invalid-feedback">姓名格式為1-9位數</div>
+                </div>
+                <div class="mb-3">
+                    <label for="password" class="form-label">密碼</label>
+                    <input type="password" class="form-control form-control-lg" id="password">
+                    <div class="valid-feedback">符合規定</div>
+                    <div class="invalid-feedback">密碼格式為8-16位數</div>
+                </div>
+                <div class="mb-3">
+                    <label for="phone" class="form-label">Email</label>
+                    <input type="email" class="form-control form-control-lg" id="email">
+                    <div class="valid-feedback">符合規定</div>
+                    <div class="invalid-feedback">Email格式為8-15位數且必須包含@</div>
+                </div>
+                <div class="mb-3">
+                    <label for="phone" class="form-label">手機</label>
+                    <input type="text" class="form-control form-control-lg" id="phone">
+                    <div class="valid-feedback">符合規定</div>
+                    <div class="invalid-feedback">手機格式為10位數且為09開頭</div>
+                </div>
+            </div>
+            <div class="col-12 text-center mt-3">
+                <button class="btn btn-primary" id="submit">確認送出</button>
+                <button class="btn btn-secondary" id="reset">重新填寫</button>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-12">
+                <div class="display-6 text-danger fw-900 my-3 py-3">報名資料確認</div>
+            </div>
+            <div class="col-12" id="showMsg"></div>
+        </div>
+    </div>
+
+    <script src="js/bootstrap.min.js"></script>
+    <script src="js/jquery-4.0.0.js"></script>
+
+    <script>
+        $(() => {
+
+            // let flag_username = false;
+
+            // 即時監聽 input, change
+            // $("#username").on("input", function () {
+            //     const _this = $(this);
+            //     // console.log("input: ", $(this).val());
+            //     if (_this.val().length > 1 && _this.val().length < 9) {
+            //         // console.log("符合規定", _this.val().length);
+            //         _this.removeClass("is-invalid").addClass("is-valid");
+            //         flag_username = true;
+
+            //     } else {
+            //         // console.log("不符合規定", _this.val().length);
+            //         _this.removeClass("is-valid").addClass("is-invalid");
+            //         flag_username = false;
+            //     }
+
+            // })
+
+            // $("#username").on("change", function() {
+            //     console.log("change: ",  $(this).val());
+            // })
+
+
+            // Form submit
+            // $("#submit").on("click", () => {
+            //     const username = $("#username").val();
+            //     $("#username").removeClass("is-valid");
+
+            //     // const show = flag_username ? alert("符合規定") : alert("不符合規定");
+
+            //     const strHtml = `<div class="h2">姓名: ${username}</div>`
+            //     $("#showMsg").html(strHtml);
+
+            // })
+
+            // Form Reset
+
+            // $("#reset").on("click", () => {
+            //     $("#username").val('');
+            //     $("#username").removeClass("is-valid").removeClass("is-invalid");
+            // })
+
+
+            $("#submit").on("click", () => {
+                $("#showMsg").empty();
+
+                const username = $("#username").val();
+                const password = $("#password").val();
+                const email = $("#email").val();
+                const phone = $("#phone").val();
+
+                let strHtml = '';
+
+                if (username.length > 1 && username.length < 9) {
+                    $("#username").removeClass("is-invalid").addClass("is-valid");
+
+                    strHtml += `<div class="h2">姓名: ${username}</div>`
+                } else {
+                    $("#username").removeClass("is-valid").addClass("is-invalid");
+                }
+
+                if (password.length > 8 && password.length < 17) {
+                    $("#password").removeClass("is-invalid").addClass("is-valid");
+
+                    strHtml += `<div class="h2">密碼: ${password}</div>`
+                } else {
+                    $("#password").removeClass("is-valid").addClass("is-invalid");
+                }
+
+                if (email.includes('@') && (email.length > 8 && email.length < 16)) {
+                    strHtml += `<div class="h2">Email: ${email}</div>`
+                    $("#email").removeClass("is-invalid").addClass("is-valid");
+
+                } else {
+                    $("#email").removeClass("is-valid").addClass("is-invalid");
+                }
+
+                if (phone.length == 10 && phone.startsWith('09')) {
+                    $("#phone").removeClass("is-invalid").addClass("is-valid");
+
+                    strHtml += `<div class="h2">手機: ${phone}</div>`
+                } else {
+                    $("#phone").removeClass("is-valid").addClass("is-invalid");
+                }
+
+                $("#showMsg").append(strHtml);
+            })
+        })
+    </script>
+</body>
+
+</html>
