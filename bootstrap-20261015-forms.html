@@ -1,0 +1,187 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Forms(表單)</title>
+    <link rel="stylesheet" href="css/bootstrap.min.css">
+    <link rel="stylesheet" href="css/style.css">
+</head>
+
+<body>
+    <div class="container py-5">
+        <div class="display-4 fw-900 text-center text-bg-danger mt-4">Forms(表單)
+        </div>
+        <div class="display-6 fw-900 mt-3 text-primary py-3">1.基本表單樣式</div>
+
+        <div class="row">
+            <div class="col-12">
+                <div class="mb-3">
+                    <label for="username" class="form-label">帳號</label>
+                    <input type="text" class="form-control" id="username">
+                </div>
+                <div class="mb-3">
+                    <label for="password" class="form-label">密碼</label>
+                    <input type="password" class="form-control" id="password">
+                </div>
+                <div class="mb-3">
+                    <label for="email" class="form-label">密碼</label>
+                    <input type="email" class="form-control form-control-lg" id="email">
+                </div>
+                <div class="mb-3">
+                    <label for="num" class="form-label">人數</label>
+                    <input type="number" class="form-control" id="num" min="0" max="10" value="1">
+                </div>
+                <div class="mb-3">
+                    <label for="files" class="form-label">檔案</label>
+                    <input type="file" class="form-control form-control-sm" id="files">
+                </div>
+                <div class="mb-3">
+                    <label for="foodList" class="form-label">點餐(datalist)</label>
+                    <input type="text" class="form-control form-control-lg" id="foodList" list="datalistOption">
+                    <datalist id="datalistOption">
+                        <option value="漢堡"></option>
+                        <option value="拉麵"></option>
+                        <option value="壽司"></option>
+                        <option value="牛肉麵"></option>
+                    </datalist>
+                </div>
+            </div>
+        </div>
+
+
+        <div class="display-6 fw-900 mt-3 text-primary py-3">2.Select</div>
+
+        <div class="row">
+            <div class="col-12">
+                <select name="city" id="city" class="form-select form-select-lg">
+                    <option value="" disabled selected>---請選擇縣市---</option>
+                    <option value="臺北市">臺北市</option>
+                    <option value="桃園市">桃園市</option>
+                    <option value="新竹市">新竹市</option>
+                    <option value="苗栗市">苗栗市</option>
+                    <option value="臺中市">臺中市</option>
+                </select>
+            </div>
+        </div>
+
+
+        <div class="display-6 fw-900 mt-3 text-primary py-3">3.checkbox & radio</div>
+
+        <div class="row">
+            <div class="col-12">
+                <div class="form-check form-check-inline">
+                    <input type="checkbox" id="chk01" class="form-check-input">
+                    <label for="chk01" class="form-check-label">option1</label>
+                </div>
+                <div class="form-check form-check-inline">
+                    <input type="checkbox" id="chk02" class="form-check-input">
+                    <label for="chk02" class="form-check-label">option2</label>
+                </div>
+                <div class="form-check form-check-inline">
+                    <input type="checkbox" id="chk03" class="form-check-input">
+                    <label for="chk03" class="form-check-label">option3</label>
+                </div>
+            </div>
+
+            <hr class="my-3">
+
+            <div class="col-12">
+                <div class="form-check">
+                    <input type="radio" name="radio01" id="radio01" class="form-check-input">
+                    <label for="radio01" class="form-check-label">YES</label>
+                </div>
+                <div class="form-check">
+                    <input type="radio" name="radio01" id="radio02" class="form-check-input">
+                    <label for="radio02" class="form-check-label">NO</label>
+                </div>
+            </div>
+        </div>
+
+        <div class="display-6 fw-900 mt-3 text-primary py-3">4. Switch</div>
+
+        <div class="row">
+            <div class="col-12">
+                <div class="form-check form-switch">
+                    <input type="checkbox" id="chk01" class="form-check-input">
+                    <label for="chk01" class="form-check-label">ON/OFF</label>
+                </div>
+            </div>
+        </div>
+
+        <div class="display-6 fw-900 mt-3 text-primary py-3">5. range</div>
+
+        <div class="row">
+            <div class="col-12">
+                <div class="form-check form-switch">
+                    <label for="" class="form-label">數量: 99個</label>
+                    <input type="range" class="form-range" min="1" max="100" step="1" value="50">
+                </div>
+            </div>
+        </div>
+
+        <div class="display-6 fw-900 mt-3 text-primary py-3">6. input-group</div>
+
+        <div class="row">
+            <div class="col-12">
+                <div class="mb-3 input-group">
+                    <span class="input-group-text">帳號</span>
+                    <input type="text" class="form-control">
+                </div>
+            </div>
+            <div class="col-12">
+                <div class="mb-3 input-group">
+                    <input type="email" class="form-control">
+                    <span class="input-group-text">@gmail.com</span>
+                </div>
+            </div>
+            <div class="col-12">
+                <div class="mb-3 input-group">
+                    <span class="input-group-text">$</span>
+                    <input type="text" class="form-control">
+                    <span class="input-group-text">NT</span>
+                </div>
+            </div>
+            <div class="col-12">
+                <div class="mb-3 input-group">
+                    <input type="text" class="form-control">
+                    <buton class="btn btn-primary">搜尋</buton>
+                </div>
+            </div>
+        </div>
+
+        <div class="display-6 fw-900 mt-3 text-primary py-3">7. Floating Labels(浮動標籤)</div>
+
+        <div class="row">
+            <div class="col-12">
+                <div class="mb-3 form-floating">
+                    <input type="text" class="form-control form-control-lg" placeholder="請輸入帳號" id="username">
+                    <label for="username" class="form-label">帳號</label>
+                </div>
+            </div>
+        </div>
+
+        <div class="display-6 fw-900 mt-3 text-primary py-3">8. 表單驗證</div>
+
+        <div class="row">
+            <div class="col-12">
+                <div class="mb-3">
+                    <label for="username" class="form-label">帳號</label>
+                    <input type="text" class="form-control is-invalid" id="username" placeholder="請輸入一個大寫的英文">
+                    <div class="valid-feedback">帳號符合規定</div>
+                    <div class="invalid-feedback">帳號輸入不符合規定</div>
+                </div>
+                <div class="mb-3">
+                    <label for="password" class="form-label">密碼</label>
+                    <input type="password" name="" id="password" class="form-control is-valid">
+                    <div class="valid-feedback">密碼符合規定</div>
+                    <div class="invalid-feedback">密碼輸入不符合規定</div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script src="js/bootstrap.min.js"></script>
+</body>
+
+</html>
