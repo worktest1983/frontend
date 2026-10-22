@@ -93,9 +93,19 @@
                         <input type="radio" name="classMode" id="rad03" class="form-check-input" value="線上實體混合課程">
                         <label for="rad03" class="form-check-label">線上實體混合課程</label>
                     </div>
-                    <div id="classMode_msg" class="text-secondary">請選擇上課方式</div>
 
+                    <div id="classMode_msg" class="text-secondary">請選擇上課方式</div>
                 </div>
+            </div>
+
+            <div class="mb-3">
+                <label for="" class="form-label">課程通知設定</label>
+                <div class="form-check form-switch">
+                    <input type="checkbox" name="classNotify" id="classNotify01" class="form-check-input">
+                    <label for="classNotify01">是否接收最新課程資訊</label>
+                </div>
+
+                <div id="classNotify_msg" class="text-secondary">目前狀態：關閉</div>
             </div>
 
             <div class="col-12 text-center mt-3">
@@ -219,15 +229,14 @@
                     flag = false
                     $("#interest_msg")
                         .removeClass("text-success")
-                        .addClass("text-secondary")
+                        .addClass("text-danger")
                         .text("請至少選擇一項課程");
                 }
             })
 
             // 單選框
-            $("input[name='classMode']").on("change", function() {
+            $("input[name='classMode']").on("change", function () {
                 if ("input[name='classMode']:checked") {
-                    console.log($(this).val());
                     flag = true;
 
                     $("#classMode_msg")
@@ -237,6 +246,26 @@
                 }
             })
 
+            // Switch 開關
+            $("input[name='classNotify']").on("change", function() {
+                if ($(this).prop("checked")) {
+                    console.log($(this).prop("checked"));
+
+                    $("#classNotify_msg")
+                        .removeClass("text-secondary")
+                        .addClass("text-success")
+                        .text(`目前狀態：開啟`);
+                } else {
+
+                    $("#classNotify_msg")
+                        .removeClass("text-success")
+                        .addClass("text-secondary")
+                        .text(`目前狀態：關閉`);
+                }
+            })
+
+
+
             // 表單送出
             $("#submit").on("click", () => {
                 const username = $("#username").val();
@@ -244,6 +273,7 @@
                 const email = $("#email").val();
                 const phone = $("#phone").val();
                 const classMode = $("input[name='classMode']:checked").val();
+                const classNotify = $("input[name='classNotify']").prop("checked");
 
                 const show = flag ? '' : alert("不符合規定");
 
@@ -252,7 +282,8 @@
                                     <div class="h4">Email: ${email}</div>
                                     <div class="h4">手機: ${phone}</div>
                                     <div class="h4">感興趣的課程: ${interest_arr.join(',')}
-                                    <div class="h4">上課方式: ${classMode}</div>`
+                                    <div class="h4">上課方式: ${classMode}</div>
+                                    <div class="h4">是否接收最新課程資訊: ${classNotify ? '開啟' : '關閉'}</div>`
 
                 $("#showMsg").html(strHtml);
 
