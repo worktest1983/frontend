@@ -7,132 +7,145 @@
     <title>Ch8 表單排版(JS)</title>
     <link rel="stylesheet" href="css/bootstrap.min.css">
     <link rel="stylesheet" href="css/style.css">
+    <style>
+        .box {
+            background: #f2f2f2;
+            border-radius: 10px;
+        }
+    </style>
 </head>
 
 <body>
     <div class="container">
-        <div class="row">
-            <div class="col-12">
-                <div class="display-4 text-bg-warning fw-900 text-center py-3 my-3">課程線上報名表</div>
-            </div>
-        </div>
-        <div class="row">
-            <div class="col-12">
-                <div class="mb-3">
-                    <label for="username" class="form-label">姓名</label>
-                    <input type="text" class="form-control form-control-lg" id="username" placeholder="輸入2~8字元">
-                    <div class="valid-feedback">符合規定</div>
-                    <div class="invalid-feedback">姓名格式為2-8位數</div>
-                </div>
-                <div class="mb-3">
-                    <label for="password" class="form-label">密碼</label>
-                    <input type="text" class="form-control form-control-lg" id="password"
-                        placeholder="密碼長度8~16,至少一個英文字母及一個數字">
-                    <div class="valid-feedback">符合規定</div>
-                    <div class="invalid-feedback">密碼格式為8-16位數,至少一個英文字母及一個數字</div>
-                </div>
-                <div class="mb-3">
-                    <label for="phone" class="form-label">Email</label>
-                    <input type="email" class="form-control form-control-lg" id="email" placeholder="email須包含@及小數點">
-                    <div class="valid-feedback">符合規定</div>
-                    <div class="invalid-feedback">Email格式必須包含@及小數點</div>
-                </div>
-                <div class="mb-3">
-                    <label for="phone" class="form-label">手機</label>
-                    <input type="text" class="form-control form-control-lg" id="phone" placeholder="手機格式為10位數且為09開頭
+        <div class="row mb-5">
+
+            <div class="display-5 text-bg-dark fw-900 text-center py-3 my-3">課程線上報名表</div>
+
+            <div class="col-8">
+                <div class="col-12">
+                    <div class="mb-3">
+                        <label for="username" class="form-label">姓名</label>
+                        <input type="text" class="form-control form-control-lg" id="username" placeholder="輸入2~8字元">
+                        <div class="valid-feedback">符合規定</div>
+                        <div class="invalid-feedback">姓名格式為2-8位數</div>
+                    </div>
+                    <div class="mb-3">
+                        <label for="password" class="form-label">密碼</label>
+                        <input type="text" class="form-control form-control-lg" id="password"
+                            placeholder="密碼長度8~16,至少一個英文字母及一個數字">
+                        <div class="valid-feedback">符合規定</div>
+                        <div class="invalid-feedback">密碼格式為8-16位數,至少一個英文字母及一個數字</div>
+                    </div>
+                    <div class="mb-3">
+                        <label for="phone" class="form-label">Email</label>
+                        <input type="email" class="form-control form-control-lg" id="email" placeholder="email須包含@及小數點">
+                        <div class="valid-feedback">符合規定</div>
+                        <div class="invalid-feedback">Email格式必須包含@及小數點</div>
+                    </div>
+                    <div class="mb-3">
+                        <label for="phone" class="form-label">手機</label>
+                        <input type="text" class="form-control form-control-lg" id="phone" placeholder="手機格式為10位數且為09開頭
                     ">
-                    <div class="valid-feedback">符合規定</div>
-                    <div class="invalid-feedback">手機格式為10位數且為09開頭</div>
+                        <div class="valid-feedback">符合規定</div>
+                        <div class="invalid-feedback">手機格式為10位數且為09開頭</div>
+                    </div>
+
+                    <div class="mb-3">
+                        <label for="city" class="form-label">居住縣市</label>
+                        <select id="city" class="form-select form-select-lg is-invalid">
+                        </select>
+                        <div class="valid-feedback">已選擇縣市名稱</div>
+                        <div class="invalid-feedback">未選擇縣市名稱</div>
+                    </div>
+
+                    <div class="mb-3">
+                        <label for="" class="form-label">感興趣的課程(可複選)</label>
+                        <div>
+                            <div class="form-check form-check-inline">
+                                <input type="checkbox" name="interest" id="chk01" class="form-check-input"
+                                    value="html/CSS">
+                                <label for="chk01" class="form-check-label">HTML/CSS</label>
+                            </div>
+                            <div class="form-check form-check-inline">
+                                <input type="checkbox" name="interest" id="chk02" class="form-check-input"
+                                    value="JavaScript">
+                                <label for="chk02" class="form-check-label">JavaScript</label>
+                            </div>
+                            <div class="form-check form-check-inline">
+                                <input type="checkbox" name="interest" id="chk03" class="form-check-input"
+                                    value="Python">
+                                <label for="chk03" class="form-check-label">Python</label>
+                            </div>
+                            <div class="form-check form-check-inline">
+                                <input type="checkbox" name="interest" id="chk04" class="form-check-input" value="PHP">
+                                <label for="chk04" class="form-check-label">PHP</label>
+                            </div>
+
+                            <div id="interest_msg" class="text-secondary">請至少選擇一項課程</div>
+                        </div>
+                    </div>
+
+                    <div class="mb-3">
+                        <label for="" class="form-label">偏好上課方式(單選)</label>
+                        <div>
+                            <div class="form-check form-check-inline">
+                                <input type="radio" name="classMode" id="rad01" class="form-check-input" value="實體課程">
+                                <label for="rad01" class="form-check-label">實體課程</label>
+                            </div>
+                            <div class="form-check form-check-inline">
+                                <input type="radio" name="classMode" id="rad02" class="form-check-input" value="線上課程">
+                                <label for="rad02" class="form-check-label">線上課程</label>
+                            </div>
+                            <div class="form-check form-check-inline">
+                                <input type="radio" name="classMode" id="rad03" class="form-check-input"
+                                    value="線上實體混合課程">
+                                <label for="rad03" class="form-check-label">線上實體混合課程</label>
+                            </div>
+
+                            <div id="classMode_msg" class="text-secondary">請選擇上課方式</div>
+                        </div>
+                    </div>
+
+                    <div class="mb-3">
+                        <label for="" class="form-label">課程通知設定</label>
+                        <div class="form-check form-switch">
+                            <input type="checkbox" name="classNotify" id="classNotify01" class="form-check-input">
+                            <label for="classNotify01">是否接收最新課程資訊</label>
+                        </div>
+
+                        <div id="classNotify_msg" class="text-secondary">目前狀態：關閉</div>
+                    </div>
+
+                    <div class="mb-3">
+                        <label for="" class="form-label">
+                            <span>成績能力自我評估</span>
+                            <span class="text-primary fw-900 fs-3" id="grade">8分</span>
+                        </label>
+                        <div>
+                            <input type="range" class="form-range" id="range" min="1" max="10" step="1" value="8">
+                        </div>
+                        <div class="d-flex justify-content-between">
+                            <span class="">1: 完全不會</span>
+                            <span class="">10: 非常熟悉</span>
+                        </div>
+                    </div>
                 </div>
 
-                <div class="mb-3">
-                    <label for="city" class="form-label">居住縣市</label>
-                    <select id="city" class="form-select form-select-lg is-invalid">
-                    </select>
-                    <div class="valid-feedback">已選擇縣市名稱</div>
-                    <div class="invalid-feedback">未選擇縣市名稱</div>
+                <div class="col-12 text-center mt-3">
+                    <button class="btn btn-primary" id="submit">確認送出</button>
+                    <button class="btn btn-secondary" id="reset">重新填寫</button>
                 </div>
             </div>
 
-            <div class="mb-3">
-                <label for="" class="form-label">感興趣的課程(可複選)</label>
-                <div>
-                    <div class="form-check form-check-inline">
-                        <input type="checkbox" name="interest" id="chk01" class="form-check-input" value="html/CSS">
-                        <label for="chk01" class="form-check-label">HTML/CSS</label>
+            <div class="col-4 box">
+                <div class="row px-3">
+                    <div class="col-12">
+                        <div class="fs-3 text-success fw-900 my-3 py-3 text-center">報名資料確認</div>
+                        <hr>
                     </div>
-                    <div class="form-check form-check-inline">
-                        <input type="checkbox" name="interest" id="chk02" class="form-check-input" value="JavaScript">
-                        <label for="chk02" class="form-check-label">JavaScript</label>
-                    </div>
-                    <div class="form-check form-check-inline">
-                        <input type="checkbox" name="interest" id="chk03" class="form-check-input" value="Python">
-                        <label for="chk03" class="form-check-label">Python</label>
-                    </div>
-                    <div class="form-check form-check-inline">
-                        <input type="checkbox" name="interest" id="chk04" class="form-check-input" value="PHP">
-                        <label for="chk04" class="form-check-label">PHP</label>
-                    </div>
-
-                    <div id="interest_msg" class="text-secondary">請至少選擇一項課程</div>
+                    <div class="col-12" id="showMsg"></div>
                 </div>
             </div>
-
-            <div class="mb-3">
-                <label for="" class="form-label">偏好上課方式(單選)</label>
-                <div>
-                    <div class="form-check form-check-inline">
-                        <input type="radio" name="classMode" id="rad01" class="form-check-input" value="實體課程">
-                        <label for="rad01" class="form-check-label">實體課程</label>
-                    </div>
-                    <div class="form-check form-check-inline">
-                        <input type="radio" name="classMode" id="rad02" class="form-check-input" value="線上課程">
-                        <label for="rad02" class="form-check-label">線上課程</label>
-                    </div>
-                    <div class="form-check form-check-inline">
-                        <input type="radio" name="classMode" id="rad03" class="form-check-input" value="線上實體混合課程">
-                        <label for="rad03" class="form-check-label">線上實體混合課程</label>
-                    </div>
-
-                    <div id="classMode_msg" class="text-secondary">請選擇上課方式</div>
-                </div>
-            </div>
-
-            <div class="mb-3">
-                <label for="" class="form-label">課程通知設定</label>
-                <div class="form-check form-switch">
-                    <input type="checkbox" name="classNotify" id="classNotify01" class="form-check-input">
-                    <label for="classNotify01">是否接收最新課程資訊</label>
-                </div>
-
-                <div id="classNotify_msg" class="text-secondary">目前狀態：關閉</div>
-            </div>
-
-            <div class="col-12 text-center mt-3">
-                <button class="btn btn-primary" id="submit">確認送出</button>
-                <button class="btn btn-secondary" id="reset">重新填寫</button>
-            </div>
-
-            <div class="mb-3">
-                <label for="" class="form-label">
-                    <span>成績能力自我評估</span>
-                    <span class="text-primary fw-900 fs-3" id="grade">8分</span>
-                </label>
-                <div>
-                    <input type="range" class="form-range" id="range" min="1" max="10" step="1" value="8">
-                </div>
-                <div class="d-flex justify-content-between">
-                    <span class="">1: 完全不會</span>
-                    <span class="">10: 非常熟悉</span>
-                </div>
-            </div>
-        </div>
-
-        <div class="row">
-            <div class="col-12">
-                <div class="display-6 text-danger fw-900 my-3 py-3">報名資料確認</div>
-            </div>
-            <div class="col-12" id="showMsg"></div>
         </div>
     </div>
 
@@ -277,7 +290,7 @@
             })
 
             // range
-            $("#range").on("change", function() {
+            $("#range").on("change", function () {
                 const range = $(this).val();
                 if (range) {
                     $("#grade").text(`${range}分`);
@@ -296,14 +309,15 @@
 
                 const show = flag ? '' : alert("不符合規定");
 
-                const strHtml = `<div class="h4">姓名: ${username}</div>
-                                    <div class="h4">密碼: ${password}</div>
-                                    <div class="h4">Email: ${email}</div>
-                                    <div class="h4">手機: ${phone}</div>
-                                    <div class="h4">感興趣的課程: ${interest_arr.join(',')}
-                                    <div class="h4">上課方式: ${classMode}</div>
-                                    <div class="h4">是否接收最新課程資訊: ${classNotify ? '開啟' : '關閉'}</div>
-                                    <div class="h4">成績能力自我評估: ${range}分</div>`
+                const strHtml = `
+                    <div class="h5 my-3">姓名: ${username}</div>
+                    <div class="h5 my-3">密碼: ${password}</div>
+                    <div class="h5 my-3">Email: ${email}</div>
+                    <div class="h5 my-3">手機: ${phone}</div>
+                    <div class="h5 my-3">感興趣的課程: ${interest_arr.join(',')}
+                    <div class="h5 my-3">上課方式: ${classMode}</div>
+                    <div class="h5 my-3">是否接收最新課程資訊: ${classNotify ? '開啟' : '關閉'}</div>
+                    <div class="h5 my-3">成績能力自我評估: ${range}分</div>`
 
                 $("#showMsg").html(strHtml);
 
