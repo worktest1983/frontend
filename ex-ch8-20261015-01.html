@@ -33,8 +33,7 @@
                 </div>
                 <div class="mb-3">
                     <label for="phone" class="form-label">Email</label>
-                    <input type="email" class="form-control form-control-lg" id="email"
-                        placeholder="email須包含@及小數點">
+                    <input type="email" class="form-control form-control-lg" id="email" placeholder="email須包含@及小數點">
                     <div class="valid-feedback">符合規定</div>
                     <div class="invalid-feedback">Email格式必須包含@及小數點</div>
                 </div>
@@ -134,7 +133,7 @@
             $("#username").on("change", function () {
                 const _this = $(this);
                 const name = _this.val();
-                
+
                 // if (name.length > 1 && name.length < 9) {
                 if (REGEX.account.test(name)) {
                     _this.removeClass("is-invalid").addClass("is-valid");
