@@ -53,6 +53,31 @@
                     <div class="invalid-feedback">未選擇縣市名稱</div>
                 </div>
             </div>
+
+            <div class="mb-3">
+                <label for="" class="form-label">感興趣的課程(可複選)</label>
+                <div>
+                    <div class="form-check form-check-inline">
+                        <input type="checkbox" name="interest" id="chk01" class="form-check-input" value="html/CSS">
+                        <label for="chk01" class="form-check-label">HTML/CSS</label>
+                    </div>
+                    <div class="form-check form-check-inline">
+                        <input type="checkbox" name="interest" id="chk02" class="form-check-input" value="JavaScript">
+                        <label for="chk02" class="form-check-label">JavaScript</label>
+                    </div>
+                    <div class="form-check form-check-inline">
+                        <input type="checkbox" name="interest" id="chk03" class="form-check-input" value="Python">
+                        <label for="chk03" class="form-check-label">Python</label>
+                    </div>
+                    <div class="form-check form-check-inline">
+                        <input type="checkbox" name="interest" id="chk04" class="form-check-input" value="PHP">
+                        <label for="chk04" class="form-check-label">PHP</label>
+                    </div>
+
+                    <div id="interest_msg" class="text-secondary">請至少選擇一項課程</div>
+                </div>
+            </div>
+
             <div class="col-12 text-center mt-3">
                 <button class="btn btn-primary" id="submit">確認送出</button>
                 <button class="btn btn-secondary" id="reset">重新填寫</button>
@@ -150,6 +175,30 @@
                 } else {
                     _this.removeClass("is-valid").addClass("is-invalid");
                     flag = false;
+                }
+            })
+
+            // 複選框
+            $("input[name='interest']").on("change", function() {
+                let arr = [];
+                $("input[name='interest']:checked").each(function() {
+                    console.log($(this).val());
+                    arr.push($(this).val());
+                })
+                
+                if (arr.length > 0) {
+                    flag = true
+                    $("#interest_msg")
+                        .removeClass("text-secondary")
+                        .addClass("text-success")
+                        .text(`已選擇${arr.length}項課程`);
+
+                } else {
+                    flag = false
+                    $("#interest_msg")
+                        .removeClass("text-success")
+                        .addClass("text-secondary")
+                        .text("請至少選擇一項課程");
                 }
             })
 
