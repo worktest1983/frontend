@@ -78,6 +78,26 @@
                 </div>
             </div>
 
+            <div class="mb-3">
+                <label for="" class="form-label">偏好上課方式(單選)</label>
+                <div>
+                    <div class="form-check form-check-inline">
+                        <input type="radio" name="classMode" id="rad01" class="form-check-input" value="實體課程">
+                        <label for="rad01" class="form-check-label">實體課程</label>
+                    </div>
+                    <div class="form-check form-check-inline">
+                        <input type="radio" name="classMode" id="rad02" class="form-check-input" value="線上課程">
+                        <label for="rad02" class="form-check-label">線上課程</label>
+                    </div>
+                    <div class="form-check form-check-inline">
+                        <input type="radio" name="classMode" id="rad03" class="form-check-input" value="線上實體混合課程">
+                        <label for="rad03" class="form-check-label">線上實體混合課程</label>
+                    </div>
+                    <div id="classMode_msg" class="text-secondary">請選擇上課方式</div>
+
+                </div>
+            </div>
+
             <div class="col-12 text-center mt-3">
                 <button class="btn btn-primary" id="submit">確認送出</button>
                 <button class="btn btn-secondary" id="reset">重新填寫</button>
@@ -106,6 +126,7 @@
         $(() => {
 
             let flag = false;
+            let interest_arr = [];
 
             // 正規表達
             const REGEX = {
@@ -179,19 +200,20 @@
             })
 
             // 複選框
-            $("input[name='interest']").on("change", function() {
-                let arr = [];
-                $("input[name='interest']:checked").each(function() {
-                    console.log($(this).val());
-                    arr.push($(this).val());
+            $("input[name='interest']").on("change", function () {
+
+                interest_arr = [];
+
+                $("input[name='interest']:checked").each(function () {
+                    interest_arr.push($(this).val());
                 })
-                
-                if (arr.length > 0) {
+
+                if (interest_arr.length > 0) {
                     flag = true
                     $("#interest_msg")
                         .removeClass("text-secondary")
                         .addClass("text-success")
-                        .text(`已選擇${arr.length}項課程`);
+                        .text(`已選擇${interest_arr.length}項課程`);
 
                 } else {
                     flag = false
@@ -202,15 +224,36 @@
                 }
             })
 
+            // 單選框
+            $("input[name='classMode']").on("change", function() {
+                if ("input[name='classMode']:checked") {
+                    console.log($(this).val());
+                    flag = true;
+
+                    $("#classMode_msg")
+                        .removeClass("text-secondary")
+                        .addClass("text-success")
+                        .text(`已選擇【${$(this).val()}】為上課方式`);
+                }
+            })
+
+            // 表單送出
             $("#submit").on("click", () => {
                 const username = $("#username").val();
                 const password = $("#password").val();
                 const email = $("#email").val();
                 const phone = $("#phone").val();
+                const classMode = $("input[name='classMode']:checked").val();
 
-                const show = flag ? alert("符合規定") : alert("不符合規定");
+                const show = flag ? '' : alert("不符合規定");
 
-                const strHtml = `<div class="h2">姓名: ${username}</div><div class="h2">密碼: ${password}</div><div class="h2">Email: ${email}</div><div class="h2">手機: ${phone}</div>`
+                const strHtml = `<div class="h4">姓名: ${username}</div>
+                                    <div class="h4">密碼: ${password}</div>
+                                    <div class="h4">Email: ${email}</div>
+                                    <div class="h4">手機: ${phone}</div>
+                                    <div class="h4">感興趣的課程: ${interest_arr.join(',')}
+                                    <div class="h4">上課方式: ${classMode}</div>`
+
                 $("#showMsg").html(strHtml);
 
             })
@@ -239,7 +282,7 @@
                 $("#city").on("change", function () {
                     const _this = $(this);
                     const city = _this.val();
-                    
+
                     _this.removeClass("is-invalid").addClass("is-valid");
                     flag = true;
                 })
