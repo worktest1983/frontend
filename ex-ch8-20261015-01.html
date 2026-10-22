@@ -20,25 +20,26 @@
             <div class="col-12">
                 <div class="mb-3">
                     <label for="username" class="form-label">姓名</label>
-                    <input type="text" class="form-control form-control-lg" id="username">
+                    <input type="text" class="form-control form-control-lg" id="username" placeholder="輸入2~9字元">
                     <div class="valid-feedback">符合規定</div>
-                    <div class="invalid-feedback">姓名格式為1-9位數</div>
+                    <div class="invalid-feedback">姓名格式為2-9位數</div>
                 </div>
                 <div class="mb-3">
                     <label for="password" class="form-label">密碼</label>
-                    <input type="password" class="form-control form-control-lg" id="password">
+                    <input type="text" class="form-control form-control-lg" id="password" placeholder="密碼長度8~16">
                     <div class="valid-feedback">符合規定</div>
                     <div class="invalid-feedback">密碼格式為8-16位數</div>
                 </div>
                 <div class="mb-3">
                     <label for="phone" class="form-label">Email</label>
-                    <input type="email" class="form-control form-control-lg" id="email">
+                    <input type="email" class="form-control form-control-lg" id="email" placeholder="email為8~15須包含@這個字元">
                     <div class="valid-feedback">符合規定</div>
                     <div class="invalid-feedback">Email格式為8-15位數且必須包含@</div>
                 </div>
                 <div class="mb-3">
                     <label for="phone" class="form-label">手機</label>
-                    <input type="text" class="form-control form-control-lg" id="phone">
+                    <input type="text" class="form-control form-control-lg" id="phone" placeholder="手機開頭09
+                    ">
                     <div class="valid-feedback">符合規定</div>
                     <div class="invalid-feedback">手機格式為10位數且為09開頭</div>
                 </div>
@@ -63,7 +64,7 @@
     <script>
         $(() => {
 
-            // let flag_username = false;
+            let flag_username = false;
 
             // 即時監聽 input, change
             // $("#username").on("input", function () {
@@ -106,51 +107,129 @@
             //     $("#username").removeClass("is-valid").removeClass("is-invalid");
             // })
 
+            // ===========================================================
+            // 課堂作業
+            // 1. Email: 包含@這個字元，使用includes();8~15字。
+            // 2. 密碼: 8~16字。
+            // 3. 手機: 10個字；開頭為09-XXXXXXXX，使用startWith()
+            // ===========================================================
+
+            $("#username").on("change", function() {
+                const _this = $(this);
+                const name = _this.val();
+
+                if (name.val().length > 1 && name.val().length < 9) {
+                    _this.removeClass("is-invalid").addClass("is-valid");
+                    flag_username = true;
+
+                } else {
+                    _this.removeClass("is-valid").addClass("is-invalid");
+                    flag_username = false;
+                }
+            })
+
+            $("#password").on("change", function() {
+                const _this = $(this);
+                const pwd = _this.val();
+
+                if (pwd.length > 8 && pwd.length < 17) {
+                    _this.removeClass("is-invalid").addClass("is-valid");
+                    flag_username = true;
+
+                } else {
+                    _this.removeClass("is-valid").addClass("is-invalid");
+                    flag_username = false;
+                }
+            })
+
+            $("#email").on("change", function() {
+                const _this = $(this);
+                const email = _this.val();
+
+                if (email.length > 7 && email.length < 16 && email.includes('@')) {
+                    _this.removeClass("is-invalid").addClass("is-valid");
+                    flag_username = true;
+
+                } else {
+                    _this.removeClass("is-valid").addClass("is-invalid");
+                    flag_username = false;
+                }
+            })
+
+            $("#phone").on("change", function() {
+                const _this = $(this);
+                const phone = _this.val();
+
+                if (phone.length == 10 && phone.startsWith('09')) {
+                    _this.removeClass("is-invalid").addClass("is-valid");
+                    flag_username = true;
+
+                } else {
+                    _this.removeClass("is-valid").addClass("is-invalid");
+                    flag_username = false;
+                }
+            })
 
             $("#submit").on("click", () => {
-                $("#showMsg").empty();
-
                 const username = $("#username").val();
                 const password = $("#password").val();
                 const email = $("#email").val();
                 const phone = $("#phone").val();
 
-                let strHtml = '';
+                const show = flag_username ? alert("符合規定") : alert("不符合規定");
 
-                if (username.length > 1 && username.length < 9) {
-                    $("#username").removeClass("is-invalid").addClass("is-valid");
+                const strHtml = `<div class="h2">姓名: ${username}</div><div class="h2">密碼: ${password}</div><div class="h2">Email: ${email}</div><div class="h2">手機: ${phone}</div>`
+                $("#showMsg").html(strHtml);
 
-                    strHtml += `<div class="h2">姓名: ${username}</div>`
-                } else {
-                    $("#username").removeClass("is-valid").addClass("is-invalid");
-                }
-
-                if (password.length > 8 && password.length < 17) {
-                    $("#password").removeClass("is-invalid").addClass("is-valid");
-
-                    strHtml += `<div class="h2">密碼: ${password}</div>`
-                } else {
-                    $("#password").removeClass("is-valid").addClass("is-invalid");
-                }
-
-                if (email.includes('@') && (email.length > 8 && email.length < 16)) {
-                    strHtml += `<div class="h2">Email: ${email}</div>`
-                    $("#email").removeClass("is-invalid").addClass("is-valid");
-
-                } else {
-                    $("#email").removeClass("is-valid").addClass("is-invalid");
-                }
-
-                if (phone.length == 10 && phone.startsWith('09')) {
-                    $("#phone").removeClass("is-invalid").addClass("is-valid");
-
-                    strHtml += `<div class="h2">手機: ${phone}</div>`
-                } else {
-                    $("#phone").removeClass("is-valid").addClass("is-invalid");
-                }
-
-                $("#showMsg").append(strHtml);
             })
+
+
+            // **** Apries 直接寫在submit裡  **** -----------------------------------
+
+            // $("#submit").on("click", () => {
+            //     $("#showMsg").empty();
+
+            //     const username = $("#username").val();
+            //     const password = $("#password").val();
+            //     const email = $("#email").val();
+            //     const phone = $("#phone").val();
+
+            //     let strHtml = '';
+
+            //     if (username.length > 1 && username.length < 9) {
+            //         $("#username").removeClass("is-invalid").addClass("is-valid");
+
+            //         strHtml += `<div class="h2">姓名: ${username}</div>`
+            //     } else {
+            //         $("#username").removeClass("is-valid").addClass("is-invalid");
+            //     }
+
+            //     if (password.length > 8 && password.length < 17) {
+            //         $("#password").removeClass("is-invalid").addClass("is-valid");
+
+            //         strHtml += `<div class="h2">密碼: ${password}</div>`
+            //     } else {
+            //         $("#password").removeClass("is-valid").addClass("is-invalid");
+            //     }
+
+            //     if (email.includes('@') && (email.length > 7 && email.length < 16)) {
+            //         strHtml += `<div class="h2">Email: ${email}</div>`
+            //         $("#email").removeClass("is-invalid").addClass("is-valid");
+
+            //     } else {
+            //         $("#email").removeClass("is-valid").addClass("is-invalid");
+            //     }
+
+            //     if (phone.length == 10 && phone.startsWith('09')) {
+            //         $("#phone").removeClass("is-invalid").addClass("is-valid");
+
+            //         strHtml += `<div class="h2">手機: ${phone}</div>`
+            //     } else {
+            //         $("#phone").removeClass("is-valid").addClass("is-invalid");
+            //     }
+
+            //     $("#showMsg").append(strHtml);
+            // })
         })
     </script>
 </body>
