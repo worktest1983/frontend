@@ -1,0 +1,412 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>學習歷程首頁</title>
+    <link rel="stylesheet" href="css/style.css">
+    <style>
+        /* CSS 變數：莫蘭迪藍色系配置 */
+        :root {
+            --morandi-blue-dark: #4a607a;   /* 主色：莫蘭迪深藍灰 */
+            --morandi-blue: #6b8e9b;        /* 次要色：柔和霧藍 */
+            --morandi-blue-light: #eef3f6;  /* 淺色背景/輔助色 */
+            --bg-body: #f4f6f8;             /* 網頁大背景：極淺灰白 */
+            --card-bg: #ffffff;             /* 卡片背景：純白 */
+            --text-main: #2c3e50;           /* 主要文字色 */
+            --text-sub: #7f8c8d;            /* 次要文字色 */
+            --border-color: #d1d5db;        /* 邊框淺灰 */
+            --shadow-sm: 0 4px 12px rgba(74, 96, 122, 0.08);
+            --shadow-lg: 0 10px 25px rgba(74, 96, 122, 0.15);
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            background-color: var(--bg-body);
+            color: var(--text-main);
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+            line-height: 1.6;
+            padding: 50px 20px;
+        }
+
+        .wrapper {
+            max-width: 1000px;
+            margin: 0 auto;
+        }
+
+        .content {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        /* 頁面主要標題 */
+        .title-02 {
+            font-size: 2.2rem;
+            color: var(--morandi-blue-dark);
+            margin-bottom: 50px;
+            text-align: center;
+            font-weight: 700;
+            letter-spacing: 1.5px;
+            position: relative;
+        }
+
+        .title-02::after {
+            content: '';
+            display: block;
+            width: 60px;
+            height: 4px;
+            background-color: var(--morandi-blue);
+            margin: 12px auto 0;
+            border-radius: 2px;
+        }
+
+        /* 時間軸主要容器 */
+        .timeline-container {
+            position: relative;
+            width: 100%;
+            padding: 20px 0;
+        }
+
+        /* 中央垂直主軸線 */
+        .timeline-container::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            bottom: 0;
+            left: 50%;
+            width: 3px;
+            background-color: var(--border-color);
+            transform: translateX(-50%);
+            border-radius: 2px;
+        }
+
+        /* 時間軸單一項目 */
+        .timeline-item {
+            position: relative;
+            width: 50%;
+            padding: 0 40px 35px 40px;
+            clear: both;
+        }
+
+        /* 靠左項目 */
+        .timeline-item.left {
+            left: 0;
+            text-align: right;
+        }
+
+        /* 靠右項目 */
+        .timeline-item.right {
+            left: 50%;
+            text-align: left;
+        }
+
+        /* 中央時間軸節點圓點 */
+        .timeline-item::after {
+            content: '';
+            position: absolute;
+            top: 22px;
+            width: 16px;
+            height: 16px;
+            background-color: var(--card-bg);
+            border: 4px solid var(--morandi-blue);
+            border-radius: 50%;
+            z-index: 2;
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        .timeline-item.left::after {
+            right: -10px;
+        }
+
+        .timeline-item.right::after {
+            left: -10px;
+        }
+
+        /* 懸停項目時，圓點高亮放大效果 */
+        .timeline-item:hover::after {
+            background-color: var(--morandi-blue-dark);
+            border-color: var(--morandi-blue-light);
+            transform: scale(1.3);
+            box-shadow: 0 0 0 4px rgba(107, 142, 155, 0.25);
+        }
+
+        /* 卡片連結 */
+        .timeline-card {
+            display: inline-block;
+            width: 100%;
+            background-color: var(--card-bg);
+            padding: 20px 24px;
+            border-radius: 12px;
+            text-decoration: none;
+            color: var(--text-main);
+            box-shadow: var(--shadow-sm);
+            transition: all 0.35s cubic-bezier(0.4, 0, 0.2, 1);
+            position: relative;
+            border-top: 4px solid var(--morandi-blue);
+        }
+
+        .timeline-item.left .timeline-card {
+            border-top-color: var(--morandi-blue);
+        }
+
+        .timeline-item.right .timeline-card {
+            border-top-color: var(--morandi-blue-dark);
+        }
+
+        /* 卡片標頭：日期標籤 */
+        .card-header {
+            margin-bottom: 8px;
+        }
+
+        .item-date {
+            display: inline-block;
+            font-size: 0.85rem;
+            font-weight: 600;
+            color: var(--morandi-blue-dark);
+            background-color: var(--morandi-blue-light);
+            padding: 4px 12px;
+            border-radius: 20px;
+            letter-spacing: 0.5px;
+            transition: all 0.3s ease;
+        }
+
+        /* 卡片標題 */
+        .item-title {
+            font-size: 1.1rem;
+            font-weight: 600;
+            line-height: 1.4;
+            color: var(--text-main);
+            transition: color 0.3s ease;
+        }
+
+        /* 卡片 Hover 懸浮效果 */
+        .timeline-card:hover {
+            transform: translateY(-5px);
+            box-shadow: var(--shadow-lg);
+        }
+
+        .timeline-card:hover .item-title {
+            color: var(--morandi-blue-dark);
+        }
+
+        .timeline-card:hover .item-date {
+            background-color: var(--morandi-blue-dark);
+            color: #ffffff;
+        }
+
+        /* --------------------------------------------------
+           RWD 響應式佈局：當螢幕寬度 < 768px 時轉為單欄
+        -------------------------------------------------- */
+        @media screen and (max-width: 767px) {
+            body {
+                padding: 30px 15px;
+            }
+
+            .title-02 {
+                font-size: 1.75rem;
+                margin-bottom: 35px;
+            }
+
+            /* 將主線移至左側 */
+            .timeline-container::before {
+                left: 20px;
+            }
+
+            /* 所有項目寬度改為 100%，並靠右對齊 */
+            .timeline-item {
+                width: 100%;
+                padding-left: 55px;
+                padding-right: 0;
+                padding-bottom: 25px;
+            }
+
+            .timeline-item.left,
+            .timeline-item.right {
+                left: 0;
+                text-align: left;
+            }
+
+            /* 圓點固定定位在左側主線上 */
+            .timeline-item.left::after,
+            .timeline-item.right::after {
+                left: 12px;
+                right: auto;
+            }
+
+            .timeline-card {
+                text-align: left;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <div class="wrapper">
+        <div class="content">
+            <h1 class="title-02">學習歷程筆記展示</h1>
+
+            <div class="timeline-container">
+                <!-- 1. 2026/10/27 (Left) -->
+                <div class="timeline-item left">
+                    <a href="ex-ch8-forms-20261027-GPT01.html" class="timeline-card" target="_blank">
+                        <div class="card-header">
+                            <span class="item-date">2026/10/27</span>
+                        </div>
+                        <div class="item-title">線上報名表(GPT)</div>
+                    </a>
+                </div>
+
+                <!-- 2. 2026/10/27 (Right) -->
+                <div class="timeline-item right">
+                    <a href="ex-ch8-forms-20261027-Gemini01.html" class="timeline-card" target="_blank">
+                        <div class="card-header">
+                            <span class="item-date">2026/10/27</span>
+                        </div>
+                        <div class="item-title">線上報名表 (Gemini)</div>
+                    </a>
+                </div>
+
+                <!-- 3. 2026/10/22 (Left) -->
+                <div class="timeline-item left">
+                    <a href="ex-ch8-forms-20261022.html" class="timeline-card" target="_blank">
+                        <div class="card-header">
+                            <span class="item-date">2026/10/22</span>
+                        </div>
+                        <div class="item-title">Form表單練習 - 線上報名表</div>
+                    </a>
+                </div>
+
+                <!-- 4. 2026/10/15 (Right) -->
+                <div class="timeline-item right">
+                    <a href="bootstrap-20261015-forms.html" class="timeline-card" target="_blank">
+                        <div class="card-header">
+                            <span class="item-date">2026/10/15</span>
+                        </div>
+                        <div class="item-title">Form表單</div>
+                    </a>
+                </div>
+
+                <!-- 5. 2026/10/13 (Left) -->
+                <div class="timeline-item left">
+                    <a href="bootstrap-20261013-roller.html" class="timeline-card" target="_blank">
+                        <div class="card-header">
+                            <span class="item-date">2026/10/13</span>
+                        </div>
+                        <div class="item-title">Roller 動畫</div>
+                    </a>
+                </div>
+
+                <!-- 6. 2026/10/13 (Right) -->
+                <div class="timeline-item right">
+                    <a href="bootstrap-20261013-flex-timeLine.html" class="timeline-card" target="_blank">
+                        <div class="card-header">
+                            <span class="item-date">2026/10/13</span>
+                        </div>
+                        <div class="item-title">時間軸(Time Line)</div>
+                    </a>
+                </div>
+
+                <!-- 7. 2026/10/08 (Left) -->
+                <div class="timeline-item left">
+                    <a href="bootstrap-20261008-flex.html" class="timeline-card" target="_blank">
+                        <div class="card-header">
+                            <span class="item-date">2026/10/08</span>
+                        </div>
+                        <div class="item-title">Flex</div>
+                    </a>
+                </div>
+
+                <!-- 8. 2026/10/08 (Right) -->
+                <div class="timeline-item right">
+                    <a href="json-server-20261008.html" class="timeline-card" target="_blank">
+                        <div class="card-header">
+                            <span class="item-date">2026/10/08</span>
+                        </div>
+                        <div class="item-title">JSON SERVER</div>
+                    </a>
+                </div>
+
+                <!-- 9. 2026/10/08 (Left) -->
+                <div class="timeline-item left">
+                    <a href="Bootstrap-20261008-ex01.html" class="timeline-card" target="_blank">
+                        <div class="card-header">
+                            <span class="item-date">2026/10/08</span>
+                        </div>
+                        <div class="item-title">Bootstrap 切版練習2</div>
+                    </a>
+                </div>
+
+                <!-- 10. 2026/10/06 (Right) -->
+                <div class="timeline-item right">
+                    <a href="bootstrap-20261006-grid-ex01.html" class="timeline-card" target="_blank">
+                        <div class="card-header">
+                            <span class="item-date">2026/10/06</span>
+                        </div>
+                        <div class="item-title">Bootstrap 切版練習1</div>
+                    </a>
+                </div>
+
+                <!-- 11. 2026/10/06 (Left) -->
+                <div class="timeline-item left">
+                    <a href="bootstrap-20261006-grid.html" class="timeline-card" target="_blank">
+                        <div class="card-header">
+                            <span class="item-date">2026/10/06</span>
+                        </div>
+                        <div class="item-title">Bootstrap Grid</div>
+                    </a>
+                </div>
+
+                <!-- 12. 2026/10/01 (Right) -->
+                <div class="timeline-item right">
+                    <a href="bootstrap-20261001-table.html" class="timeline-card" target="_blank">
+                        <div class="card-header">
+                            <span class="item-date">2026/10/01</span>
+                        </div>
+                        <div class="item-title">Bootstrap Table</div>
+                    </a>
+                </div>
+
+                <!-- 13. 2026/10/01 (Left) -->
+                <div class="timeline-item left">
+                    <a href="bootstrap-20261001.html" class="timeline-card" target="_blank">
+                        <div class="card-header">
+                            <span class="item-date">2026/10/01</span>
+                        </div>
+                        <div class="item-title">Bootstrap 常用樣式</div>
+                    </a>
+                </div>
+
+                <!-- 14. 2026/09/29 (Right) -->
+                <div class="timeline-item right">
+                    <a href="js-20260929.html" class="timeline-card" target="_blank">
+                        <div class="card-header">
+                            <span class="item-date">2026/09/29</span>
+                        </div>
+                        <div class="item-title">JS語法練習 - 地方美食 OpenData</div>
+                    </a>
+                </div>
+
+                <!-- 15. 2026/09/24 (Left) -->
+                <div class="timeline-item left">
+                    <a href="rwd-20260924.html" class="timeline-card" target="_blank">
+                        <div class="card-header">
+                            <span class="item-date">2026/09/24</span>
+                        </div>
+                        <div class="item-title">HTML and CSS 排版練習</div>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="js/jquery-4.0.0.js"></script>
+</body>
+
+</html>
