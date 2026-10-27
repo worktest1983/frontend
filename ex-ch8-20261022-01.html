@@ -151,6 +151,7 @@
 
     <script src="js/bootstrap.min.js"></script>
     <script src="js/jquery-4.0.0.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 
     <script>
         // ===========================================================
@@ -164,6 +165,19 @@
 
             let flag = false;
             let interest_arr = [];
+
+            const getStorage = (name) => {
+                const parm = localStorage.getItem(name);
+
+                if (parm != null) {
+                    $(`#${name}`).val(parm);
+                    $(`#${name}`).trigger("input");
+                }
+            }
+
+            getStorage('username');
+            getStorage('email');
+            getStorage('phone');
 
             // 正規表達
             const REGEX = {
@@ -187,7 +201,7 @@
                 if (REGEX.account.test(name)) {
                     _this.removeClass("is-invalid").addClass("is-valid");
                     flag = true;
-
+                    localStorage.setItem('username', username);
                 } else {
                     _this.removeClass("is-valid").addClass("is-invalid");
                     flag = false;
@@ -201,7 +215,6 @@
                 if (REGEX.password.test(pwd)) {
                     _this.removeClass("is-invalid").addClass("is-valid");
                     flag = true;
-
                 } else {
                     _this.removeClass("is-valid").addClass("is-invalid");
                     flag = false;
@@ -215,7 +228,7 @@
                 if (REGEX.email.test(email)) {
                     _this.removeClass("is-invalid").addClass("is-valid");
                     flag = true;
-
+                    localStorage.setItem('email', email);
                 } else {
                     _this.removeClass("is-valid").addClass("is-invalid");
                     flag = false;
@@ -229,7 +242,7 @@
                 if (REGEX.phone.test(phone)) {
                     _this.removeClass("is-invalid").addClass("is-valid");
                     flag = true;
-
+                    localStorage.setItem('phone', phone);
                 } else {
                     _this.removeClass("is-valid").addClass("is-invalid");
                     flag = false;
@@ -307,9 +320,8 @@
                 const classNotify = $("input[name='classNotify']").prop("checked");
                 const range = $("#range").val();
 
-                const show = flag ? '' : alert("不符合規定");
-
-                const strHtml = `
+                if (flag) {
+                    const strHtml = `
                     <div class="h5 my-3">姓名: ${username}</div>
                     <div class="h5 my-3">密碼: ${password}</div>
                     <div class="h5 my-3">Email: ${email}</div>
@@ -319,8 +331,25 @@
                     <div class="h5 my-3">是否接收最新課程資訊: ${classNotify ? '開啟' : '關閉'}</div>
                     <div class="h5 my-3">成績能力自我評估: ${range}分</div>`
 
-                $("#showMsg").html(strHtml);
+                    $("#showMsg").html(strHtml);
 
+                    clearStorage();
+
+                } else {
+                    Swal.fire({
+                        title: "表單內容有誤，請修正",
+                        icon: 'error'
+                    }).then((result) => {
+                        if (result.isConfirmed) location.href = "ex-ch8-20261022-01.html";
+                    });
+                }
+
+            })
+
+            // 清除表單
+            $("#reset").on("click", function() {
+                clearStorage();
+                location.reload();
             })
 
             // 縣市選單，使用外部資料
@@ -351,6 +380,12 @@
                     _this.removeClass("is-invalid").addClass("is-valid");
                     flag = true;
                 })
+            }
+
+            function clearStorage() {
+                localStorage.removeItem("username");
+                localStorage.removeItem("email");
+                localStorage.removeItem("phone");
             }
 
         })
