@@ -1,0 +1,468 @@
+/*************************
+    Section 03
+**************************/
+
+/* Carousel 背景圖片 */
+.bg-img-cover {
+    height: 85vh;
+    min-height: 500px;
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    position: relative;
+}
+
+/* 左側資訊面板 */
+.custom-caption {
+    position: absolute;
+    top: 50%;
+    left: auto;
+    right: 12%;
+    bottom: auto;
+
+    transform: translateY(-50%);
+
+    width: min(480px, 80%);
+    padding: 32px 36px;
+
+    text-align: left;
+
+    /* 深藍色半透明背景 */
+    background: rgba(12, 28, 48, 0.88);
+
+    /* 青綠色左側裝飾線 */
+    border-left: 5px solid #2dd4bf;
+    border-radius: 8px;
+
+    color: #f8fafc;
+
+    /* 柔和陰影 */
+    box-shadow: 0 12px 35px rgba(0, 0, 0, 0.25);
+
+    /* 覆寫 Bootstrap caption 的定位 */
+    margin: 0;
+}
+
+/* 英文標籤 */
+.caption-label {
+    display: inline-block;
+    margin-bottom: 12px;
+
+    color: #5eead4;
+    font-size: 0.8rem;
+    font-weight: 700;
+    letter-spacing: 2px;
+}
+
+/* 標題 */
+.custom-caption h2 {
+    margin-bottom: 16px;
+
+    color: #ffffff;
+    font-size: clamp(1.6rem, 3vw, 2.4rem);
+    font-weight: 700;
+}
+
+/* 簡介文字 */
+.caption-intro {
+    margin-bottom: 22px;
+
+    color: #cbd5e1;
+    font-size: 1rem;
+    line-height: 1.8;
+}
+
+/* 條列式內容 */
+.caption-list {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.caption-list li {
+    position: relative;
+    padding-left: 24px;
+    margin-bottom: 12px;
+
+    color: #f1f5f9;
+    font-size: 0.95rem;
+    line-height: 1.7;
+}
+
+/* 自訂青綠色項目符號 */
+.caption-list li::before {
+    content: "▹";
+    position: absolute;
+    left: 0;
+    top: 0;
+
+    color: #2dd4bf;
+    font-size: 1.15rem;
+    font-weight: bold;
+}
+
+/* 輪播指示器 */
+.carousel-indicators [data-bs-target] {
+    width: 32px;
+    height: 4px;
+    margin: 0 5px;
+
+    background-color: #cbd5e1;
+    border: 0;
+    opacity: 0.65;
+}
+
+.carousel-indicators .active {
+    background-color: #2dd4bf;
+    opacity: 1;
+}
+
+/* 手機版調整 */
+@media (max-width: 767.98px) {
+    .bg-img-cover {
+        height: 75vh;
+        min-height: 560px;
+    }
+
+    .custom-caption {
+        left: 5%;
+        right: 5%;
+        top: 50%;
+        bottom: auto;
+
+        width: auto;
+        padding: 24px 22px;
+
+        transform: translateY(-50%);
+    }
+
+    .custom-caption h2 {
+        font-size: 1.65rem;
+    }
+
+    .caption-intro {
+        font-size: 0.9rem;
+        margin-bottom: 16px;
+    }
+
+    .caption-list li {
+        font-size: 0.88rem;
+        margin-bottom: 9px;
+    }
+}
+
+
+/*************************
+    Section 04
+**************************/
+
+/* 整體背景 */
+.profile-stats {
+    background: #0B1120;
+    color: #E2E8F0;
+    overflow: hidden;
+}
+
+/* 左側圖片 */
+.stats-image {
+    position: relative;
+    height: 440px;
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+}
+
+/* 藍黑色漸層遮罩 */
+.stats-image::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(
+        0deg,
+        rgba(5, 12, 25, 0.85),
+        rgba(11, 17, 32, 0.05) 80%
+    );
+}
+
+/* 圖片英文標籤 */
+.image-overlay {
+    position: absolute;
+    left: 30px;
+    bottom: 28px;
+    color: #BFDBFE;
+    font-size: 0.75rem;
+    font-weight: 700;
+    letter-spacing: 2px;
+}
+
+/* 右側內容 */
+.stats-content {
+    padding: 60px 5%;
+}
+
+/* 英文小標 */
+.section-label {
+    display: inline-block;
+    margin-bottom: 18px;
+    color: #60A5FA;
+    font-size: 0.78rem;
+    font-weight: 700;
+    letter-spacing: 2px;
+}
+
+/* 主標題 */
+.stats-title {
+    margin-bottom: 20px;
+    color: #F8FAFC;
+    font-size: clamp(1.8rem, 3vw, 2.8rem);
+    font-weight: 800;
+    line-height: 1.45;
+}
+
+/* 標題強調文字 */
+.stats-title span {
+    color: #60A5FA;
+}
+
+/* 副標 */
+.stats-subtitle {
+    max-width: 600px;
+    margin-bottom: 38px;
+    color: #B8C5D8;
+    font-size: 1rem;
+    line-height: 1.9;
+}
+
+/* 數據排列 */
+.stats-grid {
+    row-gap: 28px;
+}
+
+/* 數據區塊 */
+.stat-item {
+    height: 100%;
+    padding: 12px 0 12px 16px;
+    border-left: 2px solid #263852;
+    transition: border-color 0.3s ease,
+                transform 0.3s ease;
+}
+
+.stat-item:hover {
+    border-left-color: #60A5FA;
+    transform: translateY(-4px);
+}
+
+/* 數字 */
+.stat-number {
+    margin-bottom: 8px;
+    color: #F8FAFC;
+    font-size: clamp(1.8rem, 2.5vw, 2.5rem);
+    font-weight: 800;
+    line-height: 1.2;
+}
+
+/* 數字強調 */
+.stat-number span {
+    color: #60A5FA;
+    font-size: 0.75em;
+}
+
+/* 指標名稱 */
+.stat-item h4 {
+    margin-bottom: 6px;
+    color: #E2E8F0;
+    font-size: 1rem;
+    font-weight: 700;
+}
+
+/* 英文說明 */
+.stat-item p {
+    margin: 0;
+    color: #8292AA;
+    font-size: 0.7rem;
+    line-height: 1.6;
+}
+
+/* 平板 */
+@media (max-width: 991.98px) {
+    .stats-content {
+        padding: 40px 28px;
+    }
+
+    .stats-image {
+        height: 380px;
+    }
+}
+
+/* 手機 */
+@media (max-width: 767.98px) {
+    .stats-image {
+        height: 260px;
+    }
+
+    .stats-content {
+        padding: 38px 24px;
+    }
+
+    .stats-title {
+        font-size: 1.85rem;
+    }
+
+    .stats-subtitle {
+        font-size: 0.92rem;
+    }
+
+    .stat-number {
+        font-size: 2rem;
+    }
+}
+
+
+
+/*************************
+    Section 05
+**************************/
+
+/* 工作理念區塊 */
+.work-philosophy {
+    background: #101926;
+    color: #F8FAFC;
+}
+
+/* 標題區 */
+.philosophy-heading h2 {
+    color: #F8FAFC;
+    font-size: clamp(1.8rem, 3vw, 2.5rem);
+    font-weight: 800;
+    letter-spacing: 1px;
+}
+
+/* 英文小標 */
+.philosophy-label {
+    color: #60A5FA;
+    font-size: 0.78rem;
+    font-weight: 700;
+    letter-spacing: 3px;
+}
+
+/* 標題說明 */
+.philosophy-heading p {
+    margin: 14px 0 0;
+    color: #94A3B8;
+    font-size: 1rem;
+    line-height: 1.8;
+}
+
+/* 理念卡片 */
+.philosophy-card {
+    position: relative;
+    padding: 35px 28px;
+    background: linear-gradient(
+        145deg,
+        #14243B,
+        #101B2D
+    );
+    border: 1px solid #263852;
+    border-radius: 12px;
+    overflow: hidden;
+
+    transition:
+        transform 0.3s ease,
+        border-color 0.3s ease,
+        box-shadow 0.3s ease;
+}
+
+/* 卡片上方裝飾線 */
+.philosophy-card::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 0;
+    height: 3px;
+    background: #60A5FA;
+
+    transition: width 0.3s ease;
+}
+
+/* 滑鼠懸停 */
+.philosophy-card:hover {
+    transform: translateY(-7px);
+    border-color: #3B82F6;
+    box-shadow: 0 12px 35px rgba(37, 99, 235, 0.12);
+}
+
+.philosophy-card:hover::before {
+    width: 100%;
+}
+
+/* 圖示外框 */
+.philosophy-icon {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    width: 60px;
+    height: 60px;
+    margin-bottom: 24px;
+
+    color: #60A5FA;
+    background: rgba(96, 165, 250, 0.1);
+    border: 1px solid rgba(96, 165, 250, 0.2);
+    border-radius: 12px;
+
+    font-size: 1.6rem;
+}
+
+/* 英文理念名稱 */
+.philosophy-en {
+    display: block;
+    margin-bottom: 12px;
+
+    color: #60A5FA;
+    font-size: 0.68rem;
+    font-weight: 700;
+    letter-spacing: 1.5px;
+}
+
+/* 理念標題 */
+.philosophy-card h3 {
+    margin-bottom: 16px;
+    color: #F1F5F9;
+    font-size: 1.3rem;
+    font-weight: 700;
+}
+
+/* 理念內容 */
+.philosophy-card p {
+    margin: 0;
+    color: #A9B8CC;
+    font-size: 0.95rem;
+    line-height: 1.95;
+}
+
+/* 手機版 */
+@media (max-width: 767.98px) {
+    .work-philosophy {
+        padding-top: 3rem !important;
+        padding-bottom: 3rem !important;
+    }
+
+    .philosophy-heading {
+        margin-bottom: 2rem !important;
+    }
+
+    .philosophy-card {
+        padding: 28px 24px;
+    }
+
+    .philosophy-icon {
+        width: 54px;
+        height: 54px;
+        margin-bottom: 20px;
+    }
+
+    .philosophy-card h3 {
+        font-size: 1.2rem;
+    }
+}

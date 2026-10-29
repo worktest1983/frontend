@@ -4,29 +4,659 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>SPA - 個人作品集</title>
+    <title>SPA網站</title>
     <link rel="stylesheet" href="css/bootstrap.min.css">
     <link rel="stylesheet" href="css/all.min.css">
     <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/style_spa.css">
 </head>
 
 <body>
-    <div id="section01">
+    <!-- Top -->
+    <!-- <sectioin id="s01" class="bg-secondary">
         <div class="container py-2">
             <div class="row">
                 <div class="text-end">
-                    <i class="fa-brands fa-instagram"></i>
-                    <i class="fa-brands fa-facebook"></i>
-                    <i class="fa-brands fa-x-twitter"></i>
-                    <i class="fa-brands fa-threads"></i>
+                    <a href="#" class="">
+                        <i class="fa-brands fa-github social-icon text-secondary"></i>
+                    </a>
+                    <a href="#" class="">
+                        <i class="fa-brands fa-instagram social-icon text-secondary"></i>
+                    </a>
+                    <a href="#" class="">
+                        <i class="fa-brands fa-facebook social-icon text-secondary"></i>
+                    </a>
                 </div>
             </div>
         </div>
-    </div>
+    </sectioin> -->
+
+    <!-- Nav -->
+    <section id="s02" class="bg-dark">
+        <div class="container">
+            <nav class="navbar navbar-expand-lg navbar-dark">
+                <div class="container-fluid">
+                    <a class="navbar-brand" href="#"><i class="fa-brands fa-connectdevelop fa-lg"></i></a>
+                    <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
+                        data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent"
+                        aria-expanded="false" aria-label="Toggle navigation">
+                        <span class="navbar-toggler-icon"></span>
+                    </button>
+                    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                        <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                            <li class="nav-item">
+                                <a class="nav-link active" aria-current="page" href="#">Home</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" href="#">Link</a>
+                            </li>
+                            <li class="nav-item dropdown">
+                                <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown"
+                                    aria-expanded="false">
+                                    Dropdown
+                                </a>
+                                <ul class="dropdown-menu">
+                                    <li><a class="dropdown-item" href="#">Action</a></li>
+                                    <li><a class="dropdown-item" href="#">Another action</a></li>
+                                    <li>
+                                        <hr class="dropdown-divider">
+                                    </li>
+                                    <li><a class="dropdown-item" href="#">Something else here</a></li>
+                                </ul>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link disabled">Disabled</a>
+                            </li>
+                        </ul>
+
+                        <div>
+                            <button class="btn btn-warning" data-bs-toggle="modal"
+                                data-bs-target="#login">Login</button>
+                            <button class="btn btn-warning" data-bs-toggle="modal"
+                                data-bs-target="#register">Register</button>
+                        </div>
+                    </div>
+                </div>
+            </nav>
+        </div>
+
+        <div class="modal" tabindex="-1" id="login">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title text-primary">
+                            <i class="fa-regular fa-circle-user"></i>
+                            <span>Login</span>
+                        </h5>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body">
+                        <div class="row">
+                            <div class="col-12">
+                                <div class="mb-3">
+                                    <label for="username" class="form-label">帳號</label>
+                                    <input type="text" class="form-control form-control-lg" id="username" maxlength="8">
+                                </div>
+                                <div class="mb-3">
+                                    <label for="password" class="form-label">密碼</label>
+                                    <input type="text" class="form-control form-control-lg" id="password"
+                                        maxlength="16">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="modal-footer justify-content-between">
+                        <div>
+                            <a href="#" data-bs-toggle="modal" data-bs-target="#login">尚未有帳號?</a>
+                        </div>
+                        <div>
+                            <button type="button" class="btn btn-warning">Login</button>
+                            <button type="button" class="btn btn-dark">Register</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="modal" tabindex="-1" id="register">
+            <div class="modal-dialog modal-xl">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title text-primary">
+                            <i class="fa-regular fa-circle-user"></i>
+                            <span>Register</span>
+                        </h5>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body">
+                        <div class="row">
+                            <div class="col-6">
+                                <div class="row">
+                                    <div class="col-12">
+                                        <div class="overflow-auto" style="height: 350px;">
+                                            <h2 class="display-5">會員條款與協議</h2>
+                                            <p>1. 服務接受與條款修改
+                                                明確指出使用者註冊或開始使用服務時，即代表同意本條款。
+                                                保留未來修改條款的權利，並說明會如何通知用戶（如公告、Email）。</p>
+                                            <p>2. 會員註冊與帳號安全
+                                                要求用戶提供真實、正確且完整的個人資料。
+                                                規範帳號密碼的保管責任（用戶需自行負責，不可轉借他人）。
+                                                若發現帳號遭盜用，用戶應立即通知平台。</p>
+                                            <p>3. 隱私權保護
+                                                簡述平台如何收集、處理及利用個人資料。
+                                                直接附上獨立的《隱私權政策》（Privacy Policy）連結。</p>
+                                            <p>4. 使用者守則與禁止行為（核心規範）
+                                                禁止違法行為： 不得散布色情、暴力、詐騙或侵害他人名譽之內容。
+                                                禁止侵害智慧財產權： 不得未經授權使用他人的商標、著作。
+                                                禁止惡意破壞： 不得使用外掛、病毒、爬蟲或干擾系統正常運作。</p>
+                                            <p>5. 智慧財產權歸屬
+                                                明定平台上的所有內容（文字、圖片、程式碼）均屬平台或權利人所有。
+                                                用戶發布的內容，需授權平台在合理範圍內使用（如宣傳、重製）。</p>
+                                            <p>6. 服務中斷與免責聲明
+                                                說明系統維護、天災或不可抗力因素導致服務中斷時，平台不負賠償責任。
+                                                「現況提供」原則：平台不保證服務完全無瑕疵、無病毒或永不中斷。</p>
+                                            <p>7. 違規處理與帳號終止
+                                                平台有權不經通知，直接刪除違規內容或暫停/終止會員資格。</p>
+                                            <p>8. 準據法與管轄法院
+                                                明定條款的解釋以特定法律為準據法（例如：中華民國法律）。
+                                                若發生訴訟，指定第一審管轄法院（例如：臺灣臺北地方法院）。</p>
+                                        </div>
+                                    </div>
+                                    <div class="col-12">
+                                        <div class="mb-3">
+                                            <div class="form-check form-switch">
+                                                <input type="checkbox" name="classNotify" id="classNotify01"
+                                                    class="form-check-input">
+                                                <label for="classNotify01">同意</label>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-6">
+                                <div class="mb-3">
+                                    <label for="username" class="form-label">帳號</label>
+                                    <input type="text" class="form-control form-control-lg" id="username"
+                                        placeholder="輸入2~8字元">
+                                    <div class="valid-feedback">符合規定</div>
+                                    <div class="invalid-feedback">帳號格式為2-8位數</div>
+                                </div>
+                                <div class="mb-3">
+                                    <label for="password" class="form-label">密碼</label>
+                                    <input type="text" class="form-control form-control-lg" id="password"
+                                        placeholder="密碼長度8~16,至少一個英文字母及一個數字">
+                                    <div class="valid-feedback">符合規定</div>
+                                    <div class="invalid-feedback">密碼格式為8-16位數,至少一個英文字母及一個數字</div>
+                                </div>
+                                <div class="mb-3">
+                                    <label for="phone" class="form-label">Email</label>
+                                    <input type="email" class="form-control form-control-lg" id="email"
+                                        placeholder="email須包含@及小數點">
+                                    <div class="valid-feedback">符合規定</div>
+                                    <div class="invalid-feedback">Email格式必須包含@及小數點</div>
+                                </div>
+                                <div class="mb-3">
+                                    <label for="phone" class="form-label">手機</label>
+                                    <input type="text" class="form-control form-control-lg" id="phone" placeholder="手機格式為10位數且為09開頭
+                    ">
+                                    <div class="valid-feedback">符合規定</div>
+                                    <div class="invalid-feedback">手機格式為10位數且為09開頭</div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="modal-footer justify-content-between">
+                            <div>
+                                <a href="#" data-bs-toggle="modal" data-bs-target="#login">已有帳號?</a>
+                            </div>
+                            <div>
+                                <button type="button" class="btn btn-secondary">Reset</button>
+                                <button type="button" class="btn btn-primary">Register</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- #s03 Carousel (原始)-->
+    <!-- <section id="s03">
+        <div id="carouselExampleCaptions" class="carousel slide" data-bs-ride="false">
+            <div class="carousel-indicators">
+                <button type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide-to="0" class="active"
+                    aria-current="true" aria-label="Slide 1"></button>
+                <button type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide-to="1"
+                    aria-label="Slide 2"></button>
+                <button type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide-to="2"
+                    aria-label="Slide 3"></button>
+            </div>
+            <div class="carousel-inner">
+                <div class="carousel-item active bg-img-cover"
+                    style="background-image: url(images/01.jpg); height: 85vh;">
+                    <div class="carousel-caption d-none d-md-block text-dark"
+                        style="background-color: rgba(255, 255, 255, 0.3);">
+                        <h5>Sea</h5>
+                        <p>Some representative placeholder content for the first slide.</p>
+                    </div>
+                </div>
+                <div class="carousel-item bg-img-cover" style="background-image: url(images/02.jpg); height: 85vh;">
+
+                    <div class="carousel-caption d-none d-md-block text-dark"
+                        style="background-color: rgba(255, 255, 255, 0.3);">
+                        <h5>Ocean</h5>
+                        <p>Some representative placeholder content for the second slide.</p>
+                    </div>
+                </div>
+                <div class="carousel-item bg-img-cover" style="background-image: url(images/03.jpg); height: 85vh;">
+
+                    <div class="carousel-caption d-none d-md-block text-dark"
+                        style="background-color: rgba(255, 255, 255, 0.3);">
+                        <h5>Sunset</h5>
+                        <p>Some representative placeholder content for the third slide.</p>
+                    </div>
+                </div>
+            </div>
+            <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleCaptions"
+                data-bs-slide="prev">
+                <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                <span class="visually-hidden">Previous</span>
+            </button>
+            <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleCaptions"
+                data-bs-slide="next">
+                <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                <span class="visually-hidden">Next</span>
+            </button>
+        </div>
+    </section> -->
+
+    <!-- #s03 Carousel (AI生成)-->
+    <section id="s03">
+        <!-- #s03 的 AI Prompt
+            將 Carousel 裡面的caption文字內容重新排版
+            1.條列式出來，列舉工作經驗或技術等
+            2.顯示於左側
+            3.並搭配適合的CSS配色
+        -->
+        <div id="carouselExampleCaptions" class="carousel slide" data-bs-ride="false">
+
+            <!-- 輪播指示器 -->
+            <div class="carousel-indicators">
+                <button type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide-to="0" class="active"
+                    aria-current="true" aria-label="Slide 1"></button>
+
+                <button type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide-to="1"
+                    aria-label="Slide 2"></button>
+
+                <button type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide-to="2"
+                    aria-label="Slide 3"></button>
+            </div>
+
+            <div class="carousel-inner">
+
+                <!-- 第一張：工作經驗 -->
+                <div class="carousel-item active bg-img-cover" style="background-image: url('images/01.jpg');">
+
+                    <div class="carousel-caption custom-caption">
+                        <span class="caption-label">ABOUT ME</span>
+                        <h2>個人簡介</h2>
+                        <p class="caption-intro">
+                            具備網站開發經驗，熱衷於學習新技術與解決問題。
+                        </p>
+
+                        <ul class="caption-list">
+                            <li>具備前端網頁開發與版面設計經驗</li>
+                            <li>熟悉 HTML、CSS、JavaScript</li>
+                            <li>具備 RWD 響應式網頁設計能力</li>
+                            <li>重視程式碼品質與使用者體驗</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <!-- 第二張：專業技術 -->
+                <div class="carousel-item bg-img-cover" style="background-image: url('images/02.jpg');">
+
+                    <div class="carousel-caption custom-caption">
+                        <span class="caption-label">TECHNICAL SKILLS</span>
+                        <h2>專業技術</h2>
+                        <p class="caption-intro">
+                            運用多元技術，打造易於維護且具備良好體驗的網站。
+                        </p>
+
+                        <ul class="caption-list">
+                            <li>前端：HTML5、CSS3、JavaScript</li>
+                            <li>框架：Bootstrap、jQuery</li>
+                            <li>後端：PHP、ASP.NET（依實際經驗調整）</li>
+                            <li>資料庫：MySQL、SQL Server（依實際經驗調整）</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <!-- 第三張：工作能力 -->
+                <div class="carousel-item bg-img-cover" style="background-image: url('images/03.jpg');">
+
+                    <div class="carousel-caption custom-caption">
+                        <span class="caption-label">WORK EXPERIENCE</span>
+                        <h2>工作經驗與能力</h2>
+                        <p class="caption-intro">
+                            擅長團隊合作、需求分析與持續改善開發流程。
+                        </p>
+
+                        <ul class="caption-list">
+                            <li>網站功能開發與既有系統維護</li>
+                            <li>網頁切版與跨裝置相容性調整</li>
+                            <li>系統問題分析與錯誤排除</li>
+                            <li>跨部門溝通與專案協作</li>
+                        </ul>
+                    </div>
+                </div>
+
+            </div>
+
+            <!-- 上一張 -->
+            <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleCaptions"
+                data-bs-slide="prev">
+                <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                <span class="visually-hidden">Previous</span>
+            </button>
+
+            <!-- 下一張 -->
+            <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleCaptions"
+                data-bs-slide="next">
+                <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                <span class="visually-hidden">Next</span>
+            </button>
+
+        </div>
+    </section>
+
+    <!-- #s04 counterup 可量化的數據 (原始) -->
+    <!-- <section id="s04">
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col-md-5 bg-img-cover" style="background-image: url(images/04.jpg); height: 300px;"></div>
+
+                <div class="col-md-7 py-5">
+                    <h2>共享公里，大多數媽。</h2>
+                    <div class="row">
+                        <div class="col-md-3">
+                            <h4>年資</h4>
+                            <div class="h4"><span class="h2">10</span>年</div>
+                        </div>
+                        <div class="col-md-3">
+                            <h4>年資</h4>
+                            <div class="h4"><span class="h2">10</span>年</div>
+                        </div>
+                        <div class="col-md-3">
+                            <h4>年資</h4>
+                            <div class="h4"><span class="h2">10</span>年</div>
+                        </div>
+                        <div class="col-md-3">
+                            <h4>年資</h4>
+                            <div class="h4"><span class="h2">10</span>年</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section> -->
+
+    <!-- #s04 counterup 可量化的數據 (AI生成) -->
+    <section id="s04">
+        <!-- #s04 的 AI Prompt
+            此區塊協助填入 
+            1.大標題與副標產生吸引人目光的用詞
+            2.可量化的數據與標題
+            3.顯眼的CSS配色
+         -->
+
+        <section class="profile-stats">
+            <div class="container-fluid">
+                <div class="row align-items-center">
+
+                    <!-- 左側圖片 -->
+                    <div class="col-md-5 p-0">
+                        <div class="stats-image bg-img-cover" style="background-image: url('images/04.jpg');">
+                            <div class="image-overlay">
+                                <span>MY PROFESSIONAL JOURNEY</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- 右側文字與數據 -->
+                    <div class="col-md-7 stats-content">
+
+                        <span class="section-label">
+                            EXPERIENCE & ACHIEVEMENTS
+                        </span>
+
+                        <h2 class="stats-title">
+                            用技術創造價值，<br>
+                            <span>讓每個專案都有成果。</span>
+                        </h2>
+
+                        <p class="stats-subtitle">
+                            從需求分析、系統開發到效能優化，
+                            以實務經驗與技術能力，
+                            打造穩定、可靠且高效的數位解決方案。
+                        </p>
+
+                        <!-- 量化數據 -->
+                        <div class="row stats-grid">
+
+                            <div class="col-6 col-lg-3">
+                                <div class="stat-item">
+                                    <div class="stat-number counter0">
+                                        10<span>+</span>
+                                    </div>
+                                    <h4>專業年資</h4>
+                                    <p>Years of Experience</p>
+                                </div>
+                            </div>
+
+                            <div class="col-6 col-lg-3">
+                                <div class="stat-item">
+                                    <div class="stat-number counter1">
+                                        50<span>+</span>
+                                    </div>
+                                    <h4>專案經驗</h4>
+                                    <p>Projects Delivered</p>
+                                </div>
+                            </div>
+
+                            <div class="col-6 col-lg-3">
+                                <div class="stat-item">
+                                    <div class="stat-number counter2">
+                                        8<span>+</span>
+                                    </div>
+                                    <h4>技術工具</h4>
+                                    <p>Technical Skills</p>
+                                </div>
+                            </div>
+
+                            <div class="col-6 col-lg-3">
+                                <div class="stat-item">
+                                    <div class="stat-number counter3">
+                                        30<span>%</span>
+                                    </div>
+                                    <h4>效率提升</h4>
+                                    <p>Process Improvement</p>
+                                </div>
+                            </div>
+
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+        </section>
+    </section>
+
+    <!-- #s05 個人特質/風格 (原始) -->
+    <!-- <section id="s05">
+        <div class="container">
+            <h2 class="text-center py-3">我的工作理念</h2>
+            <div class="row">
+                <div class="col-md-4 text-center">
+                    <i class="fa-regular fa-flag fa-2x"></i>
+                    <h3 class="py-3">主動解決問題</h3>
+                    <p>不到臺東上午時刻我想一點三大，電子商務。</p>
+                </div>
+                <div class="col-md-4 text-center">
+                    <i class="fa-regular fa-flag fa-2x"></i>
+                    <h3 class="py-3">主動解決問題</h3>
+                    <p>不到臺東上午時刻我想一點三大，電子商務。</p>
+                </div>
+                <div class="col-md-4 text-center">
+                    <i class="fa-regular fa-flag fa-2x"></i>
+                    <h3 class="py-3">主動解決問題</h3>
+                    <p>不到臺東上午時刻我想一點三大，電子商務。</p>
+                </div>
+            </div>
+        </div>
+    </section> -->
+
+    <!-- #s05 個人特質/風格 (AI生成) -->
+    <section class="work-philosophy py-5">
+        <!--  #s05 的 AI Prompt (Apries)
+            此區塊協助以下需求
+            1.重新排版及配色
+            2.文字填入，常用的履歷會提到的工作理念
+
+            Teacher's AI Prompt
+            1.
+            2.
+        -->
+        <div class="container">
+
+            <!-- 區塊標題 -->
+            <div class="text-center philosophy-heading mb-5">
+                <span class="philosophy-label">MY WORK PHILOSOPHY</span>
+                <h2 class="mt-3">我的工作理念</h2>
+                <p>
+                    以專業、合作與成長，創造更好的工作成果。
+                </p>
+            </div>
+
+            <div class="row g-4">
+
+                <!-- 理念一：主動解決問題 -->
+                <div class="col-md-4">
+                    <div class="philosophy-card h-100">
+
+                        <div class="philosophy-icon">
+                            <i class="fa-solid fa-bullseye"></i>
+                        </div>
+
+                        <span class="philosophy-en">
+                            PROBLEM SOLVING
+                        </span>
+
+                        <h3>主動解決問題</h3>
+
+                        <p>
+                            面對工作中的挑戰，主動分析問題並找出根本原因，
+                            以邏輯思考與實際行動提出可行的解決方案，
+                            持續改善工作流程與執行效率。
+                        </p>
+
+                    </div>
+                </div>
+
+                <!-- 理念二：重視團隊合作 -->
+                <div class="col-md-4">
+                    <div class="philosophy-card h-100">
+
+                        <div class="philosophy-icon">
+                            <i class="fa-solid fa-people-group"></i>
+                        </div>
+
+                        <span class="philosophy-en">
+                            TEAMWORK
+                        </span>
+
+                        <h3>重視團隊合作</h3>
+
+                        <p>
+                            重視團隊溝通與資訊共享，尊重不同專業的觀點，
+                            主動協調工作需求並與夥伴共同解決問題，
+                            攜手達成專案目標。
+                        </p>
+
+                    </div>
+                </div>
+
+                <!-- 理念三：持續學習成長 -->
+                <div class="col-md-4">
+                    <div class="philosophy-card h-100">
+
+                        <div class="philosophy-icon">
+                            <i class="fa-solid fa-chart-line"></i>
+                        </div>
+
+                        <span class="philosophy-en">
+                            CONTINUOUS LEARNING
+                        </span>
+
+                        <h3>持續學習成長</h3>
+
+                        <p>
+                            保持積極學習的態度，持續精進專業知識與技術能力，
+                            主動接觸新工具與開發方法，
+                            將所學運用於實務工作並提升成果品質。
+                        </p>
+
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <!-- #s06 關於我 (原始) -->
+    <section id="s06" class="position-relative">
+        <div class="row">
+            <div class="col-md-5 bg-img-cover position-absolute top-0 bottom-0" style="background-image: url(images/photo02.avif);height: 150px;"></div>
+            <div class="container py-3">
+                <div class="row justify-content-end">
+                    <div class="col-md-7">
+                        大全下一頁對面傳奇認為不斷維持效率環境聯合起來不好一流有一，組合通用幹什麼感到不知嘿嘿出發還要一名公司，共享版不敢一場的是台南，當初強化第二次後面年代你怎不來建議目的男人能在，各個工廠出租，現象還沒，先進性回事打電話我都一口監管任務命運便利商店投入很久奧客當地，主體之下想起服飾我看提到你自己股市表示醫學淡淡，通過另一後果把他引擎畢竟理想數碼啟動全家所有，事務電器自我我不，手機很少特價，支付公主一。
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
 
 
     <script src="js/bootstrap.min.js"></script>
     <script src="js/jquery-4.0.0.js"></script>
+    <script src="https://unpkg.com/counterup2@2.0.2/dist/index.js">	</script>
+
+    <script>
+        const counterUp = window.counterUp.default
+
+        const callback = entries => {
+            entries.forEach(entry => {
+                const el = entry.target
+                if (entry.isIntersecting && !el.classList.contains('is-visible')) {
+                    counterUp(el, {
+                        duration: 2000,
+                        delay: 16,
+                    })
+                    el.classList.add('is-visible')
+                }
+            })
+        }
+
+        const IO = new IntersectionObserver(callback, { threshold: 1 })
+
+        // const el = document.querySelector('.counter')
+        // IO.observe(el)
+
+        for (let i = 0; i < 4; i++) {
+            const el_i = $('.counter' + i)[0];
+            IO.observe(el_i)
+        }
+    </script>
 </body>
 
 </html>

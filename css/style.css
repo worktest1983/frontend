@@ -28,6 +28,14 @@
 
 
 /* 常用設定 */
+.bg-img-cover {
+    background-size: cover;
+    background-repeat: no-repeat;
+}
+.bg-img-contain {
+    background-size: contain;
+    background-repeat: no-repeat;
+}
 
 
 /* 動畫設定 - 滑入滑出*/
