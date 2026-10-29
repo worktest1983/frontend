@@ -3,15 +3,6 @@
 **************************/
 
 /* Carousel 背景圖片 */
-.bg-img-cover {
-    height: 85vh;
-    min-height: 500px;
-    background-size: cover;
-    background-position: center;
-    background-repeat: no-repeat;
-    position: relative;
-}
-
 /* 左側資訊面板 */
 .custom-caption {
     position: absolute;
@@ -465,4 +456,59 @@
     .philosophy-card h3 {
         font-size: 1.2rem;
     }
+}
+
+
+
+
+/*************************
+    Section 06
+**************************/
+
+/* 關於我 */
+#s06 {
+    background-color: #F4F7FB;
+    color: #26364A;
+    padding-top: 30px;
+    padding-bottom: 30px;
+}
+
+/* 標題 */
+#s06 h2 {
+    color: #172B46;
+    font-weight: 700;
+    letter-spacing: 2px;
+}
+
+/* 內文 */
+#s06 p {
+    color: #526176;
+    font-size: 16px;
+    line-height: 2;
+    letter-spacing: 0.5px;
+    text-align: justify;
+    margin-bottom: 28px;
+}
+
+/* 履歷下載連結 */
+#s06 .s06-resume {
+    display: block;
+    width: 100%;
+    box-sizing: border-box;
+    padding: 12px 26px;
+    color: #243B5A;
+    background-color: #E3EBF5;
+    border: 1px solid #B8C9DF;
+    border-radius: 40px;
+    text-align: center;
+    text-decoration: none;
+    font-size: 15px;
+    letter-spacing: 1px;
+    transition: all 0.3s ease;
+}
+
+#s06 .s06-resume:hover {
+    color: #FFFFFF;
+    background-color: #243B5A;
+    border-color: #243B5A;
 }
