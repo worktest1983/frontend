@@ -33,6 +33,7 @@
     background-repeat: no-repeat;
     background-position: center center;
 }
+
 .bg-img-contain {
     background-size: contain;
     background-repeat: no-repeat;
@@ -86,4 +87,10 @@
 .roller-l:hover .rollerBox,
 .roller-r:hover .rollerBox {
     transform: translateX(0);
+}
+
+
+/* 容器 */
+.box01 {
+    height: 180px;
 }
