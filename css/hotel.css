@@ -1,0 +1,16 @@
+:root {
+  /* 1. 北歐基底色 (Base) */
+  --bg-off-white: #F9F8F6;
+  --bg-oatmeal: #EFECE6;
+  --border-gray: #E4E7EB;
+
+  /* 2. 熱帶度假點綴色 (Accent) */
+  --accent-green: #4A6B5B;
+  --accent-yellow: #E9B44C;
+  --accent-coral: #D97D62;
+  --accent-blue: #5B828C;
+
+  /* 3. 文字與細節色 (Text & Details) */
+  --text-main: #2C2825;
+  --text-sub: #8C6D53;
+}
