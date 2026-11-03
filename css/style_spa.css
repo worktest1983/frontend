@@ -6,12 +6,12 @@
 /* 左側資訊面板 */
 .custom-caption {
     position: absolute;
-    top: 50%;
+    top: 30%;
     left: auto;
     right: 12%;
     bottom: auto;
 
-    transform: translateY(-50%);
+    /* transform: translateY(-50%); */
 
     width: min(480px, 80%);
     padding: 32px 36px;

@@ -7,6 +7,7 @@
     <title>SPA網站</title>
     <link rel="stylesheet" href="css/bootstrap.min.css">
     <link rel="stylesheet" href="css/all.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css" />
     <link rel="stylesheet" href="css/style.css">
     <link rel="stylesheet" href="css/style_spa.css">
 </head>
@@ -223,7 +224,7 @@
                 <div class="carousel-item active bg-img-cover"
                     style="background-image: url('images/work01.jpg'); height: 85vh;">
 
-                    <div class="carousel-caption custom-caption">
+                    <div class="carousel-caption custom-caption wow animate__animated animate__fadeInUpBig" data-wow-duration="1.5s" data-wow-delay="0s" data-wow-iteration="1">
                         <span class="caption-label">ABOUT ME</span>
                         <h2>個人簡介</h2>
                         <p class="caption-intro">
@@ -400,7 +401,7 @@
             <div class="row g-4">
 
                 <!-- 理念一：主動解決問題 -->
-                <div class="col-md-4">
+                <div class="col-md-4 wow animate__animated animate__flipInY" data-wow-duration="1.5s" data-wow-delay="0s" data-wow-iteration="1">
                     <div class="philosophy-card h-100">
 
                         <div class="philosophy-icon">
@@ -423,7 +424,7 @@
                 </div>
 
                 <!-- 理念二：重視團隊合作 -->
-                <div class="col-md-4">
+                <div class="col-md-4 wow animate__animated animate__flipInY" data-wow-duration="1.5s" data-wow-delay="0.2s" data-wow-iteration="1">
                     <div class="philosophy-card h-100">
 
                         <div class="philosophy-icon">
@@ -446,7 +447,7 @@
                 </div>
 
                 <!-- 理念三：持續學習成長 -->
-                <div class="col-md-4">
+                <div class="col-md-4 wow animate__animated animate__flipInY" data-wow-duration="1.5s" data-wow-delay="0.5s" data-wow-iteration="1">
                     <div class="philosophy-card h-100">
 
                         <div class="philosophy-icon">
@@ -954,7 +955,7 @@
 
 
     <!-- Section11 Fotter -->
-    <section id="s11">
+    <section id="s11" class="bg-dark">
         <ul class="nav">
             <li class="nav-item">
                 <a class="nav-link active disabled " aria-current="page" href="#">Copyright 2026 by Apries</a>
@@ -976,8 +977,13 @@
     <script src="js/jquery-4.0.0.js"></script>
     <!-- 計數器 -->
     <script src="https://unpkg.com/counterup2@2.0.2/dist/index.js">	</script>
+    <!-- 動畫 -->
+    <script src="js/wow.min.js"></script>
 
     <script>
+        new WOW().init();
+
+
         const counterUp = window.counterUp.default
 
         const callback = entries => {
