@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="zh-TW">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -9,15 +10,54 @@
     <!-- Font Awsome -->
     <link rel="stylesheet" href="css/all.min.css">
 </head>
+
 <body>
     <!-- 01 Top Link -->
-    <section id="topLink"></section>
+    <section id="topLink" class="position-absolute top-0 start-0 w-100" style="z-index: 99">
+        <div class="row py-3 px-5">
+            <div class="text-end">
+                <a href="#" class="text-light mx-3">
+                    <i class="fa-solid fa-earth-americas"></i>繁中
+                </a>
+                <a href="#" class="text-light">
+                    <i class="fa-brands fa-instagram social-icon"></i>
+                </a>
+                <a href="#" class="text-light">
+                    <i class="fa-brands fa-facebook social-icon"></i>
+                </a>
+            </div>
+        </div>
+    </section>
 
     <!-- 02 Nav -->
     <section id="nav"></section>
 
     <!-- 03 Banner -->
-    <section id="banner"></section>
+    <section id="banner">
+        <div id="carouselExampleCaptions" class="carousel slide" data-bs-ride="false">
+            <div class="carousel-inner">
+                <div class="carousel-item active bg-img-cover"
+                    style="background-image: url(images/hotel/room05.jpg); height: 85vh;">
+                </div>
+                <div class="carousel-item bg-img-cover" style="background-image: url(images/hotel/lobby02.jpg); height: 85vh;">
+                </div>
+                <div class="carousel-item bg-img-cover" style="background-image: url(images/hotel/room03.jpg); height: 85vh;">
+                </div>
+                <div class="carousel-item bg-img-cover" style="background-image: url(images/hotel/dinning01.jpg); height: 85vh;">
+                </div>
+            </div>
+            <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleCaptions"
+                data-bs-slide="prev">
+                <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                <span class="visually-hidden">Previous</span>
+            </button>
+            <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleCaptions"
+                data-bs-slide="next">
+                <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                <span class="visually-hidden">Next</span>
+            </button>
+        </div>
+    </section>
 
     <!-- 04 Brand Philosophy 品牌核心理念 -->
     <section id="brand"></section>
@@ -54,8 +94,9 @@
 
     <!-- 15 Footer -->
     <section id="footer"></section>
-    
+
     <script src="js/bootstrap.min.js"></script>
     <script src="js/jquery-4.0.0.js"></script>
 </body>
+
 </html>
