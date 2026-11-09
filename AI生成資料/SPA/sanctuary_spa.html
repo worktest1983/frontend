@@ -1,0 +1,893 @@
+<!DOCTYPE html>
+<html lang="zh-TW" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sanctuary 靜謐之境 SPA | 日式寂侘風身心療癒會館</title>
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Google Fonts: Noto Serif TC & Inter -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=Noto+Serif+TC:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <!-- FontAwesome Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        wabi: {
+                            bg: '#FAF8F5',       /* 核心背景：生白 / 溫潤質樸牆面 */
+                            card: '#F0ECE1',     /* 區塊與卡片：亞麻灰 */
+                            text: '#2C2A29',     /* 主要文字：墨黑 */
+                            muted: '#6E675F',    /* 次要文字：苔岩灰 */
+                            border: '#A3988B',   /* 邊框線條：枯石褐 */
+                            accent: '#4D443E',   /* 按鈕主色：禪意深木 */
+                            accentHover: '#38312C', /* 按鈕懸停色 */
+                            highlight: '#8C7B6B'  /* 強調與標籤色 */
+                        }
+                    },
+                    fontFamily: {
+                        serif: ['"Noto Serif TC"', 'serif'],
+                        sans: ['Inter', 'sans-serif']
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        /* Custom Wabi-Sabi Subtle Texture & Smooth Animation */
+        body {
+            background-color: #FAF8F5;
+            color: #2C2A29;
+            font-family: 'Noto Serif TC', serif;
+            background-image: radial-gradient(#A3988B 0.5px, transparent 0.5px);
+            background-size: 24px 24px;
+            background-position: 0 0;
+            background-blend-mode: overlay;
+        }
+
+        /* Glassmorphism translucent header */
+        .wabi-header {
+            background-color: rgba(250, 248, 245, 0.88);
+            backdrop-filter: blur(12px);
+            border-bottom: 1px solid rgba(163, 152, 139, 0.2);
+        }
+
+        /* Smooth Floating Animation for Hero Visuals */
+        @keyframes floatSlow {
+            0%, 100% { transform: translateY(0px) rotate(0deg); }
+            50% { transform: translateY(-10px) rotate(0.5deg); }
+        }
+
+        .animate-float {
+            animation: floatSlow 8s ease-in-out infinite;
+        }
+
+        /* Custom Scrollbar */
+        ::-webkit-scrollbar {
+            width: 8px;
+        }
+        ::-webkit-scrollbar-track {
+            background: #FAF8F5;
+        }
+        ::-webkit-scrollbar-thumb {
+            background: #A3988B;
+            border-radius: 4px;
+        }
+        ::-webkit-scrollbar-thumb:hover {
+            background: #4D443E;
+        }
+
+        .tab-btn.active {
+            background-color: #4D443E;
+            color: #FAF8F5;
+            border-color: #4D443E;
+        }
+    </style>
+</head>
+<body class="antialiased selection:bg-wabi-border selection:text-wabi-bg">
+
+    <!-- 1. NAVIGATION BAR -->
+    <header class="fixed top-0 left-0 right-0 z-50 wabi-header transition-all duration-300">
+        <div class="max-w-7xl mx-auto px-6 h-20 flex items-center justify-between">
+            <!-- Brand Logo -->
+            <a href="#" class="flex items-center gap-3 group">
+                <div class="w-10 h-10 rounded-full border border-wabi-border/60 flex items-center justify-center text-wabi-accent group-hover:border-wabi-accent transition-colors">
+                    <span class="font-serif text-lg">寂</span>
+                </div>
+                <div class="flex flex-col">
+                    <span class="font-serif text-xl tracking-widest font-semibold text-wabi-text">SANCTUARY</span>
+                    <span class="text-[10px] tracking-widest text-wabi-muted font-sans uppercase">靜謐之境 SPA</span>
+                </div>
+            </a>
+
+            <!-- Desktop Nav Links -->
+            <nav class="hidden md:flex items-center space-x-8 text-sm tracking-widest font-medium">
+                <a href="#philosophy" class="text-wabi-muted hover:text-wabi-text transition-colors">品牌理念</a>
+                <a href="#menu" class="text-wabi-muted hover:text-wabi-text transition-colors">精選療程</a>
+                <a href="#flow" class="text-wabi-muted hover:text-wabi-text transition-colors">服務流程</a>
+                <a href="#reviews" class="text-wabi-muted hover:text-wabi-text transition-colors">旅人評價</a>
+                <a href="#faq" class="text-wabi-muted hover:text-wabi-text transition-colors">常見問題</a>
+            </nav>
+
+            <!-- Header Action CTA -->
+            <div class="hidden md:flex items-center space-x-4">
+                <button onclick="openBookingModal()" class="px-6 py-2.5 rounded-full bg-wabi-accent text-wabi-bg text-sm tracking-widest hover:bg-wabi-accentHover transition-all shadow-sm hover:shadow">
+                    線上預約
+                </button>
+            </div>
+
+            <!-- Mobile Menu Toggle Button -->
+            <button id="mobileMenuBtn" class="md:hidden text-wabi-text p-2 focus:outline-none">
+                <i class="fa-solid fa-bars text-xl"></i>
+            </button>
+        </div>
+
+        <!-- Mobile Drawer Menu -->
+        <div id="mobileMenu" class="hidden md:hidden bg-wabi-bg border-b border-wabi-border/30 px-6 py-6 space-y-4">
+            <a href="#philosophy" class="block text-wabi-text hover:text-wabi-highlight py-2 tracking-widest border-b border-wabi-border/20">品牌理念</a>
+            <a href="#menu" class="block text-wabi-text hover:text-wabi-highlight py-2 tracking-widest border-b border-wabi-border/20">精選療程</a>
+            <a href="#flow" class="block text-wabi-text hover:text-wabi-highlight py-2 tracking-widest border-b border-wabi-border/20">服務流程</a>
+            <a href="#reviews" class="block text-wabi-text hover:text-wabi-highlight py-2 tracking-widest border-b border-wabi-border/20">旅人評價</a>
+            <a href="#faq" class="block text-wabi-text hover:text-wabi-highlight py-2 tracking-widest border-b border-wabi-border/20">常見問題</a>
+            <button onclick="openBookingModal()" class="w-full mt-4 py-3 rounded-full bg-wabi-accent text-wabi-bg tracking-widest">
+                線上預約
+            </button>
+        </div>
+    </header>
+
+    <!-- 2. HERO SECTION -->
+    <section class="relative min-h-screen flex items-center justify-center pt-24 pb-16 px-6 overflow-hidden">
+        <!-- Subtle Ambient Background Images -->
+        <div class="absolute inset-0 z-0 opacity-15 pointer-events-none">
+            <img src="https://images.unsplash.com/photo-1540555700478-4be289fbecef?auto=format&fit=crop&w=1920&q=80" alt="Spa Ambient Background" class="w-full h-full object-cover">
+        </div>
+
+        <div class="max-w-5xl mx-auto text-center relative z-10 flex flex-col items-center">
+            <!-- Wabi Sabi Small Crest -->
+            <div class="mb-6 inline-flex items-center justify-center w-12 h-12 rounded-full border border-wabi-border/50 text-wabi-highlight bg-wabi-bg/80 animate-float">
+                <i class="fa-solid fa-spa text-lg"></i>
+            </div>
+
+            <span class="text-xs md:text-sm tracking-[0.3em] uppercase text-wabi-muted mb-4 font-sans">
+                A Haven of Mindful Healing & Sensory Rest
+            </span>
+
+            <h1 class="text-3xl md:text-5xl lg:text-6xl font-normal tracking-widest leading-tight text-wabi-text mb-6">
+                卸下城市的喧囂<br>
+                <span class="text-wabi-highlight font-light">重拾身心的平衡與覺察</span>
+            </h1>
+
+            <p class="max-w-2xl text-wabi-muted text-sm md:text-base leading-relaxed tracking-wider mb-10 font-sans font-light">
+                以天然植萃精油、傳承歲月的日式順氣手技，以及獨立寂侘空間，<br class="hidden sm:inline">
+                為您沉澱疲累的靈魂，找回最初的純粹與安寧。
+            </p>
+
+            <div class="flex flex-col sm:flex-row items-center justify-center gap-4 w-full sm:w-auto">
+                <a href="#menu" class="w-full sm:w-auto px-8 py-3.5 rounded-full bg-wabi-accent text-wabi-bg tracking-widest text-sm hover:bg-wabi-accentHover transition-all shadow-md text-center">
+                    探索精選療程
+                </a>
+                <button onclick="openBookingModal()" class="w-full sm:w-auto px-8 py-3.5 rounded-full border border-wabi-accent text-wabi-accent tracking-widest text-sm hover:bg-wabi-card transition-all text-center">
+                    預約體驗專案
+                </button>
+            </div>
+
+            <!-- Scroll Indicator -->
+            <div class="mt-16 animate-bounce text-wabi-muted/70 flex flex-col items-center gap-2">
+                <span class="text-[10px] tracking-widest font-sans">SCROLL</span>
+                <i class="fa-solid fa-chevron-down text-xs"></i>
+            </div>
+        </div>
+    </section>
+
+    <!-- 3. BRAND PHILOSOPHY (品牌理念) -->
+    <section id="philosophy" class="py-24 bg-wabi-card/40 border-y border-wabi-border/20">
+        <div class="max-w-7xl mx-auto px-6">
+            <div class="text-center max-w-2xl mx-auto mb-16">
+                <span class="text-xs tracking-[0.25em] text-wabi-highlight uppercase font-sans">Philosophy</span>
+                <h2 class="text-2xl md:text-3xl tracking-widest text-wabi-text font-normal mt-2">三大靜謐堅持</h2>
+                <div class="w-12 h-[1px] bg-wabi-border mx-auto mt-4"></div>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8 md:gap-12">
+                <!-- Card 1 -->
+                <div class="bg-wabi-bg p-8 rounded-2xl border border-wabi-border/30 hover:border-wabi-border transition-all duration-300 flex flex-col items-center text-center shadow-sm">
+                    <div class="w-16 h-16 rounded-full bg-wabi-card flex items-center justify-center text-wabi-accent mb-6 text-xl">
+                        <i class="fa-solid fa-leaf"></i>
+                    </div>
+                    <h3 class="text-lg tracking-widest text-wabi-text mb-3 font-medium">100% 頂級有機精油</h3>
+                    <p class="text-wabi-muted text-sm leading-relaxed font-sans font-light">
+                        嚴選法國 ECOCERT 認證有機芳療級精油，根據您今日的身心狀態進行客製化抓周香氣調配。
+                    </p>
+                </div>
+
+                <!-- Card 2 -->
+                <div class="bg-wabi-bg p-8 rounded-2xl border border-wabi-border/30 hover:border-wabi-border transition-all duration-300 flex flex-col items-center text-center shadow-sm">
+                    <div class="w-16 h-16 rounded-full bg-wabi-card flex items-center justify-center text-wabi-accent mb-6 text-xl">
+                        <i class="fa-solid fa-door-closed"></i>
+                    </div>
+                    <h3 class="text-lg tracking-widest text-wabi-text mb-3 font-medium">獨立寂侘包廂空間</h3>
+                    <p class="text-wabi-muted text-sm leading-relaxed font-sans font-light">
+                        每間套房皆備有獨立衛浴與獨立空調，以珪藻土、質質石材打造無壓力的極致私密個人空間。
+                    </p>
+                </div>
+
+                <!-- Card 3 -->
+                <div class="bg-wabi-bg p-8 rounded-2xl border border-wabi-border/30 hover:border-wabi-border transition-all duration-300 flex flex-col items-center text-center shadow-sm">
+                    <div class="w-16 h-16 rounded-full bg-wabi-card flex items-center justify-center text-wabi-accent mb-6 text-xl">
+                        <i class="fa-solid fa-hands"></i>
+                    </div>
+                    <h3 class="text-lg tracking-widest text-wabi-text mb-3 font-medium">獨家順氣深層手技</h3>
+                    <p class="text-wabi-muted text-sm leading-relaxed font-sans font-light">
+                        資深國際認證芳療師，結合日式指壓與西方經絡順氣學，精準釋放深層累積的疲憊與緊繃。
+                    </p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 4. FEATURED SPA MENU (精選療程) -->
+    <section id="menu" class="py-24">
+        <div class="max-w-7xl mx-auto px-6">
+            <div class="text-center max-w-2xl mx-auto mb-12">
+                <span class="text-xs tracking-[0.25em] text-wabi-highlight uppercase font-sans">Treatments</span>
+                <h2 class="text-2xl md:text-3xl tracking-widest text-wabi-text font-normal mt-2">精選 SPA 療程</h2>
+                <p class="text-wabi-muted text-sm mt-3 font-sans font-light">選擇專屬於您的身心修復之旅</p>
+            </div>
+
+            <!-- Filter Tabs -->
+            <div class="flex flex-wrap justify-center gap-3 mb-12">
+                <button onclick="filterMenu('all')" class="tab-btn active px-6 py-2 rounded-full border border-wabi-border/50 text-sm tracking-widest transition-all">
+                    全部療程
+                </button>
+                <button onclick="filterMenu('body')" class="tab-btn px-6 py-2 rounded-full border border-wabi-border/50 text-sm tracking-widest transition-all text-wabi-muted hover:text-wabi-text">
+                    身心舒壓
+                </button>
+                <button onclick="filterMenu('facial')" class="tab-btn px-6 py-2 rounded-full border border-wabi-border/50 text-sm tracking-widest transition-all text-wabi-muted hover:text-wabi-text">
+                    面部護理
+                </button>
+                <button onclick="filterMenu('maternity')" class="tab-btn px-6 py-2 rounded-full border border-wabi-border/50 text-sm tracking-widest transition-all text-wabi-muted hover:text-wabi-text">
+                    孕婦舒緩
+                </button>
+            </div>
+
+            <!-- Course Cards Grid -->
+            <div id="courseContainer" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                
+                <!-- Course Item 1 -->
+                <div class="course-card body bg-wabi-card/60 rounded-2xl overflow-hidden border border-wabi-border/30 hover:shadow-lg transition-all flex flex-col">
+                    <div class="h-48 overflow-hidden relative">
+                        <img src="https://images.unsplash.com/photo-1600334089648-b0d9d3028eb2?auto=format&fit=crop&w=800&q=80" alt="深度筋膜放療" class="w-full h-full object-cover transition-transform duration-500 hover:scale-105">
+                        <span class="absolute top-4 right-4 bg-wabi-bg/90 backdrop-blur-sm text-wabi-accent px-3 py-1 rounded-full text-xs font-sans">90 分鐘</span>
+                    </div>
+                    <div class="p-6 flex-1 flex flex-col justify-between">
+                        <div>
+                            <div class="flex justify-between items-start mb-2">
+                                <h3 class="text-xl tracking-widest text-wabi-text font-medium">深度深層筋膜放療</h3>
+                                <span class="text-wabi-accent font-sans font-semibold text-lg">NT$ 3,800</span>
+                            </div>
+                            <p class="text-wabi-muted text-xs leading-relaxed font-sans font-light mb-6">
+                                針對肩頸高壓族群設計，搭配高濃度野薑與黑胡椒精油，深層揉按緊繃筋膜，釋放全身深層壓力。
+                            </p>
+                        </div>
+                        <button onclick="selectCourseAndBook('深度深層筋膜放療')" class="w-full py-2.5 rounded-xl border border-wabi-accent text-wabi-accent hover:bg-wabi-accent hover:text-wabi-bg text-sm tracking-widest transition-colors font-sans">
+                            預約此療程
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Course Item 2 -->
+                <div class="course-card facial bg-wabi-card/60 rounded-2xl overflow-hidden border border-wabi-border/30 hover:shadow-lg transition-all flex flex-col">
+                    <div class="h-48 overflow-hidden relative">
+                        <img src="https://images.unsplash.com/photo-1570172619644-dfd03ed5d881?auto=format&fit=crop&w=800&q=80" alt="植萃亮顏修護" class="w-full h-full object-cover transition-transform duration-500 hover:scale-105">
+                        <span class="absolute top-4 right-4 bg-wabi-bg/90 backdrop-blur-sm text-wabi-accent px-3 py-1 rounded-full text-xs font-sans">60 分鐘</span>
+                    </div>
+                    <div class="p-6 flex-1 flex flex-col justify-between">
+                        <div>
+                            <div class="flex justify-between items-start mb-2">
+                                <h3 class="text-xl tracking-widest text-wabi-text font-medium">植萃亮顏修護課程</h3>
+                                <span class="text-wabi-accent font-sans font-semibold text-lg">NT$ 2,900</span>
+                            </div>
+                            <p class="text-wabi-muted text-xs leading-relaxed font-sans font-light mb-6">
+                                使用大馬士革玫瑰純露與積雪草修護精華，結合冷石淋巴引流技術，恢復肌膚原本的透亮光澤。
+                            </p>
+                        </div>
+                        <button onclick="selectCourseAndBook('植萃亮顏修護課程')" class="w-full py-2.5 rounded-xl border border-wabi-accent text-wabi-accent hover:bg-wabi-accent hover:text-wabi-bg text-sm tracking-widest transition-colors font-sans">
+                            預約此療程
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Course Item 3 -->
+                <div class="course-card body bg-wabi-card/60 rounded-2xl overflow-hidden border border-wabi-border/30 hover:shadow-lg transition-all flex flex-col">
+                    <div class="h-48 overflow-hidden relative">
+                        <img src="https://images.unsplash.com/photo-1519823551278-64ac92734fb1?auto=format&fit=crop&w=800&q=80" alt="頌缽音療精油紓壓" class="w-full h-full object-cover transition-transform duration-500 hover:scale-105">
+                        <span class="absolute top-4 right-4 bg-wabi-bg/90 backdrop-blur-sm text-wabi-accent px-3 py-1 rounded-full text-xs font-sans">120 分鐘</span>
+                    </div>
+                    <div class="p-6 flex-1 flex flex-col justify-between">
+                        <div>
+                            <div class="flex justify-between items-start mb-2">
+                                <h3 class="text-xl tracking-widest text-wabi-text font-medium">頌缽音療精油紓壓</h3>
+                                <span class="text-wabi-accent font-sans font-semibold text-lg">NT$ 4,600</span>
+                            </div>
+                            <p class="text-wabi-muted text-xs leading-relaxed font-sans font-light mb-6">
+                                結合西藏手工頌缽的聲波共振與沉香全身按摩，引導大腦進入深層 alpha 波，帶來絕佳睡眠體驗。
+                            </p>
+                        </div>
+                        <button onclick="selectCourseAndBook('頌缽音療精油紓壓')" class="w-full py-2.5 rounded-xl border border-wabi-accent text-wabi-accent hover:bg-wabi-accent hover:text-wabi-bg text-sm tracking-widest transition-colors font-sans">
+                            預約此療程
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Course Item 4 -->
+                <div class="course-card body bg-wabi-card/60 rounded-2xl overflow-hidden border border-wabi-border/30 hover:shadow-lg transition-all flex flex-col">
+                    <div class="h-48 overflow-hidden relative">
+                        <img src="https://images.unsplash.com/photo-1544161515-4ab6ce6db874?auto=format&fit=crop&w=800&q=80" alt="熱石溫通全身理療" class="w-full h-full object-cover transition-transform duration-500 hover:scale-105">
+                        <span class="absolute top-4 right-4 bg-wabi-bg/90 backdrop-blur-sm text-wabi-accent px-3 py-1 rounded-full text-xs font-sans">90 分鐘</span>
+                    </div>
+                    <div class="p-6 flex-1 flex flex-col justify-between">
+                        <div>
+                            <div class="flex justify-between items-start mb-2">
+                                <h3 class="text-xl tracking-widest text-wabi-text font-medium">熱石溫通全身理療</h3>
+                                <span class="text-wabi-accent font-sans font-semibold text-lg">NT$ 3,900</span>
+                            </div>
+                            <p class="text-wabi-muted text-xs leading-relaxed font-sans font-light mb-6">
+                                採用夏威夷火山玄武岩溫熱蘊香，溫潤經絡並促進氣血循環，極為適合體質虛寒與體力透支者。
+                            </p>
+                        </div>
+                        <button onclick="selectCourseAndBook('熱石溫通全身理療')" class="w-full py-2.5 rounded-xl border border-wabi-accent text-wabi-accent hover:bg-wabi-accent hover:text-wabi-bg text-sm tracking-widest transition-colors font-sans">
+                            預約此療程
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Course Item 5 -->
+                <div class="course-card maternity bg-wabi-card/60 rounded-2xl overflow-hidden border border-wabi-border/30 hover:shadow-lg transition-all flex flex-col">
+                    <div class="h-48 overflow-hidden relative">
+                        <img src="https://images.unsplash.com/photo-1515377905703-c4788e51af15?auto=format&fit=crop&w=800&q=80" alt="深層孕婦舒緩按摩" class="w-full h-full object-cover transition-transform duration-500 hover:scale-105">
+                        <span class="absolute top-4 right-4 bg-wabi-bg/90 backdrop-blur-sm text-wabi-accent px-3 py-1 rounded-full text-xs font-sans">75 分鐘</span>
+                    </div>
+                    <div class="p-6 flex-1 flex flex-col justify-between">
+                        <div>
+                            <div class="flex justify-between items-start mb-2">
+                                <h3 class="text-xl tracking-widest text-wabi-text font-medium">深層孕婦舒緩按摩</h3>
+                                <span class="text-wabi-accent font-sans font-semibold text-lg">NT$ 3,500</span>
+                            </div>
+                            <p class="text-wabi-muted text-xs leading-relaxed font-sans font-light mb-6">
+                                專為孕期 16-32 週媽咪調配溫和無負擔甜杏仁油，由具專業認證芳療師減輕腰背沉重感與水腫。
+                            </p>
+                        </div>
+                        <button onclick="selectCourseAndBook('深層孕婦舒緩按摩')" class="w-full py-2.5 rounded-xl border border-wabi-accent text-wabi-accent hover:bg-wabi-accent hover:text-wabi-bg text-sm tracking-widest transition-colors font-sans">
+                            預約此療程
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Course Item 6 -->
+                <div class="course-card facial bg-wabi-card/60 rounded-2xl overflow-hidden border border-wabi-border/30 hover:shadow-lg transition-all flex flex-col">
+                    <div class="h-48 overflow-hidden relative">
+                        <img src="https://images.unsplash.com/photo-1512290900676-26c2816695ae?auto=format&fit=crop&w=800&q=80" alt="日式琥珀面部拉提" class="w-full h-full object-cover transition-transform duration-500 hover:scale-105">
+                        <span class="absolute top-4 right-4 bg-wabi-bg/90 backdrop-blur-sm text-wabi-accent px-3 py-1 rounded-full text-xs font-sans">75 分鐘</span>
+                    </div>
+                    <div class="p-6 flex-1 flex flex-col justify-between">
+                        <div>
+                            <div class="flex justify-between items-start mb-2">
+                                <h3 class="text-xl tracking-widest text-wabi-text font-medium">日式琥珀面部拉提</h3>
+                                <span class="text-wabi-accent font-sans font-semibold text-lg">NT$ 3,400</span>
+                            </div>
+                            <p class="text-wabi-muted text-xs leading-relaxed font-sans font-light mb-6">
+                                以天然琥珀撥筋棒撫平面部紋理，搭配獨家緊緻精華，喚醒肌膚緊實線條與水潤質感。
+                            </p>
+                        </div>
+                        <button onclick="selectCourseAndBook('日式琥珀面部拉提')" class="w-full py-2.5 rounded-xl border border-wabi-accent text-wabi-accent hover:bg-wabi-accent hover:text-wabi-bg text-sm tracking-widest transition-colors font-sans">
+                            預約此療程
+                        </button>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <!-- 5. SERVICE EXPERIENCE FLOW (服務流程) -->
+    <section id="flow" class="py-24 bg-wabi-card/40 border-y border-wabi-border/20">
+        <div class="max-w-7xl mx-auto px-6">
+            <div class="text-center max-w-2xl mx-auto mb-16">
+                <span class="text-xs tracking-[0.25em] text-wabi-highlight uppercase font-sans">Experience Flow</span>
+                <h2 class="text-2xl md:text-3xl tracking-widest text-wabi-text font-normal mt-2">五感沉浸流程</h2>
+                <div class="w-12 h-[1px] bg-wabi-border mx-auto mt-4"></div>
+            </div>
+
+            <!-- Steps Grid -->
+            <div class="grid grid-cols-1 md:grid-cols-4 gap-6">
+                
+                <!-- Step 1 -->
+                <div class="relative bg-wabi-bg p-6 rounded-2xl border border-wabi-border/30 flex flex-col justify-between">
+                    <div>
+                        <span class="text-3xl font-serif text-wabi-border/60 block mb-3">01</span>
+                        <h3 class="text-lg tracking-widest text-wabi-text mb-2 font-medium">諮詢與香氣抓周</h3>
+                        <p class="text-wabi-muted text-xs leading-relaxed font-sans font-light">
+                            細心評估今日身心狀況，透過精油抓周選擇與您當下能量最契合的專屬香氛。
+                        </p>
+                    </div>
+                    <div class="mt-6 pt-4 border-t border-wabi-border/20 flex items-center justify-between text-wabi-highlight text-xs font-sans">
+                        <span>時間：約 15 分鐘</span>
+                        <i class="fa-solid fa-wind"></i>
+                    </div>
+                </div>
+
+                <!-- Step 2 -->
+                <div class="relative bg-wabi-bg p-6 rounded-2xl border border-wabi-border/30 flex flex-col justify-between">
+                    <div>
+                        <span class="text-3xl font-serif text-wabi-border/60 block mb-3">02</span>
+                        <h3 class="text-lg tracking-widest text-wabi-text mb-2 font-medium">沐浴與洗滌沉澱</h3>
+                        <p class="text-wabi-muted text-xs leading-relaxed font-sans font-light">
+                            於寂侘獨立包廂內洗淨一日塵囂，換上軟綿亞麻袍服，靜心準備進入療癒體驗。
+                        </p>
+                    </div>
+                    <div class="mt-6 pt-4 border-t border-wabi-border/20 flex items-center justify-between text-wabi-highlight text-xs font-sans">
+                        <span>時間：約 15 分鐘</span>
+                        <i class="fa-solid fa-shower"></i>
+                    </div>
+                </div>
+
+                <!-- Step 3 -->
+                <div class="relative bg-wabi-bg p-6 rounded-2xl border border-wabi-border/30 flex flex-col justify-between">
+                    <div>
+                        <span class="text-3xl font-serif text-wabi-border/60 block mb-3">03</span>
+                        <h3 class="text-lg tracking-widest text-wabi-text mb-2 font-medium">五感深度療程</h3>
+                        <p class="text-wabi-muted text-xs leading-relaxed font-sans font-light">
+                            配合輕柔環境音樂、微昏光影與芳療師極致手技，進入放空沉靜的療癒境界。
+                        </p>
+                    </div>
+                    <div class="mt-6 pt-4 border-t border-wabi-border/20 flex items-center justify-between text-wabi-highlight text-xs font-sans">
+                        <span>時間：60-120 分鐘</span>
+                        <i class="fa-solid fa-spa"></i>
+                    </div>
+                </div>
+
+                <!-- Step 4 -->
+                <div class="relative bg-wabi-bg p-6 rounded-2xl border border-wabi-border/30 flex flex-col justify-between">
+                    <div>
+                        <span class="text-3xl font-serif text-wabi-border/60 block mb-3">04</span>
+                        <h3 class="text-lg tracking-widest text-wabi-text mb-2 font-medium">課後養生茶點</h3>
+                        <p class="text-wabi-muted text-xs leading-relaxed font-sans font-light">
+                            療程結束後，享用手工無負擔草本茶與日式手作茶點，喚醒身體與元氣。
+                        </p>
+                    </div>
+                    <div class="mt-6 pt-4 border-t border-wabi-border/20 flex items-center justify-between text-wabi-highlight text-xs font-sans">
+                        <span>時間：約 20 分鐘</span>
+                        <i class="fa-solid fa-mug-hot"></i>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <!-- 6. TESTIMONIALS (旅人好評) -->
+    <section id="reviews" class="py-24">
+        <div class="max-w-7xl mx-auto px-6">
+            <div class="text-center max-w-2xl mx-auto mb-16">
+                <span class="text-xs tracking-[0.25em] text-wabi-highlight uppercase font-sans">Testimonials</span>
+                <h2 class="text-2xl md:text-3xl tracking-widest text-wabi-text font-normal mt-2">旅人真實體驗</h2>
+                <div class="flex items-center justify-center gap-2 mt-4 text-wabi-highlight font-sans text-sm">
+                    <div class="flex text-amber-600 gap-1">
+                        <i class="fa-solid fa-star"></i>
+                        <i class="fa-solid fa-star"></i>
+                        <i class="fa-solid fa-star"></i>
+                        <i class="fa-solid fa-star"></i>
+                        <i class="fa-solid fa-star"></i>
+                    </div>
+                    <span class="font-semibold text-wabi-text">4.9 / 5.0</span>
+                    <span class="text-wabi-muted text-xs">(超過 800+ 位顧客好評驗證)</span>
+                </div>
+            </div>
+
+            <!-- Review Cards Grid -->
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                
+                <!-- Review 1 -->
+                <div class="bg-wabi-card/40 p-8 rounded-2xl border border-wabi-border/30 flex flex-col justify-between">
+                    <div class="space-y-4">
+                        <div class="flex text-amber-600 text-xs gap-1">
+                            <i class="fa-solid fa-star"></i>
+                            <i class="fa-solid fa-star"></i>
+                            <i class="fa-solid fa-star"></i>
+                            <i class="fa-solid fa-star"></i>
+                            <i class="fa-solid fa-star"></i>
+                        </div>
+                        <p class="text-wabi-muted text-sm leading-relaxed font-sans font-light italic">
+                            「剛踏進門口的瞬間就被靜謐的氣氛吸引，精油抓周非常神奇且精準！芳療師的手力十分紮實，肩頸原本很緊繃，做完頌缽音療後睡得非常香甜。」
+                        </p>
+                    </div>
+                    <div class="mt-6 pt-4 border-t border-wabi-border/20 flex items-center justify-between">
+                        <span class="text-wabi-text text-sm font-medium">林小姐 (高管)</span>
+                        <span class="text-wabi-muted text-xs font-sans">體驗：頌缽音療精油紓壓</span>
+                    </div>
+                </div>
+
+                <!-- Review 2 -->
+                <div class="bg-wabi-card/40 p-8 rounded-2xl border border-wabi-border/30 flex flex-col justify-between">
+                    <div class="space-y-4">
+                        <div class="flex text-amber-600 text-xs gap-1">
+                            <i class="fa-solid fa-star"></i>
+                            <i class="fa-solid fa-star"></i>
+                            <i class="fa-solid fa-star"></i>
+                            <i class="fa-solid fa-star"></i>
+                            <i class="fa-solid fa-star"></i>
+                        </div>
+                        <p class="text-wabi-muted text-sm leading-relaxed font-sans font-light italic">
+                            「包廂的獨立衛浴跟珪藻土牆面視覺極具美感，隱私度滿分。整個過程完全沒有任何推銷壓力，真正能讓人徹底休養生息的地方。」
+                        </p>
+                    </div>
+                    <div class="mt-6 pt-4 border-t border-wabi-border/20 flex items-center justify-between">
+                        <span class="text-wabi-text text-sm font-medium">陳先生 (設計師)</span>
+                        <span class="text-wabi-muted text-xs font-sans">體驗：深度深層筋膜放療</span>
+                    </div>
+                </div>
+
+                <!-- Review 3 -->
+                <div class="bg-wabi-card/40 p-8 rounded-2xl border border-wabi-border/30 flex flex-col justify-between">
+                    <div class="space-y-4">
+                        <div class="flex text-amber-600 text-xs gap-1">
+                            <i class="fa-solid fa-star"></i>
+                            <i class="fa-solid fa-star"></i>
+                            <i class="fa-solid fa-star"></i>
+                            <i class="fa-solid fa-star"></i>
+                            <i class="fa-solid fa-star"></i>
+                        </div>
+                        <p class="text-wabi-muted text-sm leading-relaxed font-sans font-light italic">
+                            「孕期後期腰部常常酸痛，這裡的孕婦舒緩課程真的救了我！芳療師手法極其溫柔細緻，課後的溫熱草本茶與手作茶點也相當讓人驚艷。」
+                        </p>
+                    </div>
+                    <div class="mt-6 pt-4 border-t border-wabi-border/20 flex items-center justify-between">
+                        <span class="text-wabi-text text-sm font-medium">張太太 (新手媽媽)</span>
+                        <span class="text-wabi-muted text-xs font-sans">體驗：深層孕婦舒緩按摩</span>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <!-- 7. FAQ (常見問題) -->
+    <section id="faq" class="py-24 bg-wabi-card/40 border-y border-wabi-border/20">
+        <div class="max-w-4xl mx-auto px-6">
+            <div class="text-center max-w-2xl mx-auto mb-16">
+                <span class="text-xs tracking-[0.25em] text-wabi-highlight uppercase font-sans">Questions</span>
+                <h2 class="text-2xl md:text-3xl tracking-widest text-wabi-text font-normal mt-2">常見問題</h2>
+                <div class="w-12 h-[1px] bg-wabi-border mx-auto mt-4"></div>
+            </div>
+
+            <div class="space-y-4">
+                
+                <!-- FAQ Item 1 -->
+                <div class="bg-wabi-bg rounded-xl border border-wabi-border/30 overflow-hidden">
+                    <button onclick="toggleFaq(this)" class="w-full px-6 py-5 text-left flex justify-between items-center text-wabi-text hover:text-wabi-highlight transition-colors font-medium tracking-wider">
+                        <span>預約療程需要提前多久？退費與改期政策為何？</span>
+                        <i class="fa-solid fa-chevron-down text-xs transition-transform duration-300"></i>
+                    </button>
+                    <div class="faq-content hidden px-6 pb-5 text-wabi-muted text-xs md:text-sm leading-relaxed font-sans font-light border-t border-wabi-border/10 pt-3">
+                        為維護每位顧客的沉浸體驗品質，每日接待名額有限。建議提前 3 至 7 天預約。如需變更時間或取消，請於預約時間 24 小時前告知即可免費調整。
+                    </div>
+                </div>
+
+                <!-- FAQ Item 2 -->
+                <div class="bg-wabi-bg rounded-xl border border-wabi-border/30 overflow-hidden">
+                    <button onclick="toggleFaq(this)" class="w-full px-6 py-5 text-left flex justify-between items-center text-wabi-text hover:text-wabi-highlight transition-colors font-medium tracking-wider">
+                        <span>會館是否有提供男性顧客或雙人同行服務？</span>
+                        <i class="fa-solid fa-chevron-down text-xs transition-transform duration-300"></i>
+                    </button>
+                    <div class="faq-content hidden px-6 pb-5 text-wabi-muted text-xs md:text-sm leading-relaxed font-sans font-light border-t border-wabi-border/10 pt-3">
+                        是的，我們備有獨立雙人寂侘包廂，歡迎夫妻、情侶或閨蜜一同前來。男性顧客預約時需由女性同行人陪同或預約指定專屬VIP時段。
+                    </div>
+                </div>
+
+                <!-- FAQ Item 3 -->
+                <div class="bg-wabi-bg rounded-xl border border-wabi-border/30 overflow-hidden">
+                    <button onclick="toggleFaq(this)" class="w-full px-6 py-5 text-left flex justify-between items-center text-wabi-text hover:text-wabi-highlight transition-colors font-medium tracking-wider">
+                        <span>孕婦或特殊過敏體質可以進行精油療程嗎？</span>
+                        <i class="fa-solid fa-chevron-down text-xs transition-transform duration-300"></i>
+                    </button>
+                    <div class="faq-content hidden px-6 pb-5 text-wabi-muted text-xs md:text-sm leading-relaxed font-sans font-light border-t border-wabi-border/10 pt-3">
+                        我們的孕婦療程專為滿 16 週以上的孕媽咪設計，使用安全且不含引起宮縮成分的無香冷壓植物油。若有嚴重過敏史，諮詢階段將由芳療師做貼膚敏感測試。
+                    </div>
+                </div>
+
+                <!-- FAQ Item 4 -->
+                <div class="bg-wabi-bg rounded-xl border border-wabi-border/30 overflow-hidden">
+                    <button onclick="toggleFaq(this)" class="w-full px-6 py-5 text-left flex justify-between items-center text-wabi-text hover:text-wabi-highlight transition-colors font-medium tracking-wider">
+                        <span>療程結束後現場會進行產品銷售嗎？</span>
+                        <i class="fa-solid fa-chevron-down text-xs transition-transform duration-300"></i>
+                    </button>
+                    <div class="faq-content hidden px-6 pb-5 text-wabi-muted text-xs md:text-sm leading-relaxed font-sans font-light border-t border-wabi-border/10 pt-3">
+                        靜謐之境堅持「無壓力療癒」原則，課程結束後僅提供養生茶點與保養建議，絕不進行強迫推銷或綁約購買。
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <!-- 8. EMBEDDED BOOKING SECTION (線上預約區塊) -->
+    <section id="bookingSection" class="py-24">
+        <div class="max-w-4xl mx-auto px-6">
+            <div class="bg-wabi-card/80 p-8 md:p-12 rounded-3xl border border-wabi-border/40 shadow-sm relative overflow-hidden">
+                <!-- Background Decorative Element -->
+                <div class="absolute -right-16 -bottom-16 w-64 h-64 rounded-full bg-wabi-border/10 pointer-events-none"></div>
+
+                <div class="text-center max-w-xl mx-auto mb-10">
+                    <span class="text-xs tracking-[0.25em] text-wabi-highlight uppercase font-sans">Reservation</span>
+                    <h2 class="text-2xl md:text-3xl tracking-widest text-wabi-text font-normal mt-2">線上預約療程</h2>
+                    <p class="text-wabi-muted text-xs md:text-sm mt-3 font-sans font-light">
+                        給自己一段溫柔的時光，開啟身心放療之旅。<br>首次預約享有體驗折價 NT$ 500 優惠。
+                    </p>
+                </div>
+
+                <form id="inlineBookingForm" onsubmit="handleFormSubmit(event)" class="space-y-6">
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                        <!-- Customer Name -->
+                        <div>
+                            <label class="block text-xs tracking-wider text-wabi-text mb-2 font-medium">尊姓大名 *</label>
+                            <input type="text" required placeholder="例如：林靜心" class="w-full px-4 py-3 rounded-xl bg-wabi-bg border border-wabi-border/40 text-wabi-text text-sm focus:outline-none focus:border-wabi-accent font-sans">
+                        </div>
+                        <!-- Phone Number -->
+                        <div>
+                            <label class="block text-xs tracking-wider text-wabi-text mb-2 font-medium">聯絡電話 *</label>
+                            <input type="tel" required placeholder="0912-345-678" class="w-full px-4 py-3 rounded-xl bg-wabi-bg border border-wabi-border/40 text-wabi-text text-sm focus:outline-none focus:border-wabi-accent font-sans">
+                        </div>
+                    </div>
+
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                        <!-- Select Course -->
+                        <div>
+                            <label class="block text-xs tracking-wider text-wabi-text mb-2 font-medium">意向療程 *</label>
+                            <select id="inlineCourseSelect" required class="w-full px-4 py-3 rounded-xl bg-wabi-bg border border-wabi-border/40 text-wabi-text text-sm focus:outline-none focus:border-wabi-accent font-sans">
+                                <option value="">請選擇療程</option>
+                                <option value="深度深層筋膜放療">深度深層筋膜放療 (90 min) - NT$3,800</option>
+                                <option value="植萃亮顏修護課程">植萃亮顏修護課程 (60 min) - NT$2,900</option>
+                                <option value="頌缽音療精油紓壓">頌缽音療精油紓壓 (120 min) - NT$4,600</option>
+                                <option value="熱石溫通全身理療">熱石溫通全身理療 (90 min) - NT$3,900</option>
+                                <option value="深層孕婦舒緩按摩">深層孕婦舒緩按摩 (75 min) - NT$3,500</option>
+                                <option value="日式琥珀面部拉提">日式琥珀面部拉提 (75 min) - NT$3,400</option>
+                            </select>
+                        </div>
+                        <!-- Select Preferred Time Slot -->
+                        <div>
+                            <label class="block text-xs tracking-wider text-wabi-text mb-2 font-medium">偏好時段 *</label>
+                            <select required class="w-full px-4 py-3 rounded-xl bg-wabi-bg border border-wabi-border/40 text-wabi-text text-sm focus:outline-none focus:border-wabi-accent font-sans">
+                                <option value="">請選擇希望時段</option>
+                                <option value="上午場 (10:30 - 13:00)">上午場 (10:30 - 13:00)</option>
+                                <option value="下午場 (14:00 - 17:00)">下午場 (14:00 - 17:00)</option>
+                                <option value="晚間場 (18:30 - 21:00)">晚間場 (18:30 - 21:00)</option>
+                            </select>
+                        </div>
+                    </div>
+
+                    <!-- Additional Note -->
+                    <div>
+                        <label class="block text-xs tracking-wider text-wabi-text mb-2 font-medium">特別需求或備註 (選填)</label>
+                        <textarea rows="3" placeholder="如有孕期、特殊過敏體質或偏好的按摩力度可在此說明..." class="w-full px-4 py-3 rounded-xl bg-wabi-bg border border-wabi-border/40 text-wabi-text text-sm focus:outline-none focus:border-wabi-accent font-sans"></textarea>
+                    </div>
+
+                    <!-- Submit Button -->
+                    <button type="submit" class="w-full py-4 rounded-xl bg-wabi-accent text-wabi-bg text-sm tracking-widest hover:bg-wabi-accentHover transition-all shadow-md font-sans">
+                        確認並送出預約申請
+                    </button>
+                </form>
+            </div>
+        </div>
+    </section>
+
+    <!-- 9. FOOTER & LOCATION -->
+    <footer class="bg-wabi-accent text-wabi-bg py-16 border-t border-wabi-border/30">
+        <div class="max-w-7xl mx-auto px-6 grid grid-cols-1 md:grid-cols-4 gap-10">
+            <!-- Brand Info -->
+            <div class="md:col-span-2 space-y-4">
+                <div class="flex items-center gap-3">
+                    <div class="w-8 h-8 rounded-full border border-wabi-border/40 flex items-center justify-center text-wabi-bg">
+                        <span class="font-serif text-sm">寂</span>
+                    </div>
+                    <span class="font-serif text-lg tracking-widest">SANCTUARY 靜謐之境</span>
+                </div>
+                <p class="text-wabi-card/80 text-xs leading-relaxed font-sans font-light max-w-sm">
+                    以日式寂侘的美學思想，營造一座能讓靈魂歇息的都會庇護所。靜待您的到來，共赴一場五感靜心旅程。
+                </p>
+                <div class="flex space-x-4 pt-2 text-wabi-card">
+                    <a href="#" class="w-9 h-9 rounded-full border border-wabi-border/30 flex items-center justify-center hover:border-wabi-bg hover:text-wabi-bg transition-colors"><i class="fa-brands fa-line"></i></a>
+                    <a href="#" class="w-9 h-9 rounded-full border border-wabi-border/30 flex items-center justify-center hover:border-wabi-bg hover:text-wabi-bg transition-colors"><i class="fa-brands fa-instagram"></i></a>
+                    <a href="#" class="w-9 h-9 rounded-full border border-wabi-border/30 flex items-center justify-center hover:border-wabi-bg hover:text-wabi-bg transition-colors"><i class="fa-brands fa-facebook-f"></i></a>
+                </div>
+            </div>
+
+            <!-- Hours & Contact -->
+            <div class="space-y-3 font-sans text-xs font-light">
+                <h4 class="font-serif text-sm tracking-widest text-wabi-bg mb-4 font-normal">營業資訊</h4>
+                <p class="text-wabi-card/80">週一至週日：10:30 - 21:30</p>
+                <p class="text-wabi-card/80">預約專線：(02) 2789-1688</p>
+                <p class="text-wabi-card/80">客服信箱：contact@sanctuary-spa.tw</p>
+            </div>
+
+            <!-- Location -->
+            <div class="space-y-3 font-sans text-xs font-light">
+                <h4 class="font-serif text-sm tracking-widest text-wabi-bg mb-4 font-normal">會館地址</h4>
+                <p class="text-wabi-card/80">台北市大安區仁愛路四段 300 號 2 樓</p>
+                <p class="text-wabi-card/60">捷運忠孝敦化站 3 號出口步行 5 分鐘</p>
+                <a href="https://maps.google.com" target="_blank" rel="noopener noreferrer" class="inline-flex items-center gap-2 text-wabi-card border-b border-wabi-border/50 pb-0.5 hover:text-wabi-bg transition-colors mt-2">
+                    <span>Google 地圖導航</span>
+                    <i class="fa-solid fa-arrow-up-right-from-square text-[10px]"></i>
+                </a>
+            </div>
+        </div>
+
+        <div class="max-w-7xl mx-auto px-6 mt-12 pt-8 border-t border-wabi-border/20 flex flex-col sm:flex-row items-center justify-between text-[11px] text-wabi-card/60 font-sans">
+            <p>Copyright © 2026 Sanctuary Spa. All Rights Reserved.</p>
+            <div class="flex space-x-6 mt-4 sm:mt-0">
+                <a href="#" class="hover:underline">隱私權政策</a>
+                <a href="#" class="hover:underline">服務條款</a>
+            </div>
+        </div>
+    </footer>
+
+    <!-- POPUP BOOKING MODAL -->
+    <div id="bookingModal" class="fixed inset-0 z-50 hidden flex items-center justify-center p-4 bg-wabi-text/50 backdrop-blur-sm transition-opacity">
+        <div class="bg-wabi-bg rounded-3xl max-w-lg w-full p-8 border border-wabi-border/40 shadow-2xl relative animate-float" style="animation-duration: 0s;">
+            <!-- Close button -->
+            <button onclick="closeBookingModal()" class="absolute top-6 right-6 text-wabi-muted hover:text-wabi-text p-2">
+                <i class="fa-solid fa-xmark text-lg"></i>
+            </button>
+
+            <div class="mb-6">
+                <span class="text-[10px] tracking-widest text-wabi-highlight uppercase font-sans">Quick Booking</span>
+                <h3 class="text-2xl font-serif tracking-widest text-wabi-text mt-1">快速預約專案</h3>
+            </div>
+
+            <form onsubmit="handleModalFormSubmit(event)" class="space-y-4 font-sans">
+                <div>
+                    <label class="block text-xs text-wabi-text mb-1">姓名 *</label>
+                    <input type="text" required placeholder="您的姓名" class="w-full px-4 py-2.5 rounded-xl bg-wabi-card/40 border border-wabi-border/30 text-sm focus:outline-none focus:border-wabi-accent">
+                </div>
+                <div>
+                    <label class="block text-xs text-wabi-text mb-1">手機號碼 *</label>
+                    <input type="tel" required placeholder="0912-345-678" class="w-full px-4 py-2.5 rounded-xl bg-wabi-card/40 border border-wabi-border/30 text-sm focus:outline-none focus:border-wabi-accent">
+                </div>
+                <div>
+                    <label class="block text-xs text-wabi-text mb-1">預約療程 *</label>
+                    <select id="modalCourseSelect" required class="w-full px-4 py-2.5 rounded-xl bg-wabi-card/40 border border-wabi-border/30 text-sm focus:outline-none focus:border-wabi-accent">
+                        <option value="">請選擇預約療程</option>
+                        <option value="深度深層筋膜放療">深度深層筋膜放療 (90 min)</option>
+                        <option value="植萃亮顏修護課程">植萃亮顏修護課程 (60 min)</option>
+                        <option value="頌缽音療精油紓壓">頌缽音療精油紓壓 (120 min)</option>
+                        <option value="熱石溫通全身理療">熱石溫通全身理療 (90 min)</option>
+                        <option value="深層孕婦舒緩按摩">深層孕婦舒緩按摩 (75 min)</option>
+                        <option value="日式琥珀面部拉提">日式琥珀面部拉提 (75 min)</option>
+                    </select>
+                </div>
+                <div>
+                    <label class="block text-xs text-wabi-text mb-1">期望日期 *</label>
+                    <input type="date" required class="w-full px-4 py-2.5 rounded-xl bg-wabi-card/40 border border-wabi-border/30 text-sm focus:outline-none focus:border-wabi-accent">
+                </div>
+                <button type="submit" class="w-full py-3.5 mt-2 rounded-xl bg-wabi-accent text-wabi-bg text-sm tracking-widest hover:bg-wabi-accentHover transition-colors">
+                    送出預約通知
+                </button>
+            </form>
+        </div>
+    </div>
+
+    <!-- SUCCESS TOAST NOTIFICATION -->
+    <div id="toast" class="fixed bottom-8 right-8 z-50 hidden bg-wabi-accent text-wabi-bg px-6 py-4 rounded-2xl shadow-xl flex items-center space-x-3 font-sans border border-wabi-border/40">
+        <i class="fa-solid fa-circle-check text-emerald-400 text-lg"></i>
+        <div>
+            <h4 class="text-sm font-medium tracking-wide">預約申請已成功送出！</h4>
+            <p class="text-xs text-wabi-card/80">管家將於 2 小時內透過電話或 LINE 與您確認詳細時段。</p>
+        </div>
+    </div>
+
+    <!-- JAVASCRIPT LOGIC -->
+    <script>
+        // Mobile Navigation Toggle
+        const mobileMenuBtn = document.getElementById('mobileMenuBtn');
+        const mobileMenu = document.getElementById('mobileMenu');
+
+        mobileMenuBtn.addEventListener('click', () => {
+            mobileMenu.classList.toggle('hidden');
+        });
+
+        // Close mobile menu when link clicked
+        document.querySelectorAll('#mobileMenu a, #mobileMenu button').forEach(el => {
+            el.addEventListener('click', () => {
+                mobileMenu.classList.add('hidden');
+            });
+        });
+
+        // Tab Filtering Logic for SPA Treatments
+        function filterMenu(category) {
+            const cards = document.querySelectorAll('.course-card');
+            const btns = document.querySelectorAll('.tab-btn');
+
+            // Update Tab Active Style
+            btns.forEach(btn => {
+                btn.classList.remove('active', 'bg-wabi-accent', 'text-wabi-bg');
+                btn.classList.add('text-wabi-muted');
+            });
+
+            event.currentTarget.classList.add('active', 'bg-wabi-accent', 'text-wabi-bg');
+            event.currentTarget.classList.remove('text-wabi-muted');
+
+            // Filter Cards
+            cards.forEach(card => {
+                if (category === 'all' || card.classList.contains(category)) {
+                    card.style.display = 'flex';
+                } else {
+                    card.style.display = 'none';
+                }
+            });
+        }
+
+        // Accordion FAQ Toggle Logic
+        function toggleFaq(button) {
+            const content = button.nextElementSibling;
+            const icon = button.querySelector('i');
+
+            // Toggle Hidden Class
+            content.classList.toggle('hidden');
+
+            // Rotate Arrow Icon
+            if (content.classList.contains('hidden')) {
+                icon.style.transform = 'rotate(0deg)';
+            } else {
+                icon.style.transform = 'rotate(180deg)';
+            }
+        }
+
+        // Modal Controls
+        function openBookingModal() {
+            document.getElementById('bookingModal').classList.remove('hidden');
+        }
+
+        function closeBookingModal() {
+            document.getElementById('bookingModal').classList.add('hidden');
+        }
+
+        // Select Specific Course from Card Button and Trigger Scroll/Modal
+        function selectCourseAndBook(courseName) {
+            const inlineSelect = document.getElementById('inlineCourseSelect');
+            const modalSelect = document.getElementById('modalCourseSelect');
+
+            if (inlineSelect) inlineSelect.value = courseName;
+            if (modalSelect) modalSelect.value = courseName;
+
+            // Scroll smoothly to inline booking form
+            document.getElementById('bookingSection').scrollIntoView({ behavior: 'smooth' });
+        }
+
+        // Form Submit Actions
+        function handleFormSubmit(e) {
+            e.preventDefault();
+            showToast();
+            e.target.reset();
+        }
+
+        function handleModalFormSubmit(e) {
+            e.preventDefault();
+            closeBookingModal();
+            showToast();
+            e.target.reset();
+        }
+
+        // Toast Feedback System
+        function showToast() {
+            const toast = document.getElementById('toast');
+            toast.classList.remove('hidden');
+            setTimeout(() => {
+                toast.classList.add('hidden');
+            }, 4500);
+        }
+    </script>
+</body>
+</html>
