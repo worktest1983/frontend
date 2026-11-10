@@ -2,156 +2,479 @@
 <html lang="zh-TW">
 
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Welcome to SU Hotel</title>
-    <link rel="stylesheet" href="css/bootstrap.min.css">
-    <link rel="stylesheet" href="css/style.css">
-    <!-- Font Awsome -->
-    <link rel="stylesheet" href="css/all.min.css">
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>Welcome to SU Hotel</title>
+	<link rel="stylesheet" href="css/bootstrap.min.css">
+	<link rel="stylesheet" href="css/style_spa.css">
+	<link rel="stylesheet" href="css/all.min.css">
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css">
 </head>
 
 <body>
-    <!-- 01 Top Link -->
-    <section id="topLink" class="position-absolute start-0 w-100" style="top: 2%; z-index: 100">
-        <div class="row py-2 px-5">
-            <div class="text-end">
-                <a href="#" class="text-light mx-3">
-                    <i class="fa-solid fa-earth-americas"></i>繁中
-                </a>
-                <a href="#" class="text-light">
-                    <i class="fa-brands fa-instagram social-icon"></i>
-                </a>
-                <a href="#" class="text-light">
-                    <i class="fa-brands fa-facebook social-icon"></i>
-                </a>
-            </div>
-        </div>
-    </section>
+	<!-- 01 Top Link -->
+	<div id="topLink" class="top-link">
+		<div class="container d-flex justify-content-end align-items-center gap-3">
+			<a href="#footer"><i class="fa-solid fa-earth-americas"></i>繁中</a>
+			<a href="#"><i class="fa-brands fa-instagram"></i></a>
+			<a href="#"><i class="fa-brands fa-facebook-f"></i></a>
+		</div>
+	</div>
 
-    <!-- 02 Nav -->
-    <section id="nav">
-        <div class="container">
-            <div class="row position-absolute w-100 align-items-center" style="top:5%; left: 0%; z-index: 99">
-                <div class="col-md-3 text-center">
-                    <h1 class="h1">
-                        <a class="navbar-brand" href="#">
-                            <img src="images/hotel/logo.png" alt="" style="width: 120px">
-                        </a>
-                    </h1>
-                </div>
-                <div class="col-md-9">
-                    <nav class="navbar navbar-expand-lg navbar-light rounded w-90"
-                        style="background: rgba(255, 255, 255, .6);">
-                        <div class="container">
-                            <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
-                                data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false"
-                                aria-label="Toggle navigation">
-                                <span class="navbar-toggler-icon"></span>
-                            </button>
-                            <div class="collapse navbar-collapse justify-content-center" id="navbarNav">
-                                <ul class="navbar-nav gap-5">
-                                    <li class="nav-item">
-                                        <a class="nav-link active" aria-current="page" href="#brand">關於SU</a>
-                                    </li>
-                                    <li class="nav-item">
-                                        <a class="nav-link" href="#rooms">客房住宿</a>
-                                    </li>
-                                    <li class="nav-item">
-                                        <a class="nav-link" href="#dining">餐飲體驗</a>
-                                    </li>
-                                    <li class="nav-item">
-                                        <a class="nav-link" href="#spa">慢活時光</a>
-                                    </li>
-                                    <li class="nav-item">
-                                        <a class="nav-link" href="#gallery">空間巡禮</a>
-                                    </li>
-                                </ul>
-                            </div>
-                        </div>
-                    </nav>
-                </div>
-            </div>
-        </div>
-    </section>
+	<!-- 02 Navigation -->
+	<nav id="nav" class="navbar navbar-expand-lg navbar-light site-nav sticky-top">
+		<div class="container">
+			<a class="navbar-brand" href="#banner" aria-label="SU Hotel 首頁">
+				<span class="brand-mark">SU</span><span class="brand-name">HOTEL</span>
+			</a>
+			<!-- <a class="navbar-brand" href="#">
+				<img src="images/hotel/logo.png" alt="" style="width: 120px">
+			</a> -->
+			<button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#mainNav"
+				aria-controls="mainNav" aria-expanded="false" aria-label="切換導覽選單">
+				<span class="navbar-toggler-icon"></span>
+			</button>
+			<div class="collapse navbar-collapse" id="mainNav">
+				<ul class="navbar-nav ms-auto align-items-lg-center">
+					<li class="nav-item"><a class="nav-link" href="#brand">關於 SU</a></li>
+					<li class="nav-item"><a class="nav-link" href="#rooms">客房住宿</a></li>
+					<li class="nav-item"><a class="nav-link" href="#dining">餐飲體驗</a></li>
+					<li class="nav-item"><a class="nav-link" href="#spa">慢活時光</a></li>
+					<li class="nav-item"><a class="nav-link" href="#gallery">空間巡禮</a></li>
+					<li class="nav-item ms-lg-3"><a class="btn btn-sage btn-sm px-4" href="#booking">預約入住 <i
+								class="fa-solid fa-arrow-right ms-2"></i></a></li>
+				</ul>
+			</div>
+		</div>
+	</nav>
 
-    <!-- 03 Banner -->
-    <section id="banner">
-        <div id="carouselExampleCaptions" class="carousel slide" data-bs-ride="false">
-            <div class="carousel-inner">
-                <div class="carousel-item active bg-img-cover"
-                    style="background-image: url(images/hotel/room05.jpg); height: 100vh;">
+	<!-- 03 Banner -->
+	<header id="banner" class="banner">
+		<div id="bannerCarousel" class="carousel slide carousel-fade" data-bs-ride="carousel" data-bs-interval="5000">
+			<div class="carousel-indicators">
+				<button type="button" data-bs-target="#bannerCarousel" data-bs-slide-to="0" class="active"
+					aria-current="true"></button>
+				<button type="button" data-bs-target="#bannerCarousel" data-bs-slide-to="1"></button>
+				<button type="button" data-bs-target="#bannerCarousel" data-bs-slide-to="2"></button>
+			</div>
+			<div class="carousel-inner">
+				<div class="carousel-item active">
+					<div class="banner-image" style="background-image:url('images/hotel/room05.jpg')">
+					</div>
+				</div>
+				<div class="carousel-item">
+					<div class="banner-image" style="background-image:url('images/hotel/lobby02.jpg')">
+					</div>
+				</div>
+				<div class="carousel-item">
+					<div class="banner-image" style="background-image:url('images/hotel/dinning01.jpg')">
+					</div>
+				</div>
+			</div>
+		</div>
+		<div class="banner-shade"></div>
+		<div class="container banner-content">
+			<p class="eyebrow">A QUIET PLACE TO BE</p>
+			<h1>慢一點，<br>感受生活的美好。</h1>
+			<p class="banner-copy">在自然、光線與安定之間，<br class="d-sm-none">找回生活最舒服的步調。</p>
+			<a href="#rooms" class="btn btn-outline-dark rounded-pill px-4 py-2">探索 SU Hotel <i
+					class="fa-solid fa-arrow-down ms-2"></i></a>
+		</div>
+		<div class="banner-side-note">STAY · SLOW · SIMPLE</div>
+	</header>
 
-                    <div class="container hero-content">
-                        <p class="eyebrow text-white">A QUIET PLACE TO BE</p>
-                        <h1>慢一點，<br>感受生活的美好。</h1>
-                        <p class="hero-copy">在自然、光線與安定之間，<br class="d-sm-none">找回生活最舒服的步調。</p>
-                        <a href="#rooms" class="btn btn-outline-light rounded-pill px-4 py-2">探索 SU Hotel <i
-                                class="fa-solid fa-arrow-down ms-2"></i></a>
-                    </div>
+	<main>
+		<!-- 04 Brand Philosophy -->
+		<section id="brand" class="section-pad brand-section">
+			<div class="container">
+				<div class="row align-items-center g-5">
+					<div class="col-lg-5 wow animate__fadeInUp" data-wow-duration="1s">
+						<p class="eyebrow">01 / OUR PHILOSOPHY</p>
+						<h2 class="section-title">把日子過得<br><em>簡單而美好。</em></h2>
+						<p class="lead-copy">SU Hotel 相信，真正的奢華不必繁複，而是留一點空白，讓身心自在呼吸。</p>
+						<p class="body-copy">以北歐生活美學為靈感，揉合自然材質、柔和色調與貼心細節，打造一處能暫時放下忙碌、重新感受自己的休憩空間。</p>
+						<a href="#about" class="text-link">認識 SU 的故事 <i class="fa-solid fa-arrow-right"></i></a>
+					</div>
+					<div class="col-lg-7">
+						<div class="brand-photo-wrap wow animate__fadeInRight" data-wow-duration="1.1s"
+							data-wow-delay=".15s">
+							<img src="https://images.unsplash.com/photo-1600210492486-724fe5c67fb0?auto=format&fit=crop&w=1200&q=85"
+								alt="自然光灑落的北歐風格客廳" class="img-fluid brand-photo">
+							<span class="photo-caption">A LITTLE MORE SPACE, A LITTLE MORE PEACE.</span>
+						</div>
+					</div>
+				</div>
+			</div>
+		</section>
 
-                </div>
-                <div class="carousel-item bg-img-cover"
-                    style="background-image: url(images/hotel/lobby02.jpg); height: 85vh;">
-                </div>
-                <div class="carousel-item bg-img-cover"
-                    style="background-image: url(images/hotel/room03.jpg); height: 85vh;">
-                </div>
-                <div class="carousel-item bg-img-cover"
-                    style="background-image: url(images/hotel/dinning01.jpg); height: 85vh;">
-                </div>
-            </div>
-            <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleCaptions"
-                data-bs-slide="prev">
-                <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-                <span class="visually-hidden">Previous</span>
-            </button>
-            <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleCaptions"
-                data-bs-slide="next">
-                <span class="carousel-control-next-icon" aria-hidden="true"></span>
-                <span class="visually-hidden">Next</span>
-            </button>
-        </div>
-    </section>
+		<!-- 05 Rooms -->
+		<section id="rooms" class="section-pad section-soft">
+			<div class="container">
+				<div class="section-heading text-center">
+					<p class="eyebrow">02 / ROOMS & SUITES</p>
+					<h2 class="section-title">為好好休息，留一個位置。</h2>
+					<p class="body-copy mx-auto">每一間客房，都是一座安靜的小宇宙。</p>
+				</div>
+				<div class="row g-4 mt-3">
+					<div class="col-md-6 col-lg-4">
+						<article class="room-card wow animate__fadeInUp" data-wow-duration="1s">
+							<img src="https://images.unsplash.com/photo-1611892440504-42a792e24d32?auto=format&fit=crop&w=900&q=85"
+								alt="簡約舒適的標準客房">
+							<div class="room-info"><span class="eyebrow">01 / 24 m²</span>
+								<h3>日光客房</h3>
+								<p>讓晨光自然喚醒每一天，享受剛剛好的自在。</p><a href="#booking" class="text-link">了解客房 <i
+										class="fa-solid fa-arrow-right"></i></a>
+							</div>
+						</article>
+					</div>
+					<div class="col-md-6 col-lg-4">
+						<article class="room-card wow animate__fadeInUp" data-wow-duration="1s" data-wow-delay="150ms">
+							<img src="https://images.unsplash.com/photo-1616486338812-3dadae4b4ace?auto=format&fit=crop&w=900&q=85"
+								alt="溫暖木質調的雙人客房">
+							<div class="room-info"><span class="eyebrow">02 / 32 m²</span>
+								<h3>木語雙人房</h3>
+								<p>以溫潤木質與柔軟織品，收藏兩人的旅行時光。</p><a href="#booking" class="text-link">了解客房 <i
+										class="fa-solid fa-arrow-right"></i></a>
+							</div>
+						</article>
+					</div>
+					<div class="col-md-6 col-lg-4">
+						<article class="room-card wow animate__fadeInUp" data-wow-duration="1s" data-wow-delay="300ms">
+							<img src="https://images.unsplash.com/photo-1600607687920-4e2a09cf159d?auto=format&fit=crop&w=900&q=85"
+								alt="寬敞明亮的套房">
+							<div class="room-info"><span class="eyebrow">03 / 48 m²</span>
+								<h3>森境套房</h3>
+								<p>寬敞的生活尺度，適合想把假期放慢的你。</p><a href="#booking" class="text-link">了解客房 <i
+										class="fa-solid fa-arrow-right"></i></a>
+							</div>
+						</article>
+					</div>
+				</div>
+			</div>
+		</section>
 
-    <!-- 04 Brand Philosophy 品牌核心理念 -->
-    <section id="brand"></section>
+		<!-- 06 Location & Surroundings -->
+		<section id="location" class="section-pad location-section">
+			<div class="container">
+				<div class="row align-items-center g-5">
+					<div class="col-lg-6 order-lg-2 wow animate__fadeInRight" data-wow-duration="1s">
+						<p class="eyebrow">03 / LOCATION</p>
+						<h2 class="section-title">城市不遠，<br><em>自然就在身邊。</em></h2>
+						<p class="body-copy">在便利與寧靜之間取得平衡。從 SU Hotel 出發，輕鬆探索城市風景，也能隨時回到舒適安定的空間。</p>
+						<div class="location-points">
+							<div><i
+									class="fa-solid fa-location-dot"></i><span><strong>自在抵達</strong><small>鄰近主要交通與生活機能</small></span>
+							</div>
+							<div><i
+									class="fa-solid fa-tree"></i><span><strong>漫步周邊</strong><small>發現巷弄、綠意與在地日常</small></span>
+							</div>
+							<div><i
+									class="fa-solid fa-mug-hot"></i><span><strong>探索生活</strong><small>走訪特色店家與人氣景點</small></span>
+							</div>
+						</div>
+					</div>
+					<div class="col-lg-6 order-lg-1 wow animate__fadeInLeft" data-wow-duration="1s"><img
+							class="img-fluid location-photo"
+							src="https://images.unsplash.com/photo-1449844908441-8829872d2607?auto=format&fit=crop&w=1200&q=85"
+							alt="綠意環繞的城市街景"></div>
+				</div>
+			</div>
+		</section>
 
-    <!-- 05 Rooms -->
-    <section id="rooms"></section>
+		<!-- 07 Dining -->
+		<section id="dining" class="section-pad dining-section">
+			<div class="container">
+				<div class="row g-5 align-items-center">
+					<div class="col-lg-7 wow animate__fadeInLeft" data-wow-duration="1s">
+						<img class="img-fluid dining-photo"
+							src="https://images.unsplash.com/photo-1414235077428-338989a2e8c0?auto=format&fit=crop&w=1400&q=85"
+							alt="自然風格餐廳的精緻餐點">
+					</div>
+					<div class="col-lg-5 wow animate__fadeInRight" data-wow-duration="1s">
+						<p class="eyebrow">04 / DINING & CAFÉ</p>
+						<h2 class="section-title">一餐一食，<br><em>都是生活的風景。</em></h2>
+						<p class="body-copy">選用當季食材，以簡單而細緻的料理，陪伴旅途中每一段值得停留的時光。</p>
+						<a href="#booking" class="text-link">探索餐飲體驗 <i class="fa-solid fa-arrow-right"></i></a>
+					</div>
+				</div>
+			</div>
+		</section>
 
-    <!-- 06 Location & Surroundings -->
-    <section id="section06"></section>
+		<!-- 08 Wellness & Spa -->
+		<section id="spa" class="section-pad section-sage">
+			<div class="container">
+				<div class="row align-items-center g-5">
+					<div class="col-lg-5">
+						<p class="eyebrow">05 / WELLNESS</p>
+						<h2 class="section-title">留白給自己，<br><em>讓身心慢慢歸零。</em></h2>
+						<p class="body-copy">從一段安靜的伸展、一場舒緩療程，到午後不被打擾的休息，讓照顧自己成為旅程的一部分。</p>
+						<a href="#booking" class="text-link">感受慢活時光 <i class="fa-solid fa-arrow-right"></i></a>
+					</div>
+					<div class="col-lg-7"><img class="img-fluid spa-photo"
+							src="https://images.unsplash.com/photo-1540555700478-4be289fbecef?auto=format&fit=crop&w=1200&q=85"
+							alt="寧靜舒適的療癒空間"></div>
+				</div>
+			</div>
+		</section>
 
-    <!-- 07 Dining & Café -->
-    <section id="dining"></section>
+		<!-- 09 Activities -->
+		<section id="activity" class="section-pad">
+			<div class="container">
+				<div class="section-heading text-center">
+					<p class="eyebrow">06 / EXPERIENCES</p>
+					<h2 class="section-title">把日常，過成喜歡的模樣。</h2>
+					<p class="body-copy mx-auto">不必把行程排滿，留一些時間給意想不到的美好。</p>
+				</div>
+				<div class="row g-3 mt-4 experience-grid">
+					<div class="col-md-6">
+						<div class="experience-card experience-large"
+							style="background-image:url('https://images.unsplash.com/photo-1470252649378-9c29740c9fa8?auto=format&fit=crop&w=1200&q=85')">
+							<div><span>01 / MORNING</span>
+								<h3>晨光散步</h3>
+								<p>用一段散步，開啟舒服的一天。</p>
+							</div>
+						</div>
+					</div>
+					<div class="col-md-6">
+						<div class="experience-card"
+							style="background-image:url('https://images.unsplash.com/photo-1495474472287-4d71bcdd2085?auto=format&fit=crop&w=1200&q=85')">
+							<div><span>02 / AFTERNOON</span>
+								<h3>午後咖啡</h3>
+								<p>在香氣與光影之間，享受片刻寧靜。</p>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</section>
 
-    <!-- 08 Wellness & Spa -->
-    <section id="spa"></section>
+		<!-- 10 News -->
+		<section id="news" class="section-pad section-soft">
+			<div class="container">
+				<div class="d-flex flex-wrap justify-content-between align-items-end gap-3 mb-4">
+					<div class="wow animate__fadeInUp" data-wow-duration="1s">
+						<p class="eyebrow">07 / LATEST NEWS</p>
+						<h2 class="section-title mb-0">最近，SU 有些新鮮事。</h2>
+					</div>
+					<a href="#footer" class="text-link">更多消息 <i class="fa-solid fa-arrow-right"></i></a>
+				</div>
+				<div class="row g-4">
+					<div class="col-md-4">
+						<article class="news-card wow animate__fadeInUp" data-wow-duration="1s"><img
+								src="https://images.unsplash.com/photo-1517248135467-4c7edcad34c4?auto=format&fit=crop&w=800&q=85"
+								alt="餐廳新季菜單">
+							<div class="news-info"><time>2026.10.01</time>
+								<h3>秋日餐桌｜以當季風味迎接微涼時節</h3><a href="#dining" aria-label="閱讀秋日餐桌消息"><i
+										class="fa-solid fa-arrow-right"></i></a>
+							</div>
+						</article>
+					</div>
+					<div class="col-md-4">
+						<article class="news-card wow animate__fadeInUp" data-wow-duration="1s" data-wow-delay="150ms">
+							<img src="https://images.unsplash.com/photo-1441986300917-64674bd600d8?auto=format&fit=crop&w=800&q=85"
+								alt="旅宿生活選物">
+							<div class="news-info"><time>2026.09.15</time>
+								<h3>SU Select｜把喜歡的生活細節帶回家</h3><a href="#about" aria-label="閱讀生活選物消息"><i
+										class="fa-solid fa-arrow-right"></i></a>
+							</div>
+						</article>
+					</div>
+					<div class="col-md-4">
+						<article class="news-card wow animate__fadeInUp" data-wow-duration="1s" data-wow-delay="300ms">
+							<img src="https://images.unsplash.com/photo-1500530855697-b586d89ba3ee?auto=format&fit=crop&w=800&q=85"
+								alt="秋季旅行風景">
+							<div class="news-info"><time>2026.08.20</time>
+								<h3>慢旅提案｜給自己一段不趕路的小旅行</h3><a href="#activity" aria-label="閱讀慢旅提案消息"><i
+										class="fa-solid fa-arrow-right"></i></a>
+							</div>
+						</article>
+					</div>
+				</div>
+			</div>
+		</section>
 
-    <!-- 09 Activities & Experiences -->
-    <section id="activity"></section>
+		<!-- 11 Gallery -->
+		<section id="gallery" class="section-pad">
+			<div class="container">
+				<div class="section-heading text-center">
+					<p class="eyebrow">08 / GALLERY</p>
+					<h2 class="section-title">光線、材質與生活片刻。</h2>
+					<p class="body-copy mx-auto">每個角落，都有值得收藏的風景。</p>
+				</div>
+				<div class="gallery-grid mt-5">
+					<img src="https://images.unsplash.com/photo-1600210492486-724fe5c67fb0?auto=format&fit=crop&w=900&q=85"
+						alt="飯店公共空間">
+					<img src="https://images.unsplash.com/photo-1616486338812-3dadae4b4ace?auto=format&fit=crop&w=900&q=85"
+						alt="自然材質家具細節">
+					<img src="https://images.unsplash.com/photo-1600607687920-4e2a09cf159d?auto=format&fit=crop&w=900&q=85"
+						alt="明亮客房">
+					<img src="https://images.unsplash.com/photo-1494438639946-1ebd1d20bf85?auto=format&fit=crop&w=900&q=85"
+						alt="閱讀與休憩角落">
+					<img src="https://images.unsplash.com/photo-1600566753086-00f18fb6b3ea?auto=format&fit=crop&w=900&q=85"
+						alt="簡約室內設計">
+				</div>
+			</div>
+		</section>
 
-    <!-- 10 News -->
-    <section id="news"></section>
+		<!-- 12 The Story -->
+		<section id="about" class="section-pad story-section">
+			<div class="container">
+				<div class="row g-5 align-items-start">
+					<div class="col-lg-5 wow animate__fadeInUp" data-wow-duration="1s">
+						<p class="eyebrow">09 / THE STORY</p>
+						<h2 class="section-title">一個關於<br><em>慢下來的故事。</em></h2>
+						<p class="body-copy">SU 的起點，是一個簡單的想法：旅行不只是抵達某個地方，更是重新找回生活感受的過程。</p>
+					</div>
+					<div class="col-lg-7 wow animate__fadeInUp" data-wow-duration="1s" data-wow-delay=".15s">
+						<div class="timeline">
+							<div class="timeline-item"><span>2020</span>
+								<div>
+									<h3>一個想法的開始</h3>
+									<p>從對理想旅宿的想像出發，描繪 SU 的生活提案。</p>
+								</div>
+							</div>
+							<div class="timeline-item"><span>2022</span>
+								<div>
+									<h3>讓空間回到純粹</h3>
+									<p>以自然材質、簡潔線條與溫柔光線，建立品牌風格。</p>
+								</div>
+							</div>
+							<div class="timeline-item"><span>2026</span>
+								<div>
+									<h3>分享更多生活風景</h3>
+									<p>持續探索在地文化，邀請每位旅人寫下自己的故事。</p>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</section>
 
-    <!-- 11 Gallery -->
-    <section id="gallery"></section>
+		<!-- 13 FAQ -->
+		<section id="faq" class="section-pad section-soft">
+			<div class="container">
+				<div class="row g-5">
+					<div class="col-lg-4">
+						<p class="eyebrow">10 / FAQ</p>
+						<h2 class="section-title">想知道的，<br><em>都在這裡。</em></h2>
+						<p class="body-copy">如果還有其他問題，歡迎與我們聯繫。</p>
+					</div>
+					<div class="col-lg-8">
+						<div class="accordion accordion-flush" id="faqAccordion">
+							<div class="accordion-item">
+								<h3 class="accordion-header"><button class="accordion-button" type="button"
+										data-bs-toggle="collapse" data-bs-target="#faqOne"
+										aria-expanded="true">入住與退房時間為何？</button></h3>
+								<div id="faqOne" class="accordion-collapse collapse show"
+									data-bs-parent="#faqAccordion">
+									<div class="accordion-body">一般入住時間為下午 3:00 後，退房時間為上午 11:00 前；如有特殊需求，請提前與服務人員聯繫。
+									</div>
+								</div>
+							</div>
+							<div class="accordion-item">
+								<h3 class="accordion-header"><button class="accordion-button collapsed" type="button"
+										data-bs-toggle="collapse" data-bs-target="#faqTwo">可以提前寄放行李嗎？</button></h3>
+								<div id="faqTwo" class="accordion-collapse collapse" data-bs-parent="#faqAccordion">
+									<div class="accordion-body">可以，入住前或退房後皆可洽詢櫃檯協助寄放行李。</div>
+								</div>
+							</div>
+							<div class="accordion-item">
+								<h3 class="accordion-header"><button class="accordion-button collapsed" type="button"
+										data-bs-toggle="collapse" data-bs-target="#faqThree">如何更改或取消訂房？</button></h3>
+								<div id="faqThree" class="accordion-collapse collapse" data-bs-parent="#faqAccordion">
+									<div class="accordion-body">請依照訂房確認信中的取消與更改規範辦理，或直接聯繫飯店服務人員。</div>
+								</div>
+							</div>
+							<div class="accordion-item">
+								<h3 class="accordion-header"><button class="accordion-button collapsed" type="button"
+										data-bs-toggle="collapse" data-bs-target="#faqFour">飯店是否提供停車服務？</button></h3>
+								<div id="faqFour" class="accordion-collapse collapse" data-bs-parent="#faqAccordion">
+									<div class="accordion-body">停車資訊與車位安排請於訂房時先行確認，以便我們為您提供協助。</div>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</section>
 
-    <!-- 12 The Story (Timeline)-->
-    <section id="about"></section>
+		<!-- 14 Transportation -->
+		<section id="transportation" class="section-pad transport-section">
+			<div class="container">
+				<div class="row align-items-center g-5">
+					<div class="col-lg-6 wow animate__fadeInLeft" data-wow-duration="1s"><img
+							class="img-fluid transport-photo"
+							src="https://images.unsplash.com/photo-1473448912268-2022ce9509d8?auto=format&fit=crop&w=1200&q=85"
+							alt="通往自然的林間道路"></div>
+					<div class="col-lg-6 wow animate__fadeInRight" data-wow-duration="1s">
+						<p class="eyebrow">11 / GETTING HERE</p>
+						<h2 class="section-title">旅程的開始，<br><em>從輕鬆抵達開始。</em></h2>
+						<p class="body-copy">無論搭乘大眾運輸或自行開車，都能依照最適合自己的方式抵達 SU Hotel。</p>
+						<div class="transport-detail">
+							<p><i
+									class="fa-solid fa-train"></i><span><strong>大眾運輸</strong><small>請依實際地址補上最近車站與轉乘方式。</small></span>
+							</p>
+							<p><i
+									class="fa-solid fa-car"></i><span><strong>自行開車</strong><small>請依實際地址補上導航資訊與停車說明。</small></span>
+							</p>
+						</div><a href="#footer" class="text-link">聯絡我們 <i class="fa-solid fa-arrow-right"></i></a>
+					</div>
+				</div>
+			</div>
+		</section>
 
-    <!-- 13 FAQ -->
-    <section id="faq"></section>
+		<!-- Booking -->
+		<section id="booking" class="booking-cta">
+			<div class="container text-center">
+				<p class="eyebrow text-white">YOUR SLOW MOMENT STARTS HERE</p>
+				<h2>為自己，預留一段美好時光。</h2>
+				<p>期待在 SU Hotel，與你相遇。</p>
+				<a href="mailto:hello@suhotel.example" class="btn btn-light rounded-pill px-5 py-3">聯繫訂房 <i
+						class="fa-solid fa-arrow-right ms-2"></i></a>
+			</div>
+		</section>
+	</main>
 
-    <!-- 14 Transportation-->
-    <section id="transportation"></section>
+	<!-- 15 Footer -->
+	<footer id="footer" class="site-footer">
+		<div class="container">
+			<div class="row gy-4">
+				<div class="col-lg-5"><a class="footer-brand" href="#banner"><span class="brand-mark">SU</span><span
+							class="brand-name">HOTEL</span></a>
+					<p class="footer-note">在自然與城市之間，<br>留一個位置給生活。</p>
+				</div>
+				<div class="col-6 col-lg-2">
+					<h3>EXPLORE</h3><a href="#brand">關於 SU</a><a href="#rooms">客房住宿</a><a href="#dining">餐飲體驗</a><a
+						href="#gallery">空間巡禮</a>
+				</div>
+				<div class="col-6 col-lg-2">
+					<h3>INFORMATION</h3><a href="#faq">常見問題</a><a href="#transportation">交通資訊</a><a
+						href="#news">最新消息</a>
+				</div>
+				<div class="col-lg-3">
+					<h3>CONTACT</h3>
+					<p>台灣</p>
+					<p>+886 4 0000 0000</p>
+					<p>hello@suhotel.example</p>
+					<div class="d-flex gap-3 mt-3"><a href="#" aria-label="Instagram"><i
+								class="fa-brands fa-instagram"></i></a><a href="#" aria-label="Facebook"><i
+								class="fa-brands fa-facebook-f"></i></a></div>
+				</div>
+			</div>
+			<div class="footer-bottom"><span>© 2026 SU HOTEL. ALL RIGHTS RESERVED.</span><a href="#banner">BACK TO TOP
+					↑</a>
+			</div>
+		</div>
+	</footer>
 
-    <!-- 15 Footer -->
-    <section id="footer"></section>
+	<script src="js/bootstrap.min.js"></script>
+	<script src="js/jquery-4.0.0.js"></script>
+	<script src="js/wow.min.js"></script>
 
-    <script src="js/bootstrap.min.js"></script>
-    <script src="js/jquery-4.0.0.js"></script>
+	<script>
+		new WOW().init();
+	</script>
 </body>
 
 </html>
