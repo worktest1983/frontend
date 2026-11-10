@@ -1,0 +1,226 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CH8-表單-CRUD練習</title>
+    <link rel="stylesheet" href="css/bootstrap.min.css">
+    <link rel="stylesheet" href="css/style.css">
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="css/all.min.css">
+</head>
+
+<body class="bg-light">
+    <div class="container py-5">
+        <div class="row justify-content-center">
+            <div class="col-lg-8 col-md-10">
+                <div class="card shadow-sm border-0 rounded-3">
+                    <div class="card-header bg-dark text-white p-3 rounded-top-3">
+                        <div class="h4 mb-0 text-center fw-bold">
+                            <i class="fa-solid fa-barcode me-2"></i>新增產品資料
+                        </div>
+                    </div>
+
+                    <div class="card-body p-4">
+                        <form id="productForm">
+                            <!-- 產品名稱 -->
+                            <div class="form-floating mb-3">
+                                <input type="text" name="product_name" id="product_name" class="form-control"
+                                    placeholder="產品名稱">
+                                <label for="product_name">產品名稱</label>
+                                <div class="invalid-feedback">必填欄位，且名稱字數限制2~10字內</div>
+                            </div>
+
+                            <!-- 價格與類別 (雙欄排版) -->
+                            <div class="row g-3 mb-3">
+                                <div class="col-md-6">
+                                    <div class="form-floating">
+                                        <input type="number" name="product_price" id="product_price"
+                                            class="form-control" placeholder="價格" min="0">
+                                        <label for="product_price">價格</label>
+                                        <div class="invalid-feedback">必填欄位，且金額不能為0</div>
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="form-floating">
+                                        <select name="product_category" id="product_category" class="form-select">
+                                            <option value="" disabled selected>請選擇類別</option>
+                                            <option value="零食">零食</option>
+                                            <option value="乳製品">乳製品</option>
+                                            <option value="飲料">飲料</option>
+                                        </select>
+                                        <label for="product_category">產品類別</label>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- 數量 -->
+                            <div class="mb-4 p-3 bg-body-tertiary rounded">
+                                <div class="d-flex justify-content-between align-items-center mb-2">
+                                    <label for="product_num" class="form-label mb-0 fw-semibold">數量</label>
+                                    <div>
+                                        <span class="h3 text-primary fw-900" id="product_num_val">50</span>
+                                        <span> 個</span>
+                                    </div>
+                                </div>
+                                <input type="range" class="form-range" id="product_num" name="product_num" min="1"
+                                    max="100" step="1" value="50">
+
+                                <!-- <div class="d-flex justify-content-between text-secondary">
+                                    <span>1</span><span>100</span>
+                                </div> -->
+                            </div>
+
+                            <!-- 備註 -->
+                            <div class="form-floating mb-3">
+                                <textarea name="product_remark" id="product_remark" class="form-control"
+                                    placeholder="產品說明及注意事項，上限200字" style="height: 120px"></textarea>
+                                <label for="product_remark">備註（上限 200 字）</label>
+                            </div>
+                        </form>
+                    </div>
+
+                    <div class="card-footer bg-white border-0 px-4 pb-4 text-end">
+                        <button type="button" class="btn btn-outline-secondary px-4 me-2" id="cancel">取消</button>
+                        <button type="button" form="productForm" class="btn btn-primary px-4 fw-bold"
+                            id="confirm">確認</button>
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="modal" tabindex="-1" id="confirmForm">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">產品建檔確認</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <p><span>產品名稱:</span><span id="display_name"></span></p>
+                    <p><span>產品價格:</span><span id="display_price"></span></p>
+                    <p><span>產品數量:</span><span id="display_num"></span></p>
+                    <p><span>產品類別:</span><span id="display_category"></span></p>
+                    <p><span>產品備註:</span><span id="display_remark"></span></p>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal" id="close">取消</button>
+                    <button type="submit" class="btn btn-primary" id="add">送出</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="js/bootstrap.min.js"></script>
+    <script src="js/jquery-4.0.0.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
+    <script>
+        $(() => {
+
+            const confirmModal = new bootstrap.Modal('#confirmForm');
+
+            $("#product_name").on("change", function () {
+                const _this = $(this);
+                _this.removeClass("is-invalid");
+            })
+
+            $("#product_price").on("change", function () {
+                const _this = $(this);
+                _this.removeClass("is-invalid");
+            })
+
+            $("#product_category").on("change", function () {
+                const _this = $(this);
+            })
+
+
+            $("#product_num").on("input change", function () {
+                $("#product_num_val").text($(this).val());
+            });
+
+            $("#confirm").on("click", function () {
+                const name = $("#product_name").val().trim();
+                const price = $("#product_price").val();
+                const category = $("#product_category").val();
+                const num = $("#product_num").val();
+                const remark = $("#product_remark").val();
+
+                if (name === "" || name.length < 2 || name.length > 10) {
+                    $("#product_name").addClass("is-invalid");
+                    $("#product_name").focus();
+                    return;
+                }
+
+                if (price === "" || price <= 0) {
+                    $("#product_price").addClass("is-invalid");
+                    $("#product_price").focus();
+                    return;
+                }
+
+                // 將資料填入 Modal 預覽區
+                $("#display_name").text(name);
+                $("#display_price").text(price ? price + " 元" : "未填");
+                $("#display_num").text(num + " 個");
+                $("#display_category").text(category ? category : "未選擇");
+                $("#display_remark").text(remark ? remark : "無");
+
+                confirmModal.show();
+            });
+
+            // Form submit
+            $("#add").on("click", function () {
+                const name = $("#product_name").val();
+                const price = $("#product_price").val();
+                const category = $("#product_category").val();
+                const num = $("#product_num").val();
+                const remark = $("#product_remark").val();
+
+                const parms = {
+                    "name": name,
+                    "price": price,
+                    "category": category,
+                    "num": num,
+                    "remark": remark
+                }
+
+                $.ajax({
+                    url: 'http://localhost:3000/product',
+                    type: "POST",
+                    dataType: "JSON",
+                    data: JSON.stringify(parms),
+                    contentType: "application/json",
+                    success: () => {
+                        confirmModal.hide();
+                        clear();
+
+                        Swal.fire({
+                            title: "新增成功",
+                            icon: "success"
+                        });
+                    },
+                    error: () => {
+                        Swal.fire({
+                            title: "新增產品資料失敗",
+                            text: "請檢查資料格式或連線是否正常",
+                            icon: "error"
+                        });
+                    }
+                })
+            })
+
+            function clear() {
+                $("#productForm").get(0).reset();
+                $("#product_num_val").text("50"); // 帶回您的預設值
+                $("#product_num").val(50);
+                $("#productForm").find(".is-invalid").removeClass("is-invalid");
+            }
+
+        });
+    </script>
+</body>
+
+</html>
