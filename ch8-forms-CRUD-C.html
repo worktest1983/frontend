@@ -1,0 +1,344 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CRUD練習 - 產品建檔</title>
+    <link rel="stylesheet" href="css/bootstrap.min.css">
+    <link rel="stylesheet" href="css/style.css">
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="css/all.min.css">
+    <style>
+        /* 莫蘭迪文青風專屬 CSS 變數與樣式微調 */
+        :root {
+            --morandi-bg: #f7f6f2;       /* 燕麥奶灰底色 */
+            --morandi-primary: #78857a;  /* 莫蘭迪灰綠色 */
+            --morandi-hover: #636f63;    /* 灰綠深色懸停 */
+            --morandi-card: #ffffff;     /* 卡片白 */
+            --morandi-text: #4a4a4a;     /* 柔和深灰字 */
+            --morandi-border: #dcdad3;   /* 柔和邊框 */
+        }
+
+        body {
+            background-color: var(--morandi-bg);
+            color: var(--morandi-text);
+            font-family: system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+        }
+
+        .card {
+            border: none;
+            background-color: var(--morandi-card);
+            box-shadow: 0 10rem 30rem rgba(120, 133, 122, 0.06) !important;
+        }
+
+        /* 輸入框與選擇器莫蘭迪化 */
+        .form-control,
+        .form-select {
+            border-color: var(--morandi-border);
+            background-color: #faf9f6;
+            color: var(--morandi-text);
+            border-radius: 0.5rem;
+        }
+
+        .form-control:focus,
+        .form-select:focus {
+            border-color: var(--morandi-primary);
+            box-shadow: 0 0 0 0.25rem rgba(120, 133, 122, 0.15);
+            background-color: #fff;
+        }
+
+        /* 莫蘭迪風格按鈕 */
+        .btn-morandi-primary {
+            background-color: var(--morandi-primary);
+            color: #fff;
+            border: none;
+            transition: all 0.2s ease;
+        }
+
+        .btn-morandi-primary:hover {
+            background-color: var(--morandi-hover);
+            color: #fff;
+        }
+
+        .btn-morandi-outline {
+            border: 1px solid var(--morandi-border);
+            color: var(--morandi-text);
+            background-color: transparent;
+            transition: all 0.2s ease;
+        }
+
+        .btn-morandi-outline:hover {
+            background-color: #f0eee9;
+            color: var(--morandi-text);
+        }
+
+        /* 滑桿微調 */
+        .form-range::-webkit-slider-thumb {
+            background: var(--morandi-primary);
+        }
+    </style>
+</head>
+
+<body>
+    <header>
+        <nav class="navbar navbar-expand-lg bg-dark navbar-dark">
+            <div class="container-fluid">
+                <a class="navbar-brand" href="#">CRUD練習</a>
+                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
+                    aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+                <div class="collapse navbar-collapse" id="navbarNav">
+                    <ul class="navbar-nav">
+                        <li class="nav-item">
+                            <a class="nav-link" aria-current="page" href="#">Home</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link active" href="#">產品建檔</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="#">產品列表</a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </nav>
+    </header>
+    <div class="container py-5">
+        <div class="row justify-content-center">
+            <div class="col-lg-8 col-md-10">
+                <div class="card rounded-4 overflow-hidden shadow-sm">
+                    <!-- 表單標頭：莫蘭迪灰綠色系 -->
+                    <div class="card-header text-white p-4" style="background-color: #78857a;">
+                        <div class="h4 mb-0 text-center fw-bold tracking-wide">
+                            <i class="fa-solid fa-feather me-2"></i>新增產品資料
+                        </div>
+                    </div>
+
+                    <div class="card-body p-4 p-md-5">
+                        <form id="productForm" novalidate>
+                            <!-- 產品名稱 -->
+                            <div class="form-floating mb-4">
+                                <input type="text" name="product_name" id="product_name" class="form-control" placeholder="產品名稱">
+                                <label for="product_name" class="text-muted">
+                                    <i class="fa-solid fa-tag me-1"></i>產品名稱
+                                </label>
+                                <div class="invalid-feedback">必填欄位，且名稱字數限制 2 ~ 10 字內</div>
+                            </div>
+
+                            <!-- 價格與類別 (雙欄排版) -->
+                            <div class="row g-3 mb-4">
+                                <div class="col-md-6">
+                                    <div class="form-floating">
+                                        <input type="number" name="product_price" id="product_price" class="form-control" placeholder="價格" min="0">
+                                        <label for="product_price" class="text-muted">
+                                            <i class="fa-solid fa-dollar-sign me-1"></i>價格
+                                        </label>
+                                        <div class="invalid-feedback">必填欄位，且金額不能為 0</div>
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="form-floating">
+                                        <select name="product_category" id="product_category" class="form-select">
+                                            <option value="" disabled selected>請選擇類別</option>
+                                            <option value="零食">零食</option>
+                                            <option value="乳製品">乳製品</option>
+                                            <option value="飲料">飲料</option>
+                                        </select>
+                                        <label for="product_category" class="text-muted">
+                                            <i class="fa-solid fa-folder-open me-1"></i>產品類別
+                                        </label>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- 數量 (Range 滑桿) -->
+                            <div class="mb-4 p-3 rounded-4 border"
+                                style="background-color: #faf9f6; border-color: #ebe7de !important;">
+                                <div class="d-flex justify-content-between align-items-center mb-2">
+                                    <label for="product_num" class="form-label mb-0 fw-semibold text-secondary">
+                                        <i class="fa-solid fa-cubes me-1"></i>數量
+                                    </label>
+                                    <div>
+                                        <span class="h3 fw-bold" style="color: #78857a;" id="product_num_val">50</span>
+                                        <span class="text-muted small">個</span>
+                                    </div>
+                                </div>
+                                <input type="range" class="form-range" id="product_num" name="product_num" min="1" max="100" step="1" value="50">
+                            </div>
+
+                            <!-- 備註 -->
+                            <div class="form-floating mb-3">
+                                <textarea
+                                    name="product_remark"
+                                    id="product_remark" 
+                                    class="form-control"
+                                    placeholder="產品說明及注意事項，上限200字"
+                                    style="height: 120px">
+                                </textarea>
+                                <label for="product_remark" class="text-muted">
+                                    <i class="fa-solid fa-note-sticky me-1"></i>備註（上限 200 字）
+                                </label>
+                            </div>
+                        </form>
+                    </div>
+
+                    <div class="card-footer border-0 px-4 py-3 text-end" style="background-color: #faf9f6;">
+                        <button type="button" class="btn btn-morandi-outline px-4 me-2 rounded-pill" id="cancel">取消</button>
+                        <button type="button" form="productForm" class="btn btn-morandi-primary px-4 fw-bold rounded-pill shadow-sm" id="confirm">確認建檔</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- 確認 Modal -->
+    <div class="modal fade" tabindex="-1" id="confirmForm">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content border-0 shadow-lg rounded-4 overflow-hidden" style="background-color: #fff;">
+                <div class="modal-header text-white px-4 py-3" style="background-color: #78857a;">
+                    <h5 class="modal-title fw-bold"><i class="fa-solid fa-circle-check me-2"></i>產品建檔確認</h5>
+                    <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body p-4" style="background-color: #f7f6f2;">
+                    <div class="list-group shadow-sm rounded-4 border-0 overflow-hidden">
+                        <div
+                            class="list-group-item d-flex justify-content-between align-items-center py-3 border-0 border-bottom">
+                            <span class="text-muted fw-semibold">產品名稱</span>
+                            <span id="display_name" class="fw-bold text-dark"></span>
+                        </div>
+                        <div
+                            class="list-group-item d-flex justify-content-between align-items-center py-3 border-0 border-bottom">
+                            <span class="text-muted fw-semibold">產品價格</span>
+                            <span id="display_price" class="fw-bold" style="color: #5c685f;"></span>
+                        </div>
+                        <div
+                            class="list-group-item d-flex justify-content-between align-items-center py-3 border-0 border-bottom">
+                            <span class="text-muted fw-semibold">產品數量</span>
+                            <span id="display_num" class="fw-bold text-dark"></span>
+                        </div>
+                        <div
+                            class="list-group-item d-flex justify-content-between align-items-center py-3 border-0 border-bottom">
+                            <span class="text-muted fw-semibold">產品類別</span>
+                            <span id="display_category" class="badge rounded-pill px-3 py-2"
+                                style="background-color: #a3ad9e; color: #fff;"></span>
+                        </div>
+                        <div class="list-group-item py-3 border-0">
+                            <span class="text-muted fw-semibold d-block mb-1">產品備註</span>
+                            <span id="display_remark"
+                                class="text-secondary small d-block bg-white p-2 rounded border border-light"></span>
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer border-0 px-4 py-3" style="background-color: #f7f6f2;">
+                    <button type="button" class="btn btn-morandi-outline rounded-pill px-4" data-bs-dismiss="modal" id="close">返回修改</button>
+                    <button type="submit" class="btn btn-morandi-primary rounded-pill px-4 fw-bold shadow-sm" id="add">確認送出</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Scripts -->
+    <script src="js/bootstrap.min.js"></script>
+    <script src="js/jquery-4.0.0.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
+    <script>
+        $(() => {
+            const confirmModal = new bootstrap.Modal('#confirmForm');
+
+            $("#product_name").on("change", function () {
+                $(this).removeClass("is-invalid");
+            });
+
+            $("#product_price").on("change", function () {
+                $(this).removeClass("is-invalid");
+            });
+
+            $("#product_num").on("input change", function () {
+                $("#product_num_val").text($(this).val());
+            });
+
+            $("#confirm").on("click", function () {
+                const name = $("#product_name").val().trim();
+                const price = $("#product_price").val();
+                const category = $("#product_category").val();
+                const num = $("#product_num").val();
+                const remark = $("#product_remark").val();
+
+                if (name === "" || name.length < 2 || name.length > 10) {
+                    $("#product_name").addClass("is-invalid").focus();
+                    return;
+                }
+
+                if (price === "" || price <= 0) {
+                    $("#product_price").addClass("is-invalid").focus();
+                    return;
+                }
+
+                // 將資料填入 Modal 預覽區
+                $("#display_name").text(name);
+                $("#display_price").text(price ? price + " 元" : "未填");
+                $("#display_num").text(num + " 個");
+                $("#display_category").text(category ? category : "未選擇");
+                $("#display_remark").text(remark ? remark : "無");
+
+                confirmModal.show();
+            });
+
+            // Form submit
+            $("#add").on("click", function () {
+                const name = $("#product_name").val();
+                const price = $("#product_price").val();
+                const category = $("#product_category").val();
+                const num = $("#product_num").val();
+                const remark = $("#product_remark").val();
+
+                const parms = {
+                    "name": name,
+                    "price": price,
+                    "category": category,
+                    "num": num,
+                    "remark": remark
+                }
+
+                $.ajax({
+                    url: 'http://localhost:3000/product',
+                    type: "POST",
+                    dataType: "JSON",
+                    data: JSON.stringify(parms),
+                    contentType: "application/json",
+                    success: () => {
+                        confirmModal.hide();
+                        clear();
+
+                        Swal.fire({
+                            title: "新增成功",
+                            icon: "success",
+                            showConfirmButton: false,
+                            timer: 1500
+                        });
+                    },
+                    error: () => {
+                        Swal.fire({
+                            title: "新增產品資料失敗",
+                            text: "請檢查資料格式或連線是否正常",
+                            icon: "error",
+                            confirmButtonColor: "#78857a"
+                        });
+                    }
+                })
+            });
+
+            function clear() {
+                $("#productForm").get(0).reset();
+                $("#product_num_val").text("50");
+                $("#product_num").val(50);
+                $("#productForm").find(".is-invalid").removeClass("is-invalid");
+            }
+        });
+    </script>
+</body>
+
+</html>

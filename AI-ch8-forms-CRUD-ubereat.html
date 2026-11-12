@@ -4,79 +4,155 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>CH8-表單-CRUD練習 (莫蘭迪文青風)</title>
+    <title>CH8-表單-CRUD練習 (Uber Eat風格)</title>
     <link rel="stylesheet" href="css/bootstrap.min.css">
     <link rel="stylesheet" href="css/style.css">
     <!-- Font Awesome -->
     <link rel="stylesheet" href="css/all.min.css">
     <style>
-        /* 莫蘭迪文青風專屬 CSS 變數與樣式微調 */
+        
         :root {
-            --morandi-bg: #f7f6f2;       /* 燕麥奶灰底色 */
-            --morandi-primary: #78857a;  /* 莫蘭迪灰綠色 */
-            --morandi-hover: #636f63;    /* 灰綠深色懸停 */
-            --morandi-card: #ffffff;     /* 卡片白 */
-            --morandi-text: #4a4a4a;     /* 柔和深灰字 */
-            --morandi-border: #dcdad3;   /* 柔和邊框 */
+            --uber-black: #000000;
+            --uber-green: #06C167;
+            --uber-green-hover: #059e54;
+            --uber-bg: #f6f6f6;
+            --uber-white: #ffffff;
+            --uber-text: #222222;
+            --uber-border: #e5e5e5;
         }
 
         body {
-            background-color: var(--morandi-bg);
-            color: var(--morandi-text);
-            font-family: system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+            background: var(--uber-bg);
+            color: var(--uber-text);
+            font-family: Arial, "Noto Sans TC", sans-serif;
         }
 
+        /* 表單卡片 */
         .card {
             border: none;
-            background-color: var(--morandi-card);
-            box-shadow: 0 10rem 30rem rgba(120, 133, 122, 0.06) !important;
+            background: var(--uber-white);
+            box-shadow: 0 4px 20px rgba(0,0,0,.06) !important;
         }
 
-        /* 輸入框與選擇器莫蘭迪化 */
+        /* 表單標頭 */
+        .card-header {
+            background: var(--uber-black) !important;
+            padding: 28px !important;
+        }
+
+        .card-header .h4 {
+            font-size: 24px;
+            letter-spacing: 1px;
+        }
+
+        /* 表單內容 */
+        .card-body {
+            background: #fff;
+        }
+
         .form-control,
         .form-select {
-            border-color: var(--morandi-border);
-            background-color: #faf9f6;
-            color: var(--morandi-text);
-            border-radius: 0.5rem;
+            border: 1px solid var(--uber-border);
+            background: #fff;
+            color: var(--uber-text);
+            border-radius: 8px;
         }
 
         .form-control:focus,
         .form-select:focus {
-            border-color: var(--morandi-primary);
-            box-shadow: 0 0 0 0.25rem rgba(120, 133, 122, 0.15);
-            background-color: #fff;
+            border-color: var(--uber-green);
+            box-shadow: 0 0 0 3px rgba(6,193,103,.15);
         }
 
-        /* 莫蘭迪風格按鈕 */
+        /* Floating Label */
+        .form-floating label {
+            color: #666 !important;
+        }
+
+        /* 數量區塊 */
+        .card-body .border.rounded-4 {
+            background: #f6f6f6 !important;
+            border-color: #eeeeee !important;
+        }
+
+        #product_num_val {
+            color: var(--uber-green) !important;
+        }
+
+        .form-range::-webkit-slider-thumb {
+            background: var(--uber-green);
+        }
+
+        /* 按鈕 */
         .btn-morandi-primary {
-            background-color: var(--morandi-primary);
-            color: #fff;
+            background: var(--uber-green);
+            color: #000;
             border: none;
-            transition: all 0.2s ease;
+            transition: .2s;
         }
 
         .btn-morandi-primary:hover {
-            background-color: var(--morandi-hover);
+            background: var(--uber-green-hover);
             color: #fff;
         }
 
         .btn-morandi-outline {
-            border: 1px solid var(--morandi-border);
-            color: var(--morandi-text);
-            background-color: transparent;
-            transition: all 0.2s ease;
+            border: 1px solid #cccccc;
+            color: #222;
+            background: #fff;
         }
 
         .btn-morandi-outline:hover {
-            background-color: #f0eee9;
-            color: var(--morandi-text);
+            background: #eeeeee;
+            color: #000;
         }
 
-        /* 滑桿微調 */
-        .form-range::-webkit-slider-thumb {
-            background: var(--morandi-primary);
+        /* 按鈕統一 */
+        .btn {
+            border-radius: 30px !important;
+            padding: 10px 24px;
         }
+
+        /* Footer */
+        .card-footer {
+            background: #fff !important;
+            border-top: 1px solid #eeeeee !important;
+        }
+
+        /* Modal */
+        .modal-header {
+            background: #000 !important;
+        }
+
+        .modal-body,
+        .modal-footer {
+            background: #f6f6f6 !important;
+        }
+
+        .modal-body .badge {
+            background: var(--uber-green) !important;
+            color: #000 !important;
+        }
+
+        .modal-body .list-group-item {
+            background: #fff;
+        }
+
+        /* RWD */
+        @media (max-width: 576px) {
+            .card-body {
+                padding: 24px !important;
+            }
+
+            .card-header {
+                padding: 22px !important;
+            }
+
+            .card-header .h4 {
+                font-size: 20px;
+            }
+        }
+
     </style>
 </head>
 
@@ -85,10 +161,11 @@
         <div class="row justify-content-center">
             <div class="col-lg-8 col-md-10">
                 <div class="card rounded-4 overflow-hidden shadow-sm">
-                    <!-- 表單標頭：莫蘭迪灰綠色系 -->
-                    <div class="card-header text-white p-4" style="background-color: #78857a;">
-                        <div class="h4 mb-0 text-center fw-bold tracking-wide">
-                            <i class="fa-solid fa-feather me-2"></i>新增產品資料
+                    <!-- 表單標頭 -->
+                    <div class="card-header text-white p-4">
+                        <div class="h4 mb-0 text-center fw-bold">
+                            <i class="fa-solid fa-bag-shopping me-2"></i>
+                            新增產品資料
                         </div>
                     </div>
 
@@ -173,7 +250,7 @@
     <div class="modal fade" tabindex="-1" id="confirmForm">
         <div class="modal-dialog modal-dialog-centered">
             <div class="modal-content border-0 shadow-lg rounded-4 overflow-hidden" style="background-color: #fff;">
-                <div class="modal-header text-white px-4 py-3" style="background-color: #78857a;">
+                <div class="modal-header text-white px-4 py-3">
                     <h5 class="modal-title fw-bold"><i class="fa-solid fa-circle-check me-2"></i>產品建檔確認</h5>
                     <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
@@ -197,8 +274,7 @@
                         <div
                             class="list-group-item d-flex justify-content-between align-items-center py-3 border-0 border-bottom">
                             <span class="text-muted fw-semibold">產品類別</span>
-                            <span id="display_category" class="badge rounded-pill px-3 py-2"
-                                style="background-color: #a3ad9e; color: #fff;"></span>
+                            <span id="display_category" class="badge rounded-pill px-3 py-2"></span>
                         </div>
                         <div class="list-group-item py-3 border-0">
                             <span class="text-muted fw-semibold d-block mb-1">產品備註</span>
