@@ -1,0 +1,431 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>企業級 ERP 產品管理系統 - 產品建檔</title>
+    <link rel="stylesheet" href="css/bootstrap.min.css">
+    <link rel="stylesheet" href="css/style.css">
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="css/all.min.css">
+    <style>
+        /* 專業企業 ERP 專屬 CSS 變數與樣式微調 */
+        :root {
+            --erp-bg: #f8fafc;          /* 輕量商務淺灰底色 */
+            --erp-sidebar-bg: #1e293b;  /* 深商務灰側邊欄 */
+            --erp-primary: #0d9488;     /* 專業青瓷藍綠主色 */
+            --erp-primary-hover: #0f766e; /* 主色懸停 */
+            --erp-card: #ffffff;        /* 純白卡片 */
+            --erp-text: #334155;        /* 沉穩深灰字 */
+            --erp-border: #cbd5e1;      /* 標準企業邊框 */
+        }
+
+        body {
+            background-color: var(--erp-bg);
+            color: var(--erp-text);
+            font-family: system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+            overflow-x: hidden;
+        }
+
+        /* 側邊導覽列樣式 (ERP 專用) */
+        .sidebar {
+            position: fixed;
+            top: 0;
+            left: 0;
+            bottom: 0;
+            width: 260px;
+            background-color: var(--erp-sidebar-bg);
+            color: #94a3b8;
+            z-index: 1000;
+            transition: all 0.3s ease;
+        }
+
+        .sidebar .brand-title {
+            font-size: 1.15rem;
+            font-weight: 700;
+            color: #ffffff;
+            letter-spacing: 0.5px;
+            padding: 1.5rem 1.25rem;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+        }
+
+        .sidebar .nav-link {
+            color: #94a3b8;
+            padding: 0.75rem 1.25rem;
+            margin: 0.25rem 0.75rem;
+            border-radius: 0.375rem;
+            transition: all 0.2s ease;
+            font-size: 0.95rem;
+        }
+
+        .sidebar .nav-link:hover {
+            color: #ffffff;
+            background-color: rgba(255, 255, 255, 0.06);
+        }
+
+        .sidebar .nav-link.active {
+            color: #ffffff;
+            background-color: var(--erp-primary);
+            font-weight: 600;
+        }
+
+        /* 主內容區塊位移（配合固定側邊欄） */
+        .main-wrapper {
+            margin-left: 260px;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+        }
+
+        /* 頂部導覽列 */
+        .top-navbar {
+            background-color: #ffffff;
+            border-bottom: 1px solid #e2e8f0;
+            height: 70px;
+            padding: 0 2rem;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+        /* 卡片設計 */
+        .card {
+            border: 1px solid #e2e8f0;
+            background-color: var(--erp-card);
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05), 0 2px 4px -1px rgba(0, 0, 0, 0.03);
+            border-radius: 0.75rem;
+        }
+
+        /* 表單控制項企業化微調 */
+        .form-control,
+        .form-select {
+            border-color: var(--erp-border);
+            background-color: #ffffff;
+            color: var(--erp-text);
+            border-radius: 0.375rem;
+            padding: 0.625rem 0.875rem;
+        }
+
+        .form-control:focus,
+        .form-select:focus {
+            border-color: var(--erp-primary);
+            box-shadow: 0 0 0 3px rgba(13, 148, 136, 0.15);
+            background-color: #fff;
+        }
+
+        /* 企業風格按鈕 */
+        .btn-erp-primary {
+            background-color: var(--erp-primary);
+            color: #fff;
+            border: none;
+            transition: all 0.2s ease;
+        }
+
+        .btn-erp-primary:hover {
+            background-color: var(--erp-primary-hover);
+            color: #fff;
+        }
+
+        .btn-erp-outline {
+            border: 1px solid var(--erp-border);
+            color: var(--erp-text);
+            background-color: transparent;
+            transition: all 0.2s ease;
+        }
+
+        .btn-erp-outline:hover {
+            background-color: #f1f5f9;
+            color: var(--erp-text);
+        }
+
+        /* 滑桿微調 */
+        .form-range::-webkit-slider-thumb {
+            background: var(--erp-primary);
+        }
+
+        /* 響應式調整：小螢幕時隱藏側邊欄改用上方選單 */
+        @media (max-width: 991.98px) {
+            .sidebar {
+                display: none;
+            }
+            .main-wrapper {
+                margin-left: 0;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <!-- 企業 ERP 側邊導覽列 -->
+    <nav class="sidebar">
+        <div class="brand-title">
+            <i class="fa-solid fa-boxes-stacked me-2 text-teal"></i>ERP 企業管理系統
+        </div>
+        <div class="px-3 py-3 text-uppercase fs-7 text-muted fw-bold" style="font-size: 0.75rem; letter-spacing: 1px;">核心模組</div>
+        <ul class="nav flex-column">
+            <li class="nav-item">
+                <a class="nav-link" href="#"><i class="fa-solid fa-house me-2"></i>系統首頁</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link active" href="#"><i class="fa-solid fa-file-circle-plus me-2"></i>產品建檔</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="#"><i class="fa-solid fa-table-list me-2"></i>產品列表查詢</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="#"><i class="fa-solid fa-warehouse me-2"></i>庫存異動管理</a>
+            </li>
+        </ul>
+    </nav>
+
+    <!-- 主頁面容器 -->
+    <div class="main-wrapper">
+        <!-- 頂部導覽列 -->
+        <header class="top-navbar">
+            <div class="d-flex align-items-center">
+                <span class="text-secondary fw-semibold">產品管理子系統 / <span class="text-dark">新增產品資料</span></span>
+            </div>
+            <div class="d-flex align-items-center gap-3">
+                <span class="badge bg-light text-secondary border px-3 py-2 rounded-pill">
+                    <i class="fa-solid fa-user-tie me-1"></i> 管理員 (Admin)
+                </span>
+            </div>
+        </header>
+
+        <!-- 內容工作區 -->
+        <main class="container-fluid p-4 p-md-5">
+            <div class="row justify-content-center">
+                <div class="col-xl-9 col-lg-10">
+                    <div class="card overflow-hidden">
+                        <!-- 表單標頭 -->
+                        <div class="card-header text-white p-4" style="background-color: #1e293b; border-bottom: 3px solid #0d9488;">
+                            <div class="d-flex align-items-center justify-content-between">
+                                <h4 class="mb-0 fw-bold">
+                                    <i class="fa-solid fa-circle-plus me-2 text-teal" style="color: #0d9488;"></i>新增產品資料
+                                </h4>
+                                <span class="small text-muted">請確實填寫各項商務與庫存參數</span>
+                            </div>
+                        </div>
+
+                        <div class="card-body p-4 p-md-5">
+                            <form id="productForm" novalidate>
+                                <!-- 產品名稱 -->
+                                <div class="form-floating mb-4">
+                                    <input type="text" name="product_name" id="product_name" class="form-control" placeholder="產品名稱">
+                                    <label for="product_name" class="text-muted">
+                                        <i class="fa-solid fa-tag me-1"></i>產品名稱
+                                    </label>
+                                    <div class="invalid-feedback">必填欄位，且名稱字數限制 2 ~ 10 字內</div>
+                                </div>
+
+                                <!-- 價格與類別 (雙欄排版) -->
+                                <div class="row g-3 mb-4">
+                                    <div class="col-md-6">
+                                        <div class="form-floating">
+                                            <input type="number" name="product_price" id="product_price" class="form-control" placeholder="價格" min="0">
+                                            <label for="product_price" class="text-muted">
+                                                <i class="fa-solid fa-dollar-sign me-1"></i>價格 (NT$)
+                                            </label>
+                                            <div class="invalid-feedback">必填欄位，且金額不能為 0</div>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <div class="form-floating">
+                                            <select name="product_category" id="product_category" class="form-select">
+                                                <option value="" disabled selected>請選擇類別</option>
+                                                <option value="零食">零食</option>
+                                                <option value="乳製品">乳製品</option>
+                                                <option value="飲料">飲料</option>
+                                            </select>
+                                            <label for="product_category" class="text-muted">
+                                                <i class="fa-solid fa-folder-open me-1"></i>產品類別
+                                            </label>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <!-- 數量 (Range 滑桿) -->
+                                <div class="mb-4 p-3 rounded-3 border bg-light">
+                                    <div class="d-flex justify-content-between align-items-center mb-2">
+                                        <label for="product_num" class="form-label mb-0 fw-semibold text-secondary">
+                                            <i class="fa-solid fa-cubes me-1"></i>初始庫存數量
+                                        </label>
+                                        <div>
+                                            <span class="h3 fw-bold text-teal" id="product_num_val" style="color: #0d9488;">50</span>
+                                            <span class="text-muted small">個</span>
+                                        </div>
+                                    </div>
+                                    <input type="range" class="form-range" id="product_num" name="product_num" min="1" max="100" step="1" value="50">
+                                </div>
+
+                                <!-- 備註 -->
+                                <div class="form-floating mb-3">
+                                    <textarea
+                                        name="product_remark"
+                                        id="product_remark" 
+                                        class="form-control"
+                                        placeholder="產品說明及注意事項，上限200字"
+                                        style="height: 120px">
+                                    </textarea>
+                                    <label for="product_remark" class="text-muted">
+                                        <i class="fa-solid fa-note-sticky me-1"></i>備註說明（上限 200 字）
+                                    </label>
+                                </div>
+                            </form>
+                        </div>
+
+                        <!-- 卡片底部按鈕區 -->
+                        <div class="card-footer border-0 px-4 py-3 text-end bg-light">
+                            <button type="button" class="btn btn-erp-outline px-4 me-2 rounded-pill" id="cancel">取消返回</button>
+                            <button type="button" form="productForm" class="btn btn-erp-primary px-4 fw-bold rounded-pill shadow-sm" id="confirm">確認建檔</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </main>
+    </div>
+
+    <!-- 確認 Modal -->
+    <div class="modal fade" tabindex="-1" id="confirmForm">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content border-0 shadow-lg rounded-4 overflow-hidden" style="background-color: #fff;">
+                <div class="modal-header text-white px-4 py-3" style="background-color: #1e293b;">
+                    <h5 class="modal-title fw-bold"><i class="fa-solid fa-circle-check me-2 text-teal" style="color: #0d9488;"></i>產品建檔確認</h5>
+                    <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body p-4" style="background-color: #f8fafc;">
+                    <div class="list-group shadow-sm rounded-3 border overflow-hidden">
+                        <div class="list-group-item d-flex justify-content-between align-items-center py-3 border-0 border-bottom">
+                            <span class="text-muted fw-semibold">產品名稱</span>
+                            <span id="display_name" class="fw-bold text-dark"></span>
+                        </div>
+                        <div class="list-group-item d-flex justify-content-between align-items-center py-3 border-0 border-bottom">
+                            <span class="text-muted fw-semibold">產品價格</span>
+                            <span id="display_price" class="fw-bold text-teal" style="color: #0d9488;"></span>
+                        </div>
+                        <div class="list-group-item d-flex justify-content-between align-items-center py-3 border-0 border-bottom">
+                            <span class="text-muted fw-semibold">產品數量</span>
+                            <span id="display_num" class="fw-bold text-dark"></span>
+                        </div>
+                        <div class="list-group-item d-flex justify-content-between align-items-center py-3 border-0 border-bottom">
+                            <span class="text-muted fw-semibold">產品類別</span>
+                            <span id="display_category" class="badge rounded-pill px-3 py-2" style="background-color: #0d9488; color: #fff;"></span>
+                        </div>
+                        <div class="list-group-item py-3 border-0">
+                            <span class="text-muted fw-semibold d-block mb-1">產品備註</span>
+                            <span id="display_remark" class="text-secondary small d-block bg-white p-2 rounded border"></span>
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer border-0 px-4 py-3 bg-light">
+                    <button type="button" class="btn btn-erp-outline rounded-pill px-4" data-bs-dismiss="modal" id="close">返回修改</button>
+                    <button type="submit" class="btn btn-erp-primary rounded-pill px-4 fw-bold shadow-sm" id="add">確認送出</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Scripts -->
+    <script src="js/bootstrap.min.js"></script>
+    <script src="js/jquery-4.0.0.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
+    <script>
+        $(() => {
+            const confirmModal = new bootstrap.Modal('#confirmForm');
+
+            $("#product_name").on("change", function () {
+                $(this).removeClass("is-invalid");
+            });
+
+            $("#product_price").on("change", function () {
+                $(this).removeClass("is-invalid");
+            });
+
+            $("#product_num").on("input change", function () {
+                $("#product_num_val").text($(this).val());
+            });
+
+            $("#confirm").on("click", function () {
+                const name = $("#product_name").val().trim();
+                const price = $("#product_price").val();
+                const category = $("#product_category").val();
+                const num = $("#product_num").val();
+                const remark = $("#product_remark").val();
+
+                if (name === "" || name.length < 2 || name.length > 10) {
+                    $("#product_name").addClass("is-invalid").focus();
+                    return;
+                }
+
+                if (price === "" || price <= 0) {
+                    $("#product_price").addClass("is-invalid").focus();
+                    return;
+                }
+
+                // 將資料填入 Modal 預覽區
+                $("#display_name").text(name);
+                $("#display_price").text(price ? price + " 元" : "未填");
+                $("#display_num").text(num + " 個");
+                $("#display_category").text(category ? category : "未選擇");
+                $("#display_remark").text(remark ? remark : "無");
+
+                confirmModal.show();
+            });
+
+            // Form submit
+            $("#add").on("click", function () {
+                const name = $("#product_name").val();
+                const price = $("#product_price").val();
+                const category = $("#product_category").val();
+                const num = $("#product_num").val();
+                const remark = $("#product_remark").val();
+
+                const parms = {
+                    "name": name,
+                    "price": price,
+                    "category": category,
+                    "num": num,
+                    "remark": remark
+                }
+
+                $.ajax({
+                    url: 'http://localhost:3000/product',
+                    type: "POST",
+                    dataType: "JSON",
+                    data: JSON.stringify(parms),
+                    contentType: "application/json",
+                    success: () => {
+                        confirmModal.hide();
+                        clear();
+
+                        Swal.fire({
+                            title: "新增成功",
+                            icon: "success",
+                            showConfirmButton: false,
+                            timer: 1500
+                        });
+                    },
+                    error: () => {
+                        Swal.fire({
+                            title: "新增產品資料失敗",
+                            text: "請檢查資料格式或連線是否正常",
+                            icon: "error",
+                            confirmButtonColor: "#0d9488"
+                        });
+                    }
+                })
+            });
+
+            function clear() {
+                $("#productForm").get(0).reset();
+                $("#product_num_val").text("50");
+                $("#product_num").val(50);
+                $("#productForm").find(".is-invalid").removeClass("is-invalid");
+            }
+        });
+    </script>
+</body>
+
+</html>
