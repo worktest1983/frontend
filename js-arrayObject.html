@@ -1,0 +1,225 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>JavaScript 重點整理</title>
+</head>
+
+<body>
+    <div id="showData">Look at console log</div>
+
+    <script src="js/jquery-4.0.0.js"></script>
+    <script src="js/travelFood.js"></script>
+
+    <script>
+        $(() => {
+            // map()
+            const shops = [
+                {
+                    "id": 1,
+                    "name": "阿婆滷肉飯",
+                    "address": "台北市大安區和平東路二段100號",
+                    "city": "台北市",
+                    "tel": "null"
+                },
+                {
+                    "id": 2,
+                    "name": "老街蚵仔煎",
+                    "address": "台南市中西區國華街三段50號    ",
+                    "city": "台南市",
+                    "tel": "06-222-8888"
+                },
+                {
+                    "id": 3,
+                    "name": "香噴噴牛肉麵",
+                    "address": "台中市西區公益路120號",
+                    "city": "台中市",
+                    "tel": ""
+                },
+                {
+                    "id": 4,
+                    "name": "福記大腸包小腸",
+                    "address": "高雄市左營區自由二路200號",
+                    "city": "高雄市 ",
+                    "tel": "07-5566-7788"
+                },
+                {
+                    "id": 5,
+                    "name": "泉記手工肉圓",
+                    "address": "彰化市中山路二段150號",
+                    "city": "彰化市",
+                    "tel": "04-722-1122"
+                },
+                {
+                    "id": 6,
+                    "name": "阿婆滷肉飯-分店",
+                    "address": "",
+                    "city": "台北市 ",
+                    "tel": "null"
+                },
+                {
+                    "id": 7,
+                    "name": "東港旗魚黑輪",
+                    "address": "屏東縣東港鎮光復路一段123號",
+                    "city": "屏東縣",
+                    "tel": "08-832-1234"
+                },
+                {
+                    "id": 8,
+                    "name": "兰阳美味西鲁肉",
+                    "address": "宜蘭縣羅東鎮民生路88號",
+                    "city": "宜蘭縣",
+                    "tel": ""
+                }
+            ]
+
+            const names = shops.map((item) => {
+                return item.name;
+            })
+
+            const simpleData = shops.map((item) => {
+                return {
+                    title: item.name,
+                    location: item.city
+                }
+            })
+
+
+
+            /*【Open Data 練習】 用travelfood.js map()並產生新的結構 */
+            const newTravelFood = food.map((items, index) => {
+                return {
+                    "id": index + 1,
+                    "name": items.Name,
+                    "city": items.City,
+                    "img": items.PicURL
+                }
+            })
+
+            //【Open Data 練習】-- end
+
+
+            /* 清洗資料，拒絕 null / undefined / 字串前後空白 */
+            const cleanShops = shops.map((item) => {
+                return {
+                    name: (item.name ?? "未提供").trim(),
+                    address: (item.address ?? "未提供").trim(),
+                    city: (item.city ?? "未提供").trim(),
+                    tel: (item.tel ?? "未提供").trim(),
+                }
+            })
+
+            // cleanShops.forEach((item) => {
+            //     console.log(item.tel.length);
+            // })
+
+            console.log("原本的資料", shops);
+            console.log("清洗後的資料", cleanShops);
+
+
+            /* 自建函式 */
+            function clean(data) {
+                return data.map((item) => {
+                    return {
+                        name: (item.name ?? "未提供").trim(),
+                        address: (item.address ?? "未提供").trim(),
+                        city: (item.city ?? "未提供").trim(),
+                        tel: (item.tel ?? "未提供").trim(),
+                    }
+                });
+            }
+
+            console.log("使用自訂function", clean(shops));
+
+            const shops_filter = shops.filter((item) => {
+                return item.city === "台北市"
+            })
+
+            console.log("搜尋結果 (原始資料)", shops_filter);
+
+            const shops_filter_cleanData = clean(shops).filter((item) => {
+                return item.name.includes("滷肉飯") && item.city === "台北市"
+            })
+
+            console.log("搜尋結果 (清洗後的資料)", shops_filter_cleanData);
+
+
+
+            /*【Open Data 練習】 
+                1.清洗資料(副程式)
+                2.篩選出新北市有介紹(FoodFeature)"美食"的店家
+            */
+
+            function cleanFood(data) {
+                return data.map((items) => {
+                    return {
+                        name: (items.Name ?? '未提供').trim(),
+                        city: (items.City ?? '未提供').trim(),
+                        address: (items.Address ?? '未提供').trim(),
+                        tel: (items.Tel ?? '未提供').trim(),
+                        remark: (items.FoodFeature ?? '未提供').trim()
+                    }
+                })
+            }
+
+            const food_filter = cleanFood(food).filter((item) => {
+                return item.remark.includes("美食") && item.city == "臺南市"
+            })
+
+            console.log("臺南市有介紹\"美食\"的店家", food_filter);
+
+            //【Open Data 練習】-- end
+
+
+            /* 分頁 (將分頁思考邏輯轉換成演算法再寫成程式) */
+
+            const pageSize = 5;   // 每頁顯示幾筆
+            const page = 1;       // 目前在哪一頁
+
+            const start = (page - 1) * pageSize;
+            const end = start + pageSize;
+            const pageData = shops.slice(start, end)
+
+            console.log("原始資料：", shops);
+            console.log("分頁資料：", pageData);
+
+
+            /*【Open Data 練習】使用travelFood資料練習分頁的邏輯
+                清洗 > 篩選 > 分頁
+            */
+
+            function cleanFood(data) {
+                return data.map((items) => {
+                    return {
+                        name: (items.Name ?? '未提供').trim(),
+                        city: (items.City ?? '未提供').trim(),
+                        address: (items.Address ?? '未提供').trim(),
+                        tel: (items.Tel ?? '未提供').trim(),
+                        remark: (items.FoodFeature ?? '未提供').trim()
+                    }
+                })
+            }
+
+            const foodFilterCity = cleanFood(food).filter((item) => {
+                return item.city == "臺南市"
+            })
+
+            const food_pageSize = Math.ceil(foodFilterCity.length / 5);
+            const food_page = 1;
+
+            const food_page_start = (food_pageSize - 1) * food_pageSize;
+            const fodd_page_end = food_page_start + 1;
+            
+            const food_page_data = foodFilterCity.slice(start, end);
+
+            //【Open Data 練習】-- end
+            console.log("位於臺南市的資料：", foodFilterCity);
+            console.log("位於臺南市的分頁資料：", food_page_data);
+
+        })
+    </script>
+</body>
+
+</html>
