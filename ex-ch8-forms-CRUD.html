@@ -33,14 +33,16 @@
         }
 
         /* 輸入框與選擇器莫蘭迪化 */
-        .form-control, .form-select {
+        .form-control,
+        .form-select {
             border-color: var(--morandi-border);
             background-color: #faf9f6;
             color: var(--morandi-text);
             border-radius: 0.5rem;
         }
 
-        .form-control:focus, .form-select:focus {
+        .form-control:focus,
+        .form-select:focus {
             border-color: var(--morandi-primary);
             box-shadow: 0 0 0 0.25rem rgba(120, 133, 122, 0.15);
             background-color: #fff;
@@ -94,9 +96,10 @@
                         <form id="productForm" novalidate>
                             <!-- 產品名稱 -->
                             <div class="form-floating mb-4">
-                                <input type="text" name="product_name" id="product_name" class="form-control"
-                                    placeholder="產品名稱">
-                                <label for="product_name" class="text-muted"><i class="fa-solid fa-tag me-1"></i>產品名稱</label>
+                                <input type="text" name="product_name" id="product_name" class="form-control" placeholder="產品名稱">
+                                <label for="product_name" class="text-muted">
+                                    <i class="fa-solid fa-tag me-1"></i>產品名稱
+                                </label>
                                 <div class="invalid-feedback">必填欄位，且名稱字數限制 2 ~ 10 字內</div>
                             </div>
 
@@ -104,9 +107,10 @@
                             <div class="row g-3 mb-4">
                                 <div class="col-md-6">
                                     <div class="form-floating">
-                                        <input type="number" name="product_price" id="product_price"
-                                            class="form-control" placeholder="價格" min="0">
-                                        <label for="product_price" class="text-muted"><i class="fa-solid fa-dollar-sign me-1"></i>價格</label>
+                                        <input type="number" name="product_price" id="product_price" class="form-control" placeholder="價格" min="0">
+                                        <label for="product_price" class="text-muted">
+                                            <i class="fa-solid fa-dollar-sign me-1"></i>價格
+                                        </label>
                                         <div class="invalid-feedback">必填欄位，且金額不能為 0</div>
                                     </div>
                                 </div>
@@ -118,13 +122,16 @@
                                             <option value="乳製品">乳製品</option>
                                             <option value="飲料">飲料</option>
                                         </select>
-                                        <label for="product_category" class="text-muted"><i class="fa-solid fa-folder-open me-1"></i>產品類別</label>
+                                        <label for="product_category" class="text-muted">
+                                            <i class="fa-solid fa-folder-open me-1"></i>產品類別
+                                        </label>
                                     </div>
                                 </div>
                             </div>
 
                             <!-- 數量 (Range 滑桿) -->
-                            <div class="mb-4 p-3 rounded-4 border" style="background-color: #faf9f6; border-color: #ebe7de !important;">
+                            <div class="mb-4 p-3 rounded-4 border"
+                                style="background-color: #faf9f6; border-color: #ebe7de !important;">
                                 <div class="d-flex justify-content-between align-items-center mb-2">
                                     <label for="product_num" class="form-label mb-0 fw-semibold text-secondary">
                                         <i class="fa-solid fa-cubes me-1"></i>數量
@@ -134,23 +141,28 @@
                                         <span class="text-muted small">個</span>
                                     </div>
                                 </div>
-                                <input type="range" class="form-range" id="product_num" name="product_num" min="1"
-                                    max="100" step="1" value="50">
+                                <input type="range" class="form-range" id="product_num" name="product_num" min="1" max="100" step="1" value="50">
                             </div>
 
                             <!-- 備註 -->
                             <div class="form-floating mb-3">
-                                <textarea name="product_remark" id="product_remark" class="form-control"
-                                    placeholder="產品說明及注意事項，上限200字" style="height: 120px"></textarea>
-                                <label for="product_remark" class="text-muted"><i class="fa-solid fa-note-sticky me-1"></i>備註（上限 200 字）</label>
+                                <textarea
+                                    name="product_remark"
+                                    id="product_remark" 
+                                    class="form-control"
+                                    placeholder="產品說明及注意事項，上限200字"
+                                    style="height: 120px">
+                                </textarea>
+                                <label for="product_remark" class="text-muted">
+                                    <i class="fa-solid fa-note-sticky me-1"></i>備註（上限 200 字）
+                                </label>
                             </div>
                         </form>
                     </div>
 
                     <div class="card-footer border-0 px-4 py-3 text-end" style="background-color: #faf9f6;">
                         <button type="button" class="btn btn-morandi-outline px-4 me-2 rounded-pill" id="cancel">取消</button>
-                        <button type="button" form="productForm" class="btn btn-morandi-primary px-4 fw-bold rounded-pill shadow-sm"
-                            id="confirm">確認建檔</button>
+                        <button type="button" form="productForm" class="btn btn-morandi-primary px-4 fw-bold rounded-pill shadow-sm" id="confirm">確認建檔</button>
                     </div>
                 </div>
             </div>
@@ -167,25 +179,31 @@
                 </div>
                 <div class="modal-body p-4" style="background-color: #f7f6f2;">
                     <div class="list-group shadow-sm rounded-4 border-0 overflow-hidden">
-                        <div class="list-group-item d-flex justify-content-between align-items-center py-3 border-0 border-bottom">
+                        <div
+                            class="list-group-item d-flex justify-content-between align-items-center py-3 border-0 border-bottom">
                             <span class="text-muted fw-semibold">產品名稱</span>
                             <span id="display_name" class="fw-bold text-dark"></span>
                         </div>
-                        <div class="list-group-item d-flex justify-content-between align-items-center py-3 border-0 border-bottom">
+                        <div
+                            class="list-group-item d-flex justify-content-between align-items-center py-3 border-0 border-bottom">
                             <span class="text-muted fw-semibold">產品價格</span>
                             <span id="display_price" class="fw-bold" style="color: #5c685f;"></span>
                         </div>
-                        <div class="list-group-item d-flex justify-content-between align-items-center py-3 border-0 border-bottom">
+                        <div
+                            class="list-group-item d-flex justify-content-between align-items-center py-3 border-0 border-bottom">
                             <span class="text-muted fw-semibold">產品數量</span>
                             <span id="display_num" class="fw-bold text-dark"></span>
                         </div>
-                        <div class="list-group-item d-flex justify-content-between align-items-center py-3 border-0 border-bottom">
+                        <div
+                            class="list-group-item d-flex justify-content-between align-items-center py-3 border-0 border-bottom">
                             <span class="text-muted fw-semibold">產品類別</span>
-                            <span id="display_category" class="badge rounded-pill px-3 py-2" style="background-color: #a3ad9e; color: #fff;"></span>
+                            <span id="display_category" class="badge rounded-pill px-3 py-2"
+                                style="background-color: #a3ad9e; color: #fff;"></span>
                         </div>
                         <div class="list-group-item py-3 border-0">
                             <span class="text-muted fw-semibold d-block mb-1">產品備註</span>
-                            <span id="display_remark" class="text-secondary small d-block bg-white p-2 rounded border border-light"></span>
+                            <span id="display_remark"
+                                class="text-secondary small d-block bg-white p-2 rounded border border-light"></span>
                         </div>
                     </div>
                 </div>
@@ -274,7 +292,8 @@
                         Swal.fire({
                             title: "新增成功",
                             icon: "success",
-                            confirmButtonColor: "#78857a"
+                            showConfirmButton: false,
+                            timer: 1500
                         });
                     },
                     error: () => {
