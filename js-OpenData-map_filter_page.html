@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>OPEN DATA - 旅館民宿 練習</title>
+    <link rel="stylesheet" href="css/bootstrap.min.css">
+    <link rel="stylesheet" href="css/style.css">
+    <!-- Font Awsome -->
+    <link rel="stylesheet" href="css/all.min.css">
+</head>
+<body>
+    <!-- 【OPEN DATA - 旅館民宿 練習】
+        1. 資料轉換 map()，取出所需要的欄位
+        2. 資料清洗 null、undefined、多餘空白
+        3. 過濾，臺中市房價低於3800的旅館
+        4. 分頁，每頁20筆，可指定頁碼
+    -->
+
+    <div class="cotainer">
+        <div class="row p-5">
+            <table class="table table-striped" id="hotelList">
+                <thead>
+                    <tr>
+                        <th>縣市</th>
+                        <th>飯店名稱</th>
+                        <th>連絡電話</th>
+                        <th>價格</th>
+                    </tr>
+                </thead>
+            </table>
+        </div>
+    </div>
+    
+    <script src="js/bootstrap.min.js"></script>
+    <script src="js/jquery-4.0.0.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
+    <script>
+        $(() => {
+            $.ajax({
+                type: "GET",
+                url: "../json/HotelList.json",
+                dataType: "JSON",
+                success: dataList,
+                error: function () {
+                    Swal.fire({
+                        title: "連線失敗",
+                        text: "請檢查連線是否正常",
+                        icon: "error",
+                        confirmButtonColor: "#0d9488"
+                    });
+                }
+            })
+
+            function dataList(data) {
+                // console.log('data: ', data);
+
+                const hotel_list = normalizeData(data.Hotels);
+
+                const hotel_filter = hotel_list.filter(items => {
+                    return items.city === '臺中市' && items.discountPrice < 3800
+                })
+
+                const pageSize = 10;
+                const page = 1;
+                const pageResult = pagnation(hotel_filter, pageSize, page);
+
+                // console.log('過濾結果: ', hotel_filter);
+                // console.log("分頁: ", pageResult);
+
+                let html = '';
+
+                pageResult.forEach((items, index) => {
+                    return html += `<tr>
+                        <td>${items.city}</td>
+                        <td>${items.name}</td>
+                        <td>${items.tel}</td>
+                        <td>$${items.discountPrice}</td>
+                    </tr>`
+                });
+
+                const showPage =  `<div class="p-0 py-3 my-3">第${page}頁, 每頁顯示${pageSize}筆</div>`
+
+                $("#hotelList").append(`<tbody>${html}</tbody>`);
+                $("#hotelList").after(showPage);
+            }
+
+            // Format
+            function normalizeData(data) {
+                return data.map(items => {
+                    return {
+                        name: (items.HotelName ?? '').trim(),
+                        city: (items.PostalAddress.City ?? '').trim(),
+                        tel: (items.Telephones[0].Tel ?? '').trim(),
+                        orginalPrice: items.CeilingPrice ?? '',
+                        discountPrice: items.LowestPrice ?? '',
+                        des: (items.Description ?? '').trim(),
+                    }
+                })
+            }
+
+            // Page
+            function pagnation(data, pageSize, page) {
+                const start = (page - 1) * pageSize
+                const end = start + pageSize
+
+                return data.slice(start, end)
+            }
+
+
+        })
+    </script>
+</body>
+
+</html>

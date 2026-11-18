@@ -88,7 +88,8 @@
 
 
 
-            /*【Open Data 練習】 用travelfood.js map()並產生新的結構 */
+            /*【Open Data 練習】
+                用 travelfood.js map()並產生新的結構 */
             const newTravelFood = food.map((items, index) => {
                 return {
                     "id": index + 1,
@@ -96,8 +97,7 @@
                     "city": items.City,
                     "img": items.PicURL
                 }
-            })
-
+            }) 
             //【Open Data 練習】-- end
 
 
@@ -152,9 +152,10 @@
                 2.篩選出新北市有介紹(FoodFeature)"美食"的店家
             */
 
-            function cleanFood(data) {
-                return data.map((items) => {
+            function normalizeFood(data) {
+                return data.map((items, index) => {
                     return {
+                        id: index,
                         name: (items.Name ?? '未提供').trim(),
                         city: (items.City ?? '未提供').trim(),
                         address: (items.Address ?? '未提供').trim(),
@@ -164,8 +165,8 @@
                 })
             }
 
-            const food_filter = cleanFood(food).filter((item) => {
-                return item.remark.includes("美食") && item.city == "臺南市"
+            const food_filter = normalizeFood(food).filter((item) => {
+                return item.city == "臺南市" && item.remark.includes("美食")
             })
 
             console.log("臺南市有介紹\"美食\"的店家", food_filter);
@@ -186,37 +187,43 @@
             console.log("分頁資料：", pageData);
 
 
-            /*【Open Data 練習】使用travelFood資料練習分頁的邏輯
+            /*【Open Data 練習】
+                使用travelFood資料練習分頁的邏輯
                 清洗 > 篩選 > 分頁
             */
 
-            function cleanFood(data) {
-                return data.map((items) => {
-                    return {
-                        name: (items.Name ?? '未提供').trim(),
-                        city: (items.City ?? '未提供').trim(),
-                        address: (items.Address ?? '未提供').trim(),
-                        tel: (items.Tel ?? '未提供').trim(),
-                        remark: (items.FoodFeature ?? '未提供').trim()
-                    }
-                })
-            }
-
-            const foodFilterCity = cleanFood(food).filter((item) => {
-                return item.city == "臺南市"
+            const foodFilterCity = normalizeFood(food).filter((item) => {
+                return item.city == "臺中市"
             })
+
+            console.log("travelfood 篩選後的資料：", foodFilterCity);
+            console.log("travelfood 符合條件的總筆數: ", foodFilterCity.length);
 
             const food_pageSize = Math.ceil(foodFilterCity.length / 5);
             const food_page = 1;
 
             const food_page_start = (food_pageSize - 1) * food_pageSize;
-            const fodd_page_end = food_page_start + 1;
+            const fodd_page_end = food_page_start + food_pageSize;
             
-            const food_page_data = foodFilterCity.slice(start, end);
+            const food_pageData = foodFilterCity.slice(start, end);
+
+            console.log("travelfood 位於臺中市的分頁資料：", food_pageData);
 
             //【Open Data 練習】-- end
-            console.log("位於臺南市的資料：", foodFilterCity);
-            console.log("位於臺南市的分頁資料：", food_page_data);
+
+
+
+            // 分頁(funciton)
+            function pagination(data, pageSize, page) {
+                const start = (page - 1) * pageSize;
+                const end = start + pageSize;
+                
+                return data.slice(start, end)
+            }
+
+            // const foodPage = pagination(foodFilterCity, 5, 3)
+            // console.log(foodPage);
+            
 
         })
     </script>

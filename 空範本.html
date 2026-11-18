@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="zh-TW">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -9,14 +10,24 @@
     <!-- Font Awsome -->
     <link rel="stylesheet" href="css/all.min.css">
 </head>
+
 <body>
-    
+
     <script src="js/bootstrap.min.js"></script>
     <script src="js/jquery-4.0.0.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 
     <script>
         $(() => {
+
+            Swal.fire({
+                title: "新增產品資料失敗",
+                text: "請檢查資料格式或連線是否正常",
+                icon: "error",
+                confirmButtonColor: "#0d9488"
+            });
         })
     </script>
 </body>
+
 </html>
