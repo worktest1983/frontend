@@ -16,6 +16,8 @@
         2. 資料清洗 null、undefined、多餘空白
         3. 過濾，臺中市房價低於3800的旅館
         4. 分頁，每頁20筆，可指定頁碼
+        5. 延伸 - 找出最低房價介於 2000~4000元的旅宿
+        6. 延伸 - 排除沒有電話、沒有房價的旅宿
     -->
 
     <div class="cotainer">
@@ -60,7 +62,8 @@
                 const hotel_list = normalizeData(data.Hotels);
 
                 const hotel_filter = hotel_list.filter(items => {
-                    return items.city === '臺中市' && items.discountPrice < 3800
+                    return items.city === '臺中市' && items.discountPrice < 3800 
+                    // return items.city === '臺中市' && items.discountPrice > 2000 && items.discountPrice < 4000 && !items.tel && !!items.discountPrice
                 })
 
                 const pageSize = 10;
