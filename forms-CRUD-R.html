@@ -133,12 +133,12 @@
 						<table class="table table-bordered table-hover table-sm table-rwd" id="product_list">
 							<thead class="text-white" style="background-color: #78857a;">
 								<tr class="text-center">
-									<th width="20%">產品名稱</th>
-									<th width="10%">產品價格</th>
-									<th width="10%">產品數量</th>
-									<th width="20%">產品分類</th>
-									<th width="20%">產品備註</th>
-									<th width="30%">操作</th>
+									<th width="20%" class="py-2">產品名稱</th>
+									<th width="10%" class="py-2">產品價格</th>
+									<th width="10%" class="py-2">產品數量</th>
+									<th width="10%" class="py-2">產品分類</th>
+									<th width="30%" class="py-2">產品備註</th>
+									<th width="30%" class="py-2">操作</th>
 								</tr>
 							</thead>
 							<tbody></tbody>
@@ -190,7 +190,8 @@
 
 								<div class="col-md-6">
 									<div class="form-floating">
-										<select name="product_category" id="product_category" class="form-select" disabled>
+										<select name="product_category" id="product_category" class="form-select"
+											disabled>
 											<option value="" disabled selected>請選擇類別</option>
 											<option value="零食">零食</option>
 											<option value="乳製品">乳製品</option>
@@ -253,19 +254,7 @@
 
 			$(() => {
 
-				$.ajax({
-					type: "GET",
-					url: 'http://localhost:3000/product',
-					dataType: "JSON",
-					success: showData,
-					error: () => {
-						Swal.fire({
-							title: "讀取失敗",
-							text: "無法連接後端API",
-							icon: "error",
-						});
-					}
-				})
+				getData();
 
 				// Page
 				$("#pageList").on("click", ".page-link", function () {
@@ -273,7 +262,7 @@
 					showData(productData);
 				})
 
-				// Update
+				// Update ----------------------
 				$("#product_list tbody").on("click", ".btn-update", function () {
 					const id = $(this).data("id");
 					pid = $(this).data("id");
@@ -292,8 +281,144 @@
 						}
 					})
 				})
+
+				// 滑桿
+				$("#product_num").on("input change", function () {
+					$("#product_num_val").text($(this).val());
+				});
+
+				// 欄位驗證
+				$("#product_price").on("change", function () {
+					const price = Number($(this).val());
+
+					if (price >= 1 && price <= 100) {
+						$(this).removeClass("is-invalid");
+					} else {
+						$(this).addClass("is-invalid");
+					}
+				});
+
+
+				// Update to Server
+				$("#update").on("click", function () {
+					const price = Number($("#product_price").val());
+					const num = Number($("#product_num").val());
+
+					const parms = {
+						price: price,
+						num: num
+					}
+
+					$.ajax({
+						type: 'PATCH',
+						url: 'http://localhost:3000/product/' + pid,
+						dataType: 'JSON',
+						data: JSON.stringify(parms),
+						contentType: "application/json",
+						success: () => {
+							// 關閉modal
+							bootstrap.Modal.getInstance(document.getElementById("edit")).hide();
+
+							Swal.fire({
+								title: "更新成功",
+								icon: "success",
+								showConfirmButton: false,
+								timer: 1500
+							}).then((result) => {
+								// window.location.reload();
+								getData();
+							});
+						},
+						error: () => {
+							Swal.fire({
+								title: "更新產品資料失敗",
+								text: "請檢查資料格式或連線是否正常",
+								icon: "error",
+								confirmButtonColor: "#78857a"
+							});
+						}
+					})
+				})
+
+
+				// Delete -----------------------------
+				$("#product_list").on("click", ".btn-del", function () {
+					const id = $(this).data("id");
+
+					Swal.fire({
+						title: "確認刪除?",
+						showDenyButton: true,
+						showCancelButton: false,
+						confirmButtonText: "確認",
+						denyButtonText: `取消`
+					}).then((result) => {
+						if (result.isConfirmed) {
+							$.ajax({
+								url: "http://localhost:3000/product/" + id,
+								type: "DELETE",
+								success: () => {
+									Swal.fire({
+										title: "刪除成功",
+										icon: "success",
+										showConfirmButton: false,
+										timer: 1500
+									}).then((result) => {
+										$.ajax({
+											type: "GET",
+											url: 'http://localhost:3000/product',
+											dataType: "JSON",
+											success: (data) => {
+												// 避免刪除後頁碼錯誤
+												const totalPage = Math.ceil(data.length / pageSize);
+
+												if (page > totalPage) {
+													page = Math.max(1, totalPage);
+												}
+
+												showData(data);
+											},
+											error: () => {
+												Swal.fire({
+													title: "讀取失敗",
+													text: "無法連接後端API",
+													icon: "error",
+												});
+											}
+										})
+									});
+								},
+								error: () => {
+									Swal.fire({
+										title: "刪除失敗",
+										text: "請檢查連線是否正常",
+										icon: "error",
+									});
+								}
+							})
+						} else if (result.isDenied) return;
+					});
+				});
 			});
 
+
+			// 取得資料
+			function getData() {
+				$.ajax({
+					type: "GET",
+					url: 'http://localhost:3000/product',
+					dataType: "JSON",
+					success: showData,
+					error: () => {
+						Swal.fire({
+							title: "讀取失敗",
+							text: "無法連接後端API",
+							icon: "error",
+						});
+					}
+				})
+			}
+
+			// 產品列表
 			function showData(data) {
 
 				productData = data;
@@ -312,7 +437,7 @@
 								<td data-th="產品名稱">${items.name}</td>
 								<td data-th="產品價格" class="text-end">${items.price}</td>
 								<td data-th="產品數量" class="text-center">${items.num}</td>
-								<td data-th="產品分類">${items.category}</td>
+								<td data-th="產品分類" class="text-center">${items.category}</td>
 								<td data-th="產品備註">${items.remark}</td>
 								<td data-th="功能操作" class="text-center">
 									<button class="btn btn-warning btn-update" data-bs-toggle="modal" data-bs-target="#edit" data-id=${items.id}>編輯</button>
@@ -364,91 +489,6 @@
 				const end = start + pageSize
 				return data.slice(start, end)
 			}
-
-
-			// 滑桿
-			$("#product_num").on("input change", function () {
-				$("#product_num_val").text($(this).val());
-			});
-
-			// 欄位驗證
-            $("#product_price").on("change", function () {
-				const price = Number($(this).val());
-
-				if (price >= 1 && price <= 100) {
-					$(this).removeClass("is-invalid");
-				} else {
-                	$(this).addClass("is-invalid");
-				}
-            });
-
-
-			// Update 
-			$("#update").on("click", function () {
-				console.log(pid);
-				const price = Number($("#product_price").val());
-				const num = Number($("#product_num").val());
-
-				const parms = {
-					price: price,
-					num: num
-				}
-
-				$.ajax({
-					type: 'PATCH',
-					url: 'http://localhost:3000/product/' + pid,
-					dataType: 'JSON',
-					data: JSON.stringify(parms),
-					contentType: "application/json",
-					success: () => {
-                        Swal.fire({
-                            title: "更新成功",
-                            icon: "success",
-                            showConfirmButton: false,
-                            timer: 1500
-                        }).then((result) => {
-							window.location.reload();
-						});
-					},
-                    error: () => {
-                        Swal.fire({
-                            title: "更新產品資料失敗",
-                            text: "請檢查資料格式或連線是否正常",
-                            icon: "error",
-                            confirmButtonColor: "#78857a"
-                        });
-                    }
-				})
-			})
-
-
-			// Delete
-			$("#product_list").on("click", ".btn-del", function () {
-				const id = $(this).data("id");
-
-				$.ajax({
-					url: "http://localhost:3000/product/" + id,
-					type: "DELETE",
-					success: () => {
-                        Swal.fire({
-                            title: "已刪除",
-                            icon: "success",
-                            showConfirmButton: false,
-                            timer: 1500
-                        }).then((result) => {
-							window.location.reload();
-						});
-					},
-                    error: () => {
-                        Swal.fire({
-                            title: "刪除產品失敗",
-                            text: "請檢查連線是否正常",
-                            icon: "error",
-                            confirmButtonColor: "#78857a"
-                        });
-                    }
-				})
-			});
 		</script>
 </body>
 
