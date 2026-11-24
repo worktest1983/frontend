@@ -132,66 +132,326 @@
 					<div class="card-body">
 						<table class="table mt-4 table-bordered table-hover table-sm table-rwd" id="product_list">
 							<thead class="table-dark">
-								<tr>
-									<th>產品名稱</th>
-									<th>產品價格</th>
-									<th>產品數量</th>
-									<th>產品分類</th>
-									<th>產品備註</th>
+								<tr class="text-center">
+									<th width="20%">產品名稱</th>
+									<th width="10%">產品價格</th>
+									<th width="10%">產品數量</th>
+									<th width="20%">產品分類</th>
+									<th width="20%">產品備註</th>
+									<th width="30%">操作</th>
 								</tr>
 							</thead>
 							<tbody></tbody>
 						</table>
+
+						<nav aria-label="Page navigation example">
+							<ul class="pagination justify-content-end" id="pageList"></ul>
+						</nav>
 					</div>
 				</div>
 			</div>
 		</div>
 	</div>
 
-	<!-- Scripts -->
-	<script src="js/bootstrap.min.js"></script>
-	<script src="js/jquery-4.0.0.js"></script>
+	<!-- Modal -->
+	<div class="modal fade" id="edit" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
+		aria-labelledby="staticBackdropLabel" aria-hidden="true">
+		<div class="modal-dialog modal-dialog-centered">
+			<div class="modal-content">
+				<div class="modal-header bg-warning">
+					<h1 class="modal-title fs-5" id="staticBackdropLabel">產品編輯</h1>
+					<button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+				</div>
+				<div class="modal-body">
+					<div class="card-body">
+						<form id="productForm" novalidate>
+							<input type="hidden" name="product_id" id="product_id">
+							<!-- 產品名稱 -->
+							<div class="form-floating mb-4">
+								<input type="text" name="product_name" id="product_name" class="form-control"
+									placeholder="產品名稱" value="" disabled readonly>
+								<label for="product_name" class="text-muted">
+									<i class="fa-solid fa-tag me-1"></i>產品名稱
+								</label>
+								<div class="invalid-feedback">必填欄位，且名稱字數限制 2 ~ 10 字內</div>
+							</div>
 
-	<script>
-		$(() => {
+							<!-- 價格與類別 (雙欄排版) -->
+							<div class="row g-3 mb-4">
+								<div class="col-md-6">
+									<div class="form-floating">
+										<input type="number" name="product_price" id="product_price"
+											class="form-control" placeholder="價格" min="0" value="">
+										<label for="product_price" class="text-muted">
+											<i class="fa-solid fa-dollar-sign me-1"></i>價格
+										</label>
+										<div class="invalid-feedback">金額不能為空，且不超過100</div>
+									</div>
+								</div>
 
-			$.ajax({
-				type: "GET",
-				url: 'http://localhost:3000/product',
-				dataType: "JSON",
-				success: showData,
-				error: () => {
-					Swal.fire({
-						title: "讀取失敗",
-						text: "無法連接後端API",
-						icon: "error",
-					});
-				}
-			})
+								<div class="col-md-6">
+									<div class="form-floating">
+										<select name="product_category" id="product_category" class="form-select">
+											<option value="" disabled selected>請選擇類別</option>
+											<option value="零食">零食</option>
+											<option value="乳製品">乳製品</option>
+											<option value="飲料">飲料</option>
+											<option value="日用品">日用品</option>
+										</select>
+										<label for="product_category" class="text-muted">
+											<i class="fa-solid fa-folder-open me-1"></i>產品類別
+										</label>
+									</div>
+								</div>
+							</div>
+
+							<!-- 數量 (Range 滑桿) -->
+							<div class="mb-4 p-3 rounded-4 border"
+								style="background-color: #faf9f6; border-color: #ebe7de !important;">
+								<div class="d-flex justify-content-between align-items-center mb-2">
+									<label for="product_num" class="form-label mb-0 fw-semibold text-secondary">
+										<i class="fa-solid fa-cubes me-1"></i>數量
+									</label>
+									<div>
+										<span class="h3 fw-bold" style="color: #78857a;" id="product_num_val">50</span>
+										<span class="text-muted small">個</span>
+									</div>
+								</div>
+								<input type="range" class="form-range" id="product_num" name="product_num" min="1"
+									max="100" step="1" value="50">
+							</div>
+
+							<!-- 備註 -->
+							<div class="form-floating mb-3">
+								<textarea name="product_remark" id="product_remark" class="form-control"
+									placeholder="產品說明及注意事項，上限200字" style="height: 120px" disabled readonly>
+									...
+                                </textarea>
+								<label for="product_remark" class="text-muted">
+									<i class="fa-solid fa-note-sticky me-1"></i>備註（上限 200 字）
+								</label>
+							</div>
+						</form>
+					</div>
+				</div>
+				<div class="modal-footer">
+					<button type="button" class="btn btn-secondary" data-bs-dismiss="modal">取消</button>
+					<button type="button" class="btn btn-primary" id="update">更新</button>
+				</div>
+			</div>
+		</div>
+
+		<!-- Scripts -->
+		<script src="js/bootstrap.min.js"></script>
+		<script src="js/jquery-4.0.0.js"></script>
+		<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
+		<script>
+			const pageSize = 10;
+			let page = 1;
+			let productData = [];
+
+			$(() => {
+
+				$.ajax({
+					type: "GET",
+					url: 'http://localhost:3000/product',
+					dataType: "JSON",
+					success: showData,
+					error: () => {
+						Swal.fire({
+							title: "讀取失敗",
+							text: "無法連接後端API",
+							icon: "error",
+						});
+					}
+				})
+
+				// Page
+				$("#pageList").on("click", ".page-link", function () {
+					page = Number($(this).data('page'));
+					showData(productData);
+				})
+
+				// Update
+				$("#product_list tbody").on("click", ".btn-update", function () {
+					const id = $(this).data("id");
+					console.log(id);
+
+					$.ajax({
+						type: "GET",
+						url: 'http://localhost:3000/product/' + id,
+						dataType: 'JSON',
+						success: (data) => {
+							$("#product_id").val(id);
+							$("#product_name").val(data.name);
+							$("#product_price").val(data.price);
+							$("#product_num_val").text(data.num);
+							$("#product_num").val(data.num);
+							$("#product_remark").text(data.remark);
+							$("#product_category").val(data.category);
+						}
+					})
+				})
+			});
 
 			function showData(data) {
-				if (data) {
-					console.log(data);
 
+				productData = data;
+
+				const pageData = pagnation(data, pageSize, page);
+
+				$("#product_list tbody").empty();
+				$("#pageList").empty();
+
+				if (data) {
 					let strHtml = '';
 
-					data.forEach(items => {
-						
-						strHtml += 
+					pageData.forEach(items => {
+						strHtml +=
 							`<tr>
 								<td data-th="產品名稱">${items.name}</td>
-								<td data-th="產品價格">${items.price}</td>
-								<td data-th="產品數量">${items.num}</td>
+								<td data-th="產品價格" class="text-end">${items.price}</td>
+								<td data-th="產品數量" class="text-center">${items.num}</td>
 								<td data-th="產品分類">${items.category}</td>
 								<td data-th="產品備註">${items.remark}</td>
+								<td data-th="功能操作" class="text-center">
+									<button class="btn btn-warning btn-update" data-bs-toggle="modal" data-bs-target="#edit" data-id=${items.id}>編輯</button>
+									<button class="btn btn-danger btn-del" data-id=${items.id}>刪除</button>
+								</td>
 							</tr>`
 					});
 
 					$("#product_list tbody").append(strHtml);
+
+
+					// 頁碼
+					let pageHtml = ''
+
+					if (page > 1) {
+						pageHtml += `
+							<li class="page-item">
+								<a class="page-link" href="#" data-page=${page - 1}>
+									<span aria-hidden="true">&laquo;</span>
+								</a>
+							</li>`
+					}
+
+					const totalPage = Math.ceil(data.length / pageSize);
+
+					for (let i = 1; i <= totalPage; i++) {
+						const active = i === page ? 'active' : '';
+						pageHtml += `<li class="page-item ${active}"><a class="page-link" href="#" data-page=${i}>${i}</a></li>`
+
+					}
+
+					if (page < totalPage) {
+						pageHtml += `
+							<li class="page-item">
+								<a class="page-link" href="#" data-page=${page + 1}>
+									<span aria-hidden="true">&raquo;</span>
+								</a>
+							</li>`;
+					}
+
+					$("#pageList").append(pageHtml);
+
 				}
 			}
-		});
-	</script>
+
+			// Page
+			function pagnation(data, pageSize, page) {
+				const start = (page - 1) * pageSize
+				const end = start + pageSize
+				return data.slice(start, end)
+			}
+
+
+			// 滑桿
+			$("#product_num").on("input change", function () {
+				$("#product_num_val").text($(this).val());
+			});
+
+			// 欄位驗證
+            $("#product_price").on("change", function () {
+				const price = Number($(this).val());
+
+				if (price >= 1 && price <= 100) {
+					$(this).removeClass("is-invalid");
+				} else {
+                	$(this).addClass("is-invalid");
+				}
+            });
+
+
+			// Update 
+			$("#update").on("click", function () {
+				const id = $("#product_id").val();
+				const parms = {
+					"name": $("#product_name").val(),
+					"price": $("#product_price").val(),
+					"category": $("#product_category").val(),
+					"num": $("#product_num").val(),
+					"remark": $("#product_remark").text()
+				}
+
+				$.ajax({
+					type: 'PUT',
+					url: 'http://localhost:3000/product/' + id,
+					dataType: 'JSON',
+					data: JSON.stringify(parms),
+					success: () => {
+                        Swal.fire({
+                            title: "更新成功",
+                            icon: "success",
+                            showConfirmButton: false,
+                            timer: 1500
+                        });
+
+						window.location.reload();
+					},
+                    error: () => {
+                        Swal.fire({
+                            title: "更新產品資料失敗",
+                            text: "請檢查資料格式或連線是否正常",
+                            icon: "error",
+                            confirmButtonColor: "#78857a"
+                        });
+                    }
+				})
+			})
+
+
+			// 刪除
+			$("#product_list").on("click", ".btn-del", function () {
+				const id = $(this).data("id");
+
+				$.ajax({
+					url: "http://localhost:3000/product/" + id,
+					type: "DELETE",
+					success: () => {
+                        Swal.fire({
+                            title: "已刪除",
+                            icon: "success",
+                            showConfirmButton: false,
+                            timer: 1500
+                        });
+
+						setTimeout(() => {
+							window.location.reload();
+						}, 1500);
+					},
+                    error: () => {
+                        Swal.fire({
+                            title: "刪除產品失敗",
+                            text: "請檢查連線是否正常",
+                            icon: "error",
+                            confirmButtonColor: "#78857a"
+                        });
+                    }
+				})
+			});
+		</script>
 </body>
 
 </html>
