@@ -130,8 +130,8 @@
 					</div>
 
 					<div class="card-body">
-						<table class="table mt-4 table-bordered table-hover table-sm table-rwd" id="product_list">
-							<thead class="table-dark">
+						<table class="table table-bordered table-hover table-sm table-rwd" id="product_list">
+							<thead class="text-white" style="background-color: #78857a;">
 								<tr class="text-center">
 									<th width="20%">產品名稱</th>
 									<th width="10%">產品價格</th>
@@ -165,7 +165,6 @@
 				<div class="modal-body">
 					<div class="card-body">
 						<form id="productForm" novalidate>
-							<input type="hidden" name="product_id" id="product_id">
 							<!-- 產品名稱 -->
 							<div class="form-floating mb-4">
 								<input type="text" name="product_name" id="product_name" class="form-control"
@@ -191,7 +190,7 @@
 
 								<div class="col-md-6">
 									<div class="form-floating">
-										<select name="product_category" id="product_category" class="form-select">
+										<select name="product_category" id="product_category" class="form-select" disabled>
 											<option value="" disabled selected>請選擇類別</option>
 											<option value="零食">零食</option>
 											<option value="乳製品">乳製品</option>
@@ -250,6 +249,7 @@
 			const pageSize = 10;
 			let page = 1;
 			let productData = [];
+			let pid;
 
 			$(() => {
 
@@ -276,14 +276,13 @@
 				// Update
 				$("#product_list tbody").on("click", ".btn-update", function () {
 					const id = $(this).data("id");
-					console.log(id);
+					pid = $(this).data("id");
 
 					$.ajax({
 						type: "GET",
 						url: 'http://localhost:3000/product/' + id,
 						dataType: 'JSON',
 						success: (data) => {
-							$("#product_id").val(id);
 							$("#product_name").val(data.name);
 							$("#product_price").val(data.price);
 							$("#product_num_val").text(data.num);
@@ -386,29 +385,30 @@
 
 			// Update 
 			$("#update").on("click", function () {
-				const id = $("#product_id").val();
+				console.log(pid);
+				const price = Number($("#product_price").val());
+				const num = Number($("#product_num").val());
+
 				const parms = {
-					"name": $("#product_name").val(),
-					"price": $("#product_price").val(),
-					"category": $("#product_category").val(),
-					"num": $("#product_num").val(),
-					"remark": $("#product_remark").text()
+					price: price,
+					num: num
 				}
 
 				$.ajax({
-					type: 'PUT',
-					url: 'http://localhost:3000/product/' + id,
+					type: 'PATCH',
+					url: 'http://localhost:3000/product/' + pid,
 					dataType: 'JSON',
 					data: JSON.stringify(parms),
+					contentType: "application/json",
 					success: () => {
                         Swal.fire({
                             title: "更新成功",
                             icon: "success",
                             showConfirmButton: false,
                             timer: 1500
-                        });
-
-						window.location.reload();
+                        }).then((result) => {
+							window.location.reload();
+						});
 					},
                     error: () => {
                         Swal.fire({
@@ -422,7 +422,7 @@
 			})
 
 
-			// 刪除
+			// Delete
 			$("#product_list").on("click", ".btn-del", function () {
 				const id = $(this).data("id");
 
@@ -435,11 +435,9 @@
                             icon: "success",
                             showConfirmButton: false,
                             timer: 1500
-                        });
-
-						setTimeout(() => {
+                        }).then((result) => {
 							window.location.reload();
-						}, 1500);
+						});
 					},
                     error: () => {
                         Swal.fire({
