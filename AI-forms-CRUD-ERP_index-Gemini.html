@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>NEXUS ERP | 系統首頁</title>
+  <link rel="stylesheet" href="css/bootstrap.min.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Noto+Sans+TC:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/AI_erp-style.css">
+  <link rel="stylesheet" href="css/AI_erp-home.css">
+</head>
+<body>
+<header>
+  <nav class="navbar navbar-expand-lg erp-navbar sticky-top">
+    <div class="container">
+      <a class="navbar-brand" href="index.html">
+        <span class="brand-logo-box"><i class="fa-solid fa-layer-group"></i></span>
+        <span>NEXUS <span class="fw-normal text-white-50">ERP</span></span>
+      </a>
+      <button class="navbar-toggler border-secondary" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="切換導覽選單">
+        <span class="text-white"><i class="fa-solid fa-bars"></i></span>
+      </button>
+      <div class="collapse navbar-collapse justify-content-end" id="navbarNav">
+        <ul class="navbar-nav mt-2 mt-lg-0">
+          <li class="nav-item"><a class="nav-link active" aria-current="page" href="index.html"><i class="fa-solid fa-house me-1"></i>首頁</a></li>
+          <li class="nav-item"><a class="nav-link" href="AI-forms-CRUD-C-ERP-Gemini-Final.html"><i class="fa-solid fa-file-circle-plus me-1"></i>產品建檔</a></li>
+          <li class="nav-item"><a class="nav-link" href="AI-forms-CRUD-R-ERP-Gemini-Final.html"><i class="fa-solid fa-boxes-stacked me-1"></i>產品列表</a></li>
+        </ul>
+      </div>
+    </div>
+  </nav>
+</header>
+
+<main class="container home-dashboard pb-5">
+  <section class="home-welcome d-flex flex-column flex-lg-row justify-content-between align-items-lg-center gap-3">
+    <div>
+      <div class="welcome-eyebrow"><span class="welcome-dot"></span> WORKSPACE OVERVIEW</div>
+      <h1>早安，歡迎回到 <span>NEXUS ERP</span></h1>
+      <p>在這裡快速掌握產品、庫存與近期營運狀況。</p>
+    </div>
+    <div class="welcome-date"><i class="fa-regular fa-calendar me-2"></i><span id="todayDate">2026 年 11 月 27 日 星期五</span></div>
+  </section>
+
+  <section class="quick-actions" aria-label="快捷操作">
+    <a class="quick-action quick-action-primary" href="AI-forms-CRUD-C-ERP-Gemini-Final.html">
+      <span class="quick-action-icon"><i class="fa-solid fa-plus"></i></span>
+      <span><strong>新增產品</strong><small>建立新的產品資料</small></span>
+      <i class="fa-solid fa-arrow-up-right-from-square quick-arrow"></i>
+    </a>
+    <a class="quick-action" href="AI-forms-CRUD-R-ERP-Gemini-Final.html">
+      <span class="quick-action-icon"><i class="fa-solid fa-list"></i></span>
+      <span><strong>查看產品列表</strong><small>瀏覽及管理商品</small></span>
+      <i class="fa-solid fa-arrow-right quick-arrow"></i>
+    </a>
+    <a class="quick-action" href="AI-forms-CRUD-R-ERP-Gemini-Final.html">
+      <span class="quick-action-icon"><i class="fa-solid fa-boxes-stacked"></i></span>
+      <span><strong>庫存管理</strong><small>查看庫存概況</small></span>
+      <i class="fa-solid fa-arrow-right quick-arrow"></i>
+    </a>
+  </section>
+
+  <section class="dashboard-section">
+    <div class="section-heading">
+      <div><h2>營運概況</h2><p>主要數據摘要 · 今日即時概覽</p></div>
+      <span class="data-status"><span></span> DEMO DATA</span>
+    </div>
+    <div class="row g-3 dashboard-kpis">
+      <div class="col-12 col-sm-6 col-xl-3"><article class="overview-card">
+        <div class="overview-top"><span class="overview-label">產品總數</span><span class="overview-icon icon-blue"><i class="fa-solid fa-box"></i></span></div>
+        <div class="overview-number">128 <small>項</small></div><div class="overview-foot"><span class="trend-up"><i class="fa-solid fa-arrow-up"></i> 8.3%</span><span>較上月</span></div>
+        <div class="mini-bars bars-blue"><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i></div>
+      </article></div>
+      <div class="col-12 col-sm-6 col-xl-3"><article class="overview-card">
+        <div class="overview-top"><span class="overview-label">庫存總量</span><span class="overview-icon icon-emerald"><i class="fa-solid fa-warehouse"></i></span></div>
+        <div class="overview-number">3,642 <small>件</small></div><div class="overview-foot"><span class="trend-up"><i class="fa-solid fa-arrow-up"></i> 4.6%</span><span>較上月</span></div>
+        <div class="mini-bars bars-green"><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i></div>
+      </article></div>
+      <div class="col-12 col-sm-6 col-xl-3"><article class="overview-card">
+        <div class="overview-top"><span class="overview-label">庫存預警</span><span class="overview-icon icon-amber"><i class="fa-solid fa-triangle-exclamation"></i></span></div>
+        <div class="overview-number">06 <small>項</small></div><div class="overview-foot"><span class="trend-warning"><i class="fa-solid fa-circle-exclamation"></i> 需留意</span><span>低庫存產品</span></div>
+        <div class="mini-bars bars-orange"><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i></div>
+      </article></div>
+      <div class="col-12 col-sm-6 col-xl-3"><article class="overview-card">
+        <div class="overview-top"><span class="overview-label">產品類別</span><span class="overview-icon icon-indigo"><i class="fa-solid fa-layer-group"></i></span></div>
+        <div class="overview-number">04 <small>類</small></div><div class="overview-foot"><span class="trend-neutral"><i class="fa-solid fa-check"></i> 分類完整</span><span>目前分類數</span></div>
+        <div class="mini-bars bars-indigo"><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i></div>
+      </article></div>
+    </div>
+  </section>
+
+  <section class="row g-3 dashboard-section analytics-row">
+    <div class="col-12 col-xl-7"><article class="dashboard-panel chart-panel h-100">
+      <div class="panel-heading"><div><h2>庫存趨勢</h2><p>近 7 日庫存數量變化</p></div><div class="chart-legend"><span><i class="legend-blue"></i>庫存量</span><span class="chart-period">近 7 日 <i class="fa-solid fa-chevron-down ms-1"></i></span></div></div>
+      <div class="chart-area">
+        <div class="chart-y-labels"><span>4,000</span><span>3,000</span><span>2,000</span><span>1,000</span><span>0</span></div>
+        <div class="chart-plot"><div class="chart-gridline g1"></div><div class="chart-gridline g2"></div><div class="chart-gridline g3"></div><div class="chart-gridline g4"></div>
+          <svg viewBox="0 0 720 220" preserveAspectRatio="none" class="inventory-chart" aria-label="近七日庫存趨勢示意圖">
+            <defs><linearGradient id="chartFill" x1="0" x2="0" y1="0" y2="1"><stop offset="0%" stop-color="#3b82f6" stop-opacity=".24"/><stop offset="100%" stop-color="#3b82f6" stop-opacity="0"/></linearGradient></defs>
+            <path d="M0 148 L120 125 L240 136 L360 92 L480 105 L600 64 L720 78 L720 220 L0 220 Z" fill="url(#chartFill)"/>
+            <path d="M0 148 L120 125 L240 136 L360 92 L480 105 L600 64 L720 78" fill="none" stroke="#2563eb" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>
+            <g fill="#fff" stroke="#2563eb" stroke-width="3"><circle cx="0" cy="148" r="4"/><circle cx="120" cy="125" r="4"/><circle cx="240" cy="136" r="4"/><circle cx="360" cy="92" r="4"/><circle cx="480" cy="105" r="4"/><circle cx="600" cy="64" r="4"/><circle cx="720" cy="78" r="4"/></g>
+          </svg>
+          <div class="chart-x-labels"><span>11/21</span><span>11/22</span><span>11/23</span><span>11/24</span><span>11/25</span><span>11/26</span><span>11/27</span></div>
+        </div>
+      </div>
+    </article></div>
+    <div class="col-12 col-xl-5"><article class="dashboard-panel category-panel h-100">
+      <div class="panel-heading"><div><h2>產品分類分布</h2><p>依目前產品類別統計</p></div><button class="panel-more" aria-label="更多分類資訊"><i class="fa-solid fa-ellipsis"></i></button></div>
+      <div class="category-content">
+        <div class="donut-wrap"><div class="donut-chart"><div class="donut-center"><strong>128</strong><span>產品總數</span></div></div></div>
+        <div class="category-legend">
+          <div><i class="cat-dot dot-snack"></i><span>零食</span><strong>36 <small>28.1%</small></strong></div>
+          <div><i class="cat-dot dot-dairy"></i><span>乳製品</span><strong>29 <small>22.7%</small></small></strong></div>
+          <div><i class="cat-dot dot-drink"></i><span>飲料</span><strong>41 <small>32.0%</small></strong></div>
+          <div><i class="cat-dot dot-daily"></i><span>日用品</span><strong>22 <small>17.2%</small></strong></div>
+        </div>
+      </div>
+    </article></div>
+  </section>
+
+  <section class="row g-3 dashboard-section bottom-row">
+    <div class="col-12 col-xl-7"><article class="dashboard-panel recent-panel">
+      <div class="panel-heading"><div><h2>最近新增產品</h2><p>最新建立的產品資料</p></div><a class="panel-link" href="AI-forms-CRUD-R-ERP-Gemini-Final.html">查看全部 <i class="fa-solid fa-arrow-right ms-1"></i></a></div>
+      <div class="table-responsive"><table class="table recent-table align-middle mb-0"><thead><tr><th>產品名稱</th><th>類別</th><th>單價</th><th>庫存</th></tr></thead><tbody>
+        <tr><td><span class="product-avatar avatar-blue">A</span><strong>無線藍牙耳機</strong></td><td><span class="category-pill pill-snack">零食</span></td><td>NT$ 1,280</td><td><span class="stock-indicator stock-ok"><i></i> 86</span></td></tr>
+        <tr><td><span class="product-avatar avatar-green">B</span><strong>純天然牛奶</strong></td><td><span class="category-pill pill-dairy">乳製品</span></td><td>NT$ 95</td><td><span class="stock-indicator stock-ok"><i></i> 124</span></td></tr>
+        <tr><td><span class="product-avatar avatar-purple">C</span><strong>氣泡飲料</strong></td><td><span class="category-pill pill-drink">飲料</span></td><td>NT$ 45</td><td><span class="stock-indicator stock-low"><i></i> 12</span></td></tr>
+        <tr><td><span class="product-avatar avatar-orange">D</span><strong>居家清潔用品</strong></td><td><span class="category-pill pill-daily">日用品</span></td><td>NT$ 189</td><td><span class="stock-indicator stock-ok"><i></i> 63</span></td></tr>
+      </tbody></table></div>
+    </article></div>
+    <div class="col-12 col-xl-5"><article class="dashboard-panel alerts-panel h-100">
+      <div class="panel-heading"><div><h2>庫存提醒</h2><p>需要優先關注的項目</p></div><span class="alert-count">3 項提醒</span></div>
+      <div class="alert-list">
+        <div class="alert-item alert-danger-soft"><span class="alert-symbol"><i class="fa-solid fa-circle-exclamation"></i></span><div><strong>商品庫存不足</strong><p>氣泡飲料 · 目前庫存 12 件</p></div><span class="alert-time">需補貨</span></div>
+        <div class="alert-item alert-warning-soft"><span class="alert-symbol"><i class="fa-solid fa-box-open"></i></span><div><strong>即將低於安全庫存</strong><p>巧克力餅乾 · 目前庫存 18 件</p></div><span class="alert-time">請留意</span></div>
+        <div class="alert-item alert-info-soft"><span class="alert-symbol"><i class="fa-solid fa-clipboard-list"></i></span><div><strong>待確認產品資料</strong><p>有 2 筆新建資料等待檢視</p></div><span class="alert-time">待處理</span></div>
+      </div>
+      <a href="AI-forms-CRUD-R-ERP-Gemini-Final.html" class="alerts-footer">前往產品管理 <i class="fa-solid fa-arrow-right"></i></a>
+    </article></div>
+  </section>
+  <footer class="home-footer"><span>© 2026 NEXUS ERP</span><span>Enterprise Resource Planning System <i class="fa-solid fa-circle ms-1"></i></span></footer>
+</main>
+<script src="js/bootstrap.min.js"></script>
+<script>
+  const now = new Date();
+  const dateEl = document.getElementById('todayDate');
+  if (dateEl) dateEl.textContent = new Intl.DateTimeFormat('zh-TW', {year:'numeric',month:'long',day:'numeric',weekday:'long'}).format(now);
+</script>
+</body>
+</html>
