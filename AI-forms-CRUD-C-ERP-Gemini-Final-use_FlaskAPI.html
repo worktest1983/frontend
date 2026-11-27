@@ -1,0 +1,343 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>NEXUS ERP | 產品建檔</title>
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="css/bootstrap.min.css">
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- SweetAlert2 -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/sweetalert2@11/dist/sweetalert2.min.css">
+    <!-- Google Fonts: Inter & Noto Sans TC -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Noto+Sans+TC:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <!-- ERP 統一樣式檔 -->
+    <link rel="stylesheet" href="css/AI_erp-style.css">
+</head>
+
+<body>
+    <!-- =========================================
+         上方水平導覽列 (Top Navigation Bar)
+         ========================================= -->
+    <header>
+        <nav class="navbar navbar-expand-lg erp-navbar sticky-top">
+            <div class="container">
+                <a class="navbar-brand" href="#">
+                    <span class="brand-logo-box">
+                        <i class="fa-solid fa-layer-group"></i>
+                    </span>
+                    <span>NEXUS <span class="fw-normal text-white-50">ERP</span></span>
+                </a>
+                <button class="navbar-toggler border-secondary" type="button" data-bs-toggle="collapse"
+                    data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false"
+                    aria-label="Toggle navigation">
+                    <span class="text-white"><i class="fa-solid fa-bars"></i></span>
+                </button>
+                <div class="collapse navbar-collapse justify-content-end" id="navbarNav">
+                    <ul class="navbar-nav mt-2 mt-lg-0">
+                        <li class="nav-item">
+                            <a class="nav-link" href="AI-forms-CRUD-index-ERP-GPT.html">
+                                <i class="fa-solid fa-chart-pie me-1"></i> 首頁
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link active" aria-current="page" href="#">
+                                <i class="fa-solid fa-file-circle-plus me-1"></i> 產品建檔
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="AI-forms-CRUD-R-ERP-Gemini-Final-use_FlaskAPI.html">
+                                <i class="fa-solid fa-boxes-stacked me-1"></i> 產品列表
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </nav>
+    </header>
+
+    <!-- =========================================
+         主內容區塊
+         ========================================= -->
+    <main class="container pb-5">
+        <!-- 頁面標題與麵包屑導覽 -->
+        <section class="page-header-section d-flex flex-column flex-md-row justify-content-between align-items-md-end gap-2">
+            <nav aria-label="breadcrumb" class="erp-breadcrumb">
+                <ol class="breadcrumb mb-0">
+                    <li class="breadcrumb-item"><a href="#">首頁</a></li>
+                    <li class="breadcrumb-item"><a href="#">庫存與商品中心</a></li>
+                    <li class="breadcrumb-item active text-primary fw-medium" aria-current="page">產品建檔</li>
+                </ol>
+            </nav>
+        </section>
+
+        <!-- 企業級視覺 Banner 區塊 -->
+        <section class="erp-banner my-2">
+            <div class="row align-items-center">
+                <div class="col-lg-8">
+                    <h1 class="text-white fw-bold mb-2" style="font-size: 1.75rem;">新增產品資料</h1>
+                    <p class="text-white-50 mb-0" style="font-size: 0.95rem; line-height: 1.6;">
+                        於系統中登錄新商品的品名、定價、初始安全庫存與所屬類別，建立完整庫存基礎資料。
+                    </p>
+                </div>
+                <div class="col-lg-4 text-lg-end mt-3 mt-lg-0">
+                    <a href="forms-CRUD-R.html" class="btn btn-light px-4 py-2 fw-semibold shadow-sm text-primary"
+                        style="border-radius: 8px; font-size: 0.9rem;">
+                        <i class="fa-solid fa-boxes-stacked me-1"></i> 返回產品列表
+                    </a>
+                </div>
+            </div>
+        </section>
+
+        <!-- 產品建檔主卡片 -->
+        <section class="row justify-content-center my-4">
+            <div class="col-lg-12">
+                <div class="erp-main-card">
+                    <div class="erp-card-toolbar">
+                        <h2 class="erp-card-title">
+                            <i class="fa-solid fa-circle-plus text-primary"></i>
+                            <span>商品基本資料登錄表</span>
+                        </h2>
+                    </div>
+
+                    <div class="card-body p-4 p-md-5 bg-white">
+                        <form id="productForm" novalidate>
+                            <!-- 產品名稱 -->
+                            <div class="form-floating mb-4">
+                                <input type="text" name="product_name" id="product_name" class="form-control" placeholder="產品名稱">
+                                <label for="product_name" class="text-muted">
+                                    <i class="fa-solid fa-tag me-1 text-primary"></i>產品名稱
+                                </label>
+                                <div class="invalid-feedback">必填欄位，且名稱字數限制 2 ~ 10 字內</div>
+                            </div>
+
+                            <!-- 價格與類別 (雙欄排版) -->
+                            <div class="row g-3 mb-4">
+                                <div class="col-md-6">
+                                    <div class="form-floating">
+                                        <input type="number" name="product_price" id="product_price" class="form-control num-tabular" placeholder="價格" min="0">
+                                        <label for="product_price" class="text-muted">
+                                            <i class="fa-solid fa-dollar-sign me-1 text-primary"></i>產品單價 (NT$)
+                                        </label>
+                                        <div class="invalid-feedback">必填欄位，且金額不能為 0</div>
+                                    </div>
+                                </div>
+
+                                <div class="col-md-6">
+                                    <div class="form-floating">
+                                        <select name="product_category" id="product_category" class="form-select">
+                                            <option value="" disabled selected>請選擇類別</option>
+                                            <option value="零食">零食</option>
+                                            <option value="乳製品">乳製品</option>
+                                            <option value="飲料">飲料</option>
+                                            <option value="日用品">日用品</option>
+                                        </select>
+                                        <label for="product_category" class="text-muted">
+                                            <i class="fa-solid fa-folder-open me-1 text-primary"></i>產品類別
+                                        </label>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- 數量 (Range 滑桿) -->
+                            <div class="mb-4 p-3 rounded-3 border bg-light">
+                                <div class="d-flex justify-content-between align-items-center mb-1">
+                                    <label for="product_num" class="form-label mb-0 fw-semibold text-secondary small">
+                                        <i class="fa-solid fa-cubes me-1 text-primary"></i>初始庫存數量
+                                    </label>
+                                    <div>
+                                        <span class="h4 fw-bold text-primary num-tabular mb-0" id="product_num_val">50</span>
+                                        <span class="text-muted small">件</span>
+                                    </div>
+                                </div>
+                                <input type="range" class="form-range" id="product_num" name="product_num" min="1" max="100" step="1" value="50">
+                                <div class="d-flex justify-content-between text-muted mt-1" style="font-size: 0.72rem;">
+                                    <span>1 件</span>
+                                    <span>安全水位 50</span>
+                                    <span>100 件</span>
+                                </div>
+                            </div>
+
+                            <!-- 備註 -->
+                            <div class="form-floating mb-3">
+                                <textarea name="product_remark" id="product_remark" class="form-control" placeholder="產品說明及注意事項，上限200字" style="height: 100px"></textarea>
+                                <label for="product_remark" class="text-muted">
+                                    <i class="fa-solid fa-note-sticky me-1 text-primary"></i>產品備註說明（上限 200 字）
+                                </label>
+                            </div>
+                        </form>
+                    </div>
+
+                    <div class="card-footer bg-white border-top px-4 py-3 d-flex justify-content-end gap-2">
+                        <button type="button" class="btn btn-light border px-4 fw-medium" id="cancel">取消返回</button>
+                        <button type="button" form="productForm" class="btn btn-primary px-4 fw-medium" id="confirm" style="background-color: var(--erp-primary);">
+                            <i class="fa-solid fa-check me-1"></i>確認建檔
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- 確認 Modal -->
+    <div class="modal fade erp-modal" tabindex="-1" id="confirmForm">
+        <div class="modal-dialog modal-dialog-centered modal-lg">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <div class="d-flex align-items-center gap-2">
+                        <span class="kpi-icon-wrapper kpi-blue" style="width: 36px; height: 36px; font-size: 0.95rem;">
+                            <i class="fa-solid fa-clipboard-check"></i>
+                        </span>
+                        <div>
+                            <h1 class="modal-title fs-5 mb-0" id="staticBackdropLabel">產品建檔資料確認</h1>
+                            <div class="text-muted" style="font-size: 0.78rem;">請確認以下登錄資訊是否正確，點擊送交後將寫入資料庫</div>
+                        </div>
+                    </div>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+
+                <div class="modal-body">
+                    <div class="list-group shadow-sm rounded-3 border overflow-hidden">
+                        <div class="list-group-item d-flex justify-content-between align-items-center py-3 border-0 border-bottom">
+                            <span class="text-secondary fw-medium">產品名稱</span>
+                            <span id="display_name" class="fw-bold text-dark"></span>
+                        </div>
+                        <div class="list-group-item d-flex justify-content-between align-items-center py-3 border-0 border-bottom">
+                            <span class="text-secondary fw-medium">產品單價</span>
+                            <span id="display_price" class="fw-bold text-primary num-tabular"></span>
+                        </div>
+                        <div class="list-group-item d-flex justify-content-between align-items-center py-3 border-0 border-bottom">
+                            <span class="text-secondary fw-medium">初始庫存數量</span>
+                            <span id="display_num" class="fw-bold text-dark num-tabular"></span>
+                        </div>
+                        <div class="list-group-item d-flex justify-content-between align-items-center py-3 border-0 border-bottom">
+                            <span class="text-secondary fw-medium">產品類別</span>
+                            <span id="display_category" class="badge rounded-pill px-3 py-2 bg-light text-dark border"></span>
+                        </div>
+                        <div class="list-group-item py-3 border-0 bg-light">
+                            <span class="text-secondary fw-medium d-block mb-1">產品備註說明</span>
+                            <span id="display_remark" class="text-secondary small d-block bg-white p-2.5 rounded border"></span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="modal-footer bg-white border-top px-4 py-3">
+                    <button type="button" class="btn btn-light border px-4 fw-medium" data-bs-dismiss="modal" id="close">返回修改</button>
+                    <button type="submit" class="btn btn-primary px-4 fw-medium" id="add" style="background-color: var(--erp-primary);">
+                        <i class="fa-solid fa-cloud-arrow-up me-1"></i>確認送出建檔
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Scripts -->
+    <script src="js/bootstrap.min.js"></script>
+    <script src="js/jquery-4.0.0.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
+    <script>
+		const API_URL = "http://localhost:8082/product"
+
+        $(() => {
+            const confirmModal = new bootstrap.Modal('#confirmForm');
+
+            $("#product_name").on("change", function () {
+                $(this).removeClass("is-invalid");
+            });
+
+            $("#product_price").on("change", function () {
+                $(this).removeClass("is-invalid");
+            });
+
+            $("#product_num").on("input change", function () {
+                $("#product_num_val").text($(this).val());
+            });
+
+            $("#confirm").on("click", function () {
+                const name = $("#product_name").val().trim();
+                const price = $("#product_price").val();
+                const category = $("#product_category").val();
+                const num = $("#product_num").val();
+                const remark = $("#product_remark").val();
+
+                if (name === "" || name.length < 2 || name.length > 10) {
+                    $("#product_name").addClass("is-invalid").focus();
+                    return;
+                }
+
+                if (price === "" || price <= 0) {
+                    $("#product_price").addClass("is-invalid").focus();
+                    return;
+                }
+
+                // 將資料填入 Modal 預覽區
+                $("#display_name").text(name);
+                $("#display_price").text(price ? "NT$ " + Number(price).toLocaleString() : "未填");
+                $("#display_num").text(num + " 件");
+                $("#display_category").text(category ? category : "未選擇");
+                $("#display_remark").text(remark ? remark : "無");
+
+                confirmModal.show();
+            });
+
+            // Form submit
+            $("#add").on("click", function () {
+                const name = $("#product_name").val();
+                const price = $("#product_price").val();
+                const category = $("#product_category").val();
+                const num = $("#product_num").val();
+                const remark = $("#product_remark").val();
+
+                const parms = {
+                    "name": name,
+                    "price": price,
+                    "category": category,
+                    "num": num,
+                    "remark": remark
+                }
+
+                $.ajax({
+                    url: API_URL,
+                    type: "POST",
+                    dataType: "JSON",
+                    data: JSON.stringify(parms),
+                    contentType: "application/json",
+                    success: () => {
+                        confirmModal.hide();
+                        clear();
+
+                        Swal.fire({
+                            title: "新增成功",
+                            text: "產品資料已成功寫入系統",
+                            icon: "success",
+                            showConfirmButton: false,
+                            timer: 1500
+                        });
+                    },
+                    error: () => {
+                        Swal.fire({
+                            title: "新增產品資料失敗",
+                            text: "請檢查資料格式或連線是否正常",
+                            icon: "error",
+                            confirmButtonColor: "#1d4ed8"
+                        });
+                    }
+                })
+            });
+
+            function clear() {
+                $("#productForm").get(0).reset();
+                $("#product_num_val").text("50");
+                $("#product_num").val(50);
+                $("#productForm").find(".is-invalid").removeClass("is-invalid");
+            }
+        });
+    </script>
+</body>
+
+</html>
