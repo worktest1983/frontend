@@ -139,6 +139,7 @@
                                         <label for="product_category" class="text-muted">
                                             <i class="fa-solid fa-folder-open me-1 text-primary"></i>產品類別
                                         </label>
+                                        <div class="invalid-feedback">必填欄位</div>
                                     </div>
                                 </div>
                             </div>
@@ -218,9 +219,9 @@
                             <span class="text-secondary fw-medium">產品類別</span>
                             <span id="display_category" class="badge rounded-pill px-3 py-2 bg-light text-dark border"></span>
                         </div>
-                        <div class="list-group-item py-3 border-0 bg-light">
+                        <div class="list-group-item py-3 border-0">
                             <span class="text-secondary fw-medium d-block mb-1">產品備註說明</span>
-                            <span id="display_remark" class="text-secondary small d-block bg-white p-2.5 rounded border"></span>
+                            <span id="display_remark" class="text-secondary small d-block bg-white p-2 rounded border"></span>
                         </div>
                     </div>
                 </div>
@@ -241,7 +242,7 @@
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 
     <script>
-		const API_URL = "http://localhost:8082/product"
+		const API_URL = "http://127.0.0.1:8082/product"
 
         $(() => {
             const confirmModal = new bootstrap.Modal('#confirmForm');
@@ -275,6 +276,11 @@
                     return;
                 }
 
+                if (!category) {
+                    $("#product_category").addClass("is-invalid").focus();
+                    return;
+                }
+
                 // 將資料填入 Modal 預覽區
                 $("#display_name").text(name);
                 $("#display_price").text(price ? "NT$ " + Number(price).toLocaleString() : "未填");
@@ -295,11 +301,14 @@
 
                 const parms = {
                     "name": name,
-                    "price": price,
-                    "category": category,
-                    "num": num,
+                    "price": Number(price),
+                    "category": category ? category : '',
+                    "num": Number(num),
                     "remark": remark
                 }
+
+                console.log(parms);
+                
 
                 $.ajax({
                     url: API_URL,
