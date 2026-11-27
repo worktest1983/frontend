@@ -1,0 +1,613 @@
+/* =========================================
+1. 企業級 ERP 設計系統變數 (:root)
+   ========================================= */
+:root {
+    /* 品牌主色調：沉穩深海藍與科技靛藍 */
+    --erp-nav-bg: #0f172a;
+    --erp-nav-hover: #1e293b;
+    --erp-primary: #1d4ed8;
+    --erp-primary-hover: #1e40af;
+    --erp-primary-soft: #eff6ff;
+
+    /* 中性背景與表面色 */
+    --erp-bg-body: #f4f6f9;
+    --erp-surface: #ffffff;
+    --erp-surface-subtle: #f8fafc;
+    --erp-border: #e2e8f0;
+    --erp-border-light: #f1f5f9;
+
+    /* 文字層級色 */
+    --erp-text-primary: #0f172a;
+    --erp-text-secondary: #475569;
+    --erp-text-muted: #94a3b8;
+
+    /* 柔和狀態色 (Soft Pastel Badges) */
+    --badge-success-bg: #ecfdf5;
+    --badge-success-text: #047857;
+    --badge-success-dot: #10b981;
+
+    --badge-warning-bg: #fffbeb;
+    --badge-warning-text: #b45309;
+    --badge-warning-dot: #f59e0b;
+
+    --badge-danger-bg: #fef2f2;
+    --badge-danger-text: #b91c1c;
+    --badge-danger-dot: #ef4444;
+
+    /* 陰影與圓角規範 */
+    --erp-shadow-sm: 0 1px 2px 0 rgba(15, 23, 42, 0.04);
+    --erp-shadow-md: 0 4px 12px -2px rgba(15, 23, 42, 0.06), 0 2px 4px -2px rgba(15, 23, 42, 0.04);
+    --erp-shadow-lg: 0 12px 24px -4px rgba(15, 23, 42, 0.12);
+    --erp-radius-md: 10px;
+    --erp-radius-lg: 14px;
+}
+
+/* =========================================
+2. 全域基礎樣式與字體排版
+   ========================================= */
+body {
+    background-color: var(--erp-bg-body);
+    color: var(--erp-text-primary);
+    font-family: 'Inter', 'Noto Sans TC', -apple-system, BlinkMacSystemFont, sans-serif;
+    -webkit-font-smoothing: antialiased;
+    letter-spacing: 0.01em;
+}
+
+/* 數字等寬對齊 */
+.num-tabular {
+    font-variant-numeric: tabular-nums;
+}
+
+/* =========================================
+3. 頂部水平導覽列 (Top Navigation Bar)
+   ========================================= */
+.erp-navbar {
+    background-color: var(--erp-nav-bg);
+    border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+    padding: 0.75rem 0;
+    box-shadow: 0 2px 10px rgba(15, 23, 42, 0.15);
+}
+
+.erp-navbar .navbar-brand {
+    font-weight: 700;
+    font-size: 1.15rem;
+    letter-spacing: 0.04em;
+    color: #ffffff;
+    display: flex;
+    align-items: center;
+    gap: 0.65rem;
+}
+
+.brand-logo-box {
+    width: 34px;
+    height: 34px;
+    background: linear-gradient(135deg, #3b82f6 0%, #1d4ed8 100%);
+    border-radius: 8px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    color: #ffffff;
+    font-size: 0.95rem;
+    box-shadow: 0 2px 6px rgba(37, 99, 235, 0.4);
+}
+
+.erp-navbar .nav-link {
+    color: #cbd5e1;
+    font-weight: 500;
+    font-size: 0.925rem;
+    padding: 0.5rem 1rem !important;
+    border-radius: 8px;
+    margin: 0 0.2rem;
+    transition: all 0.2s ease;
+}
+
+.erp-navbar .nav-link:hover {
+    color: #ffffff;
+    background-color: var(--erp-nav-hover);
+}
+
+.erp-navbar .nav-link.active {
+    color: #ffffff;
+    background-color: rgba(59, 130, 246, 0.18);
+    border: 1px solid rgba(59, 130, 246, 0.35);
+    font-weight: 600;
+}
+
+/* =========================================
+4. 頁面標題與麵包屑
+   ========================================= */
+.page-header-section {
+    padding: 1.75rem 0 1.25rem;
+}
+
+.erp-breadcrumb .breadcrumb-item {
+    font-size: 0.825rem;
+    color: var(--erp-text-muted);
+}
+
+.erp-breadcrumb .breadcrumb-item a {
+    color: var(--erp-text-secondary);
+    text-decoration: none;
+    transition: color 0.15s;
+}
+
+.erp-breadcrumb .breadcrumb-item a:hover {
+    color: var(--erp-primary);
+}
+
+.page-title {
+    font-size: 1.5rem;
+    font-weight: 700;
+    color: var(--erp-text-primary);
+    letter-spacing: -0.02em;
+}
+
+.page-subtitle {
+    font-size: 0.875rem;
+    color: var(--erp-text-secondary);
+}
+
+/* =========================================
+5. 企業級視覺 Banner
+   ========================================= */
+.erp-banner {
+    background: linear-gradient(135deg, #1e3a8a 0%, #1d4ed8 100%);
+    border-radius: var(--erp-radius-lg);
+    color: #ffffff;
+    padding: 2rem 2.5rem;
+    margin-bottom: 1.75rem;
+    box-shadow: 0 10px 25px -5px rgba(29, 78, 216, 0.25);
+    position: relative;
+    overflow: hidden;
+}
+
+.erp-banner::after {
+    content: "\f468";
+    font-family: "Font Awesome 6 Free";
+    font-weight: 900;
+    position: absolute;
+    right: -20px;
+    bottom: -30px;
+    font-size: 10rem;
+    color: rgba(255, 255, 255, 0.05);
+    pointer-events: none;
+}
+
+.erp-banner h2 {
+    font-size: 1.5rem;
+    font-weight: 700;
+    margin-bottom: 0.5rem;
+}
+
+.erp-banner p {
+    font-size: 0.925rem;
+    color: rgba(255, 255, 255, 0.85);
+    margin-bottom: 0;
+    max-width: 650px;
+    line-height: 1.5;
+}
+
+/* =========================================
+6. 統計資訊卡片 (KPI Stat Cards)
+   ========================================= */
+.kpi-card {
+    background: var(--erp-surface);
+    border: 1px solid var(--erp-border);
+    border-radius: var(--erp-radius-lg);
+    padding: 1.35rem 1.5rem;
+    box-shadow: var(--erp-shadow-sm);
+    transition: transform 0.2s ease, box-shadow 0.2s ease, border-color 0.2s ease;
+    height: 100%;
+    position: relative;
+    overflow: hidden;
+}
+
+.kpi-card:hover {
+    transform: translateY(-2px);
+    box-shadow: var(--erp-shadow-md);
+    border-color: #cbd5e1;
+}
+
+.kpi-icon-wrapper {
+    width: 44px;
+    height: 44px;
+    border-radius: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.15rem;
+    flex-shrink: 0;
+}
+
+.kpi-blue {
+    background-color: #eff6ff;
+    color: #1d4ed8;
+}
+
+.kpi-emerald {
+    background-color: #ecfdf5;
+    color: #059669;
+}
+
+.kpi-indigo {
+    background-color: #eef2ff;
+    color: #4338ca;
+}
+
+.kpi-amber {
+    background-color: #fffbeb;
+    color: #d97706;
+}
+
+.kpi-label {
+    font-size: 0.825rem;
+    font-weight: 500;
+    color: var(--erp-text-secondary);
+    margin-bottom: 0.25rem;
+}
+
+.kpi-value {
+    font-size: 1.65rem;
+    font-weight: 700;
+    color: var(--erp-text-primary);
+    line-height: 1.2;
+}
+
+/* =========================================
+7. 企業級無框線資料表格 (Data Table)
+   ========================================= */
+.erp-main-card {
+    background: var(--erp-surface);
+    border: 1px solid var(--erp-border);
+    border-radius: var(--erp-radius-lg);
+    box-shadow: var(--erp-shadow-md);
+    overflow: hidden;
+}
+
+.erp-card-toolbar {
+    padding: 1.25rem 1.5rem;
+    border-bottom: 1px solid var(--erp-border);
+    background-color: var(--erp-surface);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 1rem;
+}
+
+.erp-card-title {
+    font-size: 1.05rem;
+    font-weight: 600;
+    color: var(--erp-text-primary);
+    margin: 0;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+.erp-table {
+    margin-bottom: 0;
+    border-collapse: separate;
+    border-spacing: 0;
+}
+
+.erp-table thead th {
+    background-color: var(--erp-surface-subtle);
+    color: var(--erp-text-secondary);
+    font-size: 0.8rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.04em;
+    padding: 0.95rem 1.25rem;
+    border-bottom: 1px solid var(--erp-border);
+    border-top: none;
+    white-space: nowrap;
+}
+
+.erp-table tbody td {
+    padding: 1rem 1.25rem;
+    border-bottom: 1px solid var(--erp-border-light);
+    color: var(--erp-text-primary);
+    font-size: 0.925rem;
+    vertical-align: middle;
+    transition: background-color 0.15s ease;
+}
+
+.erp-table tbody tr:last-child td {
+    border-bottom: none;
+}
+
+.erp-table tbody tr:hover td {
+    background-color: #f8fafc;
+}
+
+/* 柔和膠囊標籤 (Soft Pill Badges) */
+.erp-badge {
+    display: inline-flex;
+    align-items: center;
+    padding: 0.3rem 0.75rem;
+    font-size: 0.8rem;
+    font-weight: 600;
+    border-radius: 999px;
+    line-height: 1.2;
+}
+
+.erp-badge-dot {
+    width: 6px;
+    height: 6px;
+    border-radius: 50%;
+}
+
+/* 庫存狀態色 */
+.stock-normal {
+    background-color: var(--badge-success-bg);
+    color: var(--badge-success-text);
+}
+
+.stock-normal .erp-badge-dot {
+    background-color: var(--badge-success-dot);
+}
+
+.stock-low {
+    background-color: var(--badge-warning-bg);
+    color: var(--badge-warning-text);
+}
+
+.stock-low .erp-badge-dot {
+    background-color: var(--badge-warning-dot);
+}
+
+.stock-out {
+    background-color: var(--badge-danger-bg);
+    color: var(--badge-danger-text);
+}
+
+.stock-out .erp-badge-dot {
+    background-color: var(--badge-danger-dot);
+}
+
+/* 產品分類色 */
+.cat-snack {
+    background-color: #eef2ff;
+    color: #3730a3;
+}
+
+.cat-dairy {
+    background-color: #f0f9ff;
+    color: #0369a1;
+}
+
+.cat-drink {
+    background-color: #f0fdf4;
+    color: #15803d;
+}
+
+.cat-daily {
+    background-color: #faf5ff;
+    color: #6b21a8;
+}
+
+.cat-default {
+    background-color: #f1f5f9;
+    color: #475569;
+}
+
+/* 操作按鈕微調 */
+.btn-erp-edit {
+    color: var(--erp-primary);
+    background-color: var(--erp-primary-soft);
+    border: 1px solid transparent;
+    font-size: 0.825rem;
+    font-weight: 500;
+    padding: 0.38rem 0.75rem;
+    border-radius: 7px;
+    transition: all 0.15s ease;
+}
+
+.btn-erp-edit:hover {
+    background-color: var(--erp-primary);
+    color: #ffffff;
+}
+
+.btn-erp-del {
+    color: #dc2626;
+    background-color: #fef2f2;
+    border: 1px solid transparent;
+    font-size: 0.825rem;
+    font-weight: 500;
+    padding: 0.38rem 0.75rem;
+    border-radius: 7px;
+    transition: all 0.15s ease;
+}
+
+.btn-erp-del:hover {
+    background-color: #dc2626;
+    color: #ffffff;
+}
+
+/* =========================================
+8. 分頁導覽美化 (Pagination)
+   ========================================= */
+.erp-card-footer {
+    padding: 1rem 1.5rem;
+    background-color: var(--erp-surface-subtle);
+    border-top: 1px solid var(--erp-border);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 0.75rem;
+}
+
+.pagination .page-link {
+    border: 1px solid var(--erp-border);
+    color: var(--erp-text-secondary);
+    font-size: 0.85rem;
+    font-weight: 500;
+    padding: 0.42rem 0.82rem;
+    margin: 0 2px;
+    border-radius: 7px !important;
+    background-color: var(--erp-surface);
+    transition: all 0.15s ease;
+}
+
+.pagination .page-link:hover {
+    background-color: var(--erp-surface-subtle);
+    color: var(--erp-primary);
+    border-color: #cbd5e1;
+}
+
+.pagination .page-item.active .page-link {
+    background-color: var(--erp-primary);
+    border-color: var(--erp-primary);
+    color: #ffffff;
+    box-shadow: 0 2px 5px rgba(29, 78, 216, 0.25);
+}
+
+/* =========================================
+9. 產品編輯 Modal 質感優化
+   ========================================= */
+.erp-modal .modal-content {
+    border: 1px solid var(--erp-border);
+    border-radius: var(--erp-radius-lg);
+    box-shadow: var(--erp-shadow-lg);
+    overflow: hidden;
+}
+
+.erp-modal .modal-header {
+    background-color: var(--erp-surface);
+    border-bottom: 1px solid var(--erp-border);
+    padding: 1.25rem 1.5rem;
+}
+
+.erp-modal .modal-title {
+    font-size: 1.1rem;
+    font-weight: 700;
+    color: var(--erp-text-primary);
+}
+
+.erp-modal .modal-body {
+    background-color: var(--erp-bg-body);
+    padding: 1.5rem;
+}
+
+.readonly-section {
+    background-color: var(--erp-surface-subtle);
+    border: 1px dashed #cbd5e1;
+    border-radius: var(--erp-radius-md);
+    padding: 1rem 1.15rem;
+    margin-bottom: 1.25rem;
+}
+
+.editable-section {
+    background-color: var(--erp-surface);
+    border: 1px solid var(--erp-border);
+    border-radius: var(--erp-radius-md);
+    padding: 1.25rem;
+    box-shadow: var(--erp-shadow-sm);
+}
+
+.section-tag {
+    font-size: 0.75rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    color: var(--erp-text-muted);
+    margin-bottom: 0.85rem;
+    display: flex;
+    align-items: center;
+    gap: 0.4rem;
+}
+
+.form-control,
+.form-select {
+    border-color: var(--erp-border);
+    background-color: var(--erp-surface);
+    color: var(--erp-text-primary);
+    border-radius: var(--erp-radius-md);
+    padding: 0.75rem 1rem;
+    font-size: 0.925rem;
+}
+
+.form-control:focus,
+.form-select:focus {
+    border-color: var(--erp-primary);
+    box-shadow: 0 0 0 0.25rem rgba(29, 78, 216, 0.15);
+    background-color: #fff;
+}
+
+.form-control:disabled,
+.form-control[readonly],
+.form-select:disabled {
+    background-color: #f1f5f9 !important;
+    color: var(--erp-text-secondary);
+    border-color: var(--erp-border);
+    cursor: not-allowed;
+}
+
+.form-range::-webkit-slider-thumb {
+    background: var(--erp-primary);
+}
+
+/* =========================================
+10. RWD 手機版卡片式表格
+   ========================================= */
+@media screen and (max-width: 768px) {
+    .erp-main-card {
+        background: transparent;
+        border: none;
+        box-shadow: none;
+    }
+
+    .erp-card-toolbar {
+        background: var(--erp-surface);
+        border: 1px solid var(--erp-border);
+        border-radius: var(--erp-radius-md);
+        margin-bottom: 1rem;
+    }
+
+    .table-rwd thead {
+        display: none;
+    }
+
+    .table-rwd tbody tr {
+        display: block;
+        background: var(--erp-surface);
+        border: 1px solid var(--erp-border);
+        border-radius: var(--erp-radius-md);
+        margin-bottom: 0.85rem;
+        padding: 0.35rem 0;
+        box-shadow: var(--erp-shadow-sm);
+    }
+
+    .table-rwd tbody td {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding: 0.65rem 1.1rem !important;
+        border-bottom: 1px solid var(--erp-border-light);
+        text-align: right !important;
+    }
+
+    .table-rwd tbody td::before {
+        content: attr(data-th);
+        font-size: 0.825rem;
+        font-weight: 600;
+        color: var(--erp-text-secondary);
+        text-align: left;
+    }
+
+    .table-rwd tbody td:last-child {
+        border-bottom: none;
+        background-color: var(--erp-surface-subtle);
+        margin-top: 0.25rem;
+        border-radius: 0 0 var(--erp-radius-md) var(--erp-radius-md);
+    }
+
+    .erp-card-footer {
+        background: var(--erp-surface);
+        border: 1px solid var(--erp-border);
+        border-radius: var(--erp-radius-md);
+        justify-content: center;
+    }
+}
