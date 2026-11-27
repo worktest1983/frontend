@@ -1,0 +1,686 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>ERP 產品建檔</title>
+	<!-- 請依專案實際位置調整本機套件路徑 -->
+	<link rel="stylesheet" href="css/bootstrap.min.css">
+	<link rel="stylesheet" href="css/all.min.css">
+	<style>
+		:root {
+			--erp-navy: #172b4d;
+			--erp-blue: #315a83;
+			--erp-blue-light: #eaf1f8;
+			--erp-bg: #f3f6fa;
+			--erp-surface: #ffffff;
+			--erp-text: #26364a;
+			--erp-muted: #64748b;
+			--erp-border: #dfe6ee;
+			--erp-success: #16805d;
+			--erp-success-bg: #e6f5ef;
+			--erp-warning: #a86b12;
+			--erp-warning-bg: #fff4df;
+			--erp-danger: #b42332;
+			--erp-danger-bg: #fdebed;
+			--erp-shadow: 0 4px 18px rgba(23, 43, 77, .06);
+			--erp-radius: 14px;
+		}
+
+		body {
+			background: var(--erp-bg);
+			color: var(--erp-text);
+			font-family: system-ui, -apple-system, "Segoe UI", "Noto Sans TC", sans-serif;
+		}
+
+		.erp-navbar {
+			background: var(--erp-navy);
+			box-shadow: 0 2px 10px rgba(16, 31, 54, .15);
+		}
+
+		.erp-navbar .navbar-brand {
+			color: #fff;
+			font-weight: 700;
+			letter-spacing: .03em;
+		}
+
+		.erp-navbar .nav-link {
+			color: rgba(255, 255, 255, .78);
+			padding: .75rem 1rem;
+			margin: .15rem .2rem;
+			border-radius: 8px;
+			transition: background-color .18s ease, color .18s ease;
+		}
+
+		.erp-navbar .nav-link:hover,
+		.erp-navbar .nav-link:focus {
+			color: #fff;
+			background: rgba(255, 255, 255, .1);
+		}
+
+		.erp-navbar .nav-link.active {
+			color: #fff;
+			background: rgba(255, 255, 255, .14);
+			font-weight: 600;
+		}
+
+		.page-wrap {
+			max-width: 1440px;
+		}
+
+		.breadcrumb {
+			font-size: .875rem;
+		}
+
+		.breadcrumb-item,
+		.breadcrumb-item a {
+			color: var(--erp-muted);
+			text-decoration: none;
+		}
+
+		.breadcrumb-item.active {
+			color: var(--erp-blue);
+		}
+
+		.page-title {
+			color: var(--erp-navy);
+			font-weight: 750;
+			letter-spacing: -.02em;
+		}
+
+		.page-description {
+			color: var(--erp-muted);
+		}
+
+		.erp-card,
+		.info-card {
+			background: var(--erp-surface);
+			border: 1px solid var(--erp-border);
+			border-radius: var(--erp-radius);
+			box-shadow: var(--erp-shadow);
+		}
+
+		.erp-card {
+			overflow: hidden;
+		}
+
+		.form-card-header {
+			padding: 1.25rem 1.5rem;
+			background: var(--erp-navy);
+			color: #fff;
+		}
+
+		.form-card-header .subheading {
+			color: rgba(255, 255, 255, .72);
+			font-size: .875rem;
+		}
+
+		.form-card-body {
+			padding: 1.5rem;
+		}
+
+		.section-label {
+			color: var(--erp-navy);
+			font-weight: 700;
+			font-size: .95rem;
+			margin-bottom: 1rem;
+		}
+
+		.form-label,
+		.form-floating label {
+			color: var(--erp-muted);
+		}
+
+		.form-control,
+		.form-select {
+			border-color: #d5dee8;
+			border-radius: 9px;
+		}
+
+		.form-control:focus,
+		.form-select:focus {
+			border-color: #7295b8;
+			box-shadow: 0 0 0 .2rem rgba(49, 90, 131, .12);
+		}
+
+		.form-floating>.form-control,
+		.form-floating>.form-select {
+			min-height: 3.6rem;
+		}
+
+		.form-floating>textarea.form-control {
+			min-height: 130px;
+		}
+
+		.input-icon {
+			color: var(--erp-blue);
+		}
+
+		.range-panel {
+			background: #f5f8fb;
+			border: 1px solid var(--erp-border);
+			border-radius: 12px;
+			padding: 1.15rem;
+		}
+
+		.range-value {
+			color: var(--erp-blue);
+			font-size: 1.8rem;
+			font-weight: 750;
+			line-height: 1;
+		}
+
+		.form-range::-webkit-slider-thumb {
+			background: var(--erp-blue);
+		}
+
+		.form-range::-moz-range-thumb {
+			background: var(--erp-blue);
+		}
+
+		.form-range::-webkit-slider-runnable-track {
+			background: #d5e1ed;
+		}
+
+		.form-actions {
+			background: #f8fafc;
+			border-top: 1px solid var(--erp-border);
+			padding: 1rem 1.5rem;
+		}
+
+		.btn-erp-primary {
+			background: var(--erp-navy);
+			border-color: var(--erp-navy);
+			color: #fff;
+		}
+
+		.btn-erp-primary:hover,
+		.btn-erp-primary:focus {
+			background: #24456c;
+			border-color: #24456c;
+			color: #fff;
+		}
+
+		.btn-erp-secondary {
+			background: #fff;
+			color: #475569;
+			border-color: #cbd5e1;
+		}
+
+		.btn-erp-secondary:hover {
+			background: #f1f5f9;
+			color: #334155;
+		}
+
+		.info-card {
+			padding: 1.25rem;
+			height: 100%;
+		}
+
+		.info-icon {
+			width: 42px;
+			height: 42px;
+			display: inline-flex;
+			align-items: center;
+			justify-content: center;
+			border-radius: 11px;
+			background: var(--erp-blue-light);
+			color: var(--erp-blue);
+			font-size: 1.05rem;
+		}
+
+		.info-title {
+			color: var(--erp-navy);
+			font-weight: 700;
+		}
+
+		.info-text {
+			color: var(--erp-muted);
+			font-size: .9rem;
+		}
+
+		.step-item {
+			display: flex;
+			gap: .75rem;
+			align-items: flex-start;
+			margin-bottom: 1rem;
+		}
+
+		.step-number {
+			flex: 0 0 28px;
+			width: 28px;
+			height: 28px;
+			border-radius: 50%;
+			display: flex;
+			align-items: center;
+			justify-content: center;
+			background: var(--erp-blue-light);
+			color: var(--erp-blue);
+			font-weight: 700;
+			font-size: .85rem;
+		}
+
+		.step-item:last-child {
+			margin-bottom: 0;
+		}
+
+		.hint-box {
+			background: #f5f8fb;
+			border: 1px solid var(--erp-border);
+			border-radius: 10px;
+			padding: .85rem;
+		}
+
+		.erp-modal .modal-content {
+			border: 0;
+			border-radius: 16px;
+			overflow: hidden;
+			box-shadow: 0 18px 48px rgba(16, 31, 54, .22);
+		}
+
+		.erp-modal .modal-header {
+			background: var(--erp-navy);
+			color: #fff;
+			border-bottom: 0;
+			padding: 1.2rem 1.4rem;
+		}
+
+		.erp-modal .modal-title {
+			font-weight: 700;
+		}
+
+		.erp-modal .btn-close {
+			filter: invert(1);
+		}
+
+		.erp-modal .modal-body {
+			padding: 1.4rem;
+			background: #f3f6fa;
+		}
+
+		.confirm-list {
+			border: 1px solid var(--erp-border);
+			border-radius: 12px;
+			overflow: hidden;
+			background: #fff;
+		}
+
+		.confirm-row {
+			display: flex;
+			justify-content: space-between;
+			align-items: center;
+			gap: 1rem;
+			padding: .9rem 1rem;
+			border-bottom: 1px solid var(--erp-border);
+		}
+
+		.confirm-row:last-child {
+			border-bottom: 0;
+		}
+
+		.confirm-label {
+			color: var(--erp-muted);
+			font-weight: 600;
+		}
+
+		.confirm-value {
+			color: var(--erp-text);
+			font-weight: 650;
+			text-align: right;
+			overflow-wrap: anywhere;
+		}
+
+		.confirm-category {
+			display: inline-block;
+			border-radius: 999px;
+			padding: .35rem .7rem;
+			background: var(--erp-blue-light);
+			color: var(--erp-blue);
+			font-size: .8rem;
+			font-weight: 650;
+		}
+
+		.confirm-remark {
+			background: #f8fafc;
+			border: 1px solid var(--erp-border);
+			border-radius: 8px;
+			padding: .75rem;
+			white-space: pre-wrap;
+			overflow-wrap: anywhere;
+		}
+
+		.erp-modal .modal-footer {
+			border-top: 1px solid var(--erp-border);
+			padding: 1rem 1.4rem;
+		}
+
+		@media (max-width:991.98px) {
+			.form-card-body {
+				padding: 1.25rem;
+			}
+		}
+
+		@media (max-width:767.98px) {
+			.page-wrap {
+				padding-left: .85rem;
+				padding-right: .85rem;
+			}
+
+			.form-card-header,
+			.form-actions {
+				padding: 1rem;
+			}
+
+			.form-card-body {
+				padding: 1rem;
+			}
+
+			.confirm-row {
+				align-items: flex-start;
+			}
+
+			.confirm-value {
+				max-width: 65%;
+			}
+		}
+	</style>
+</head>
+
+<body>
+	<header>
+		<!-- 上方水平 Navbar：保留原有導覽結構，不使用側邊 Sidebar -->
+		<nav class="navbar navbar-expand-lg erp-navbar navbar-dark">
+			<div class="container-fluid px-lg-4">
+				<a class="navbar-brand" href="#"><i class="fa-solid fa-boxes-stacked me-2"></i>ERP Product System</a>
+				<button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
+					aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+					<span class="navbar-toggler-icon"></span>
+				</button>
+				<div class="collapse navbar-collapse" id="navbarNav">
+					<ul class="navbar-nav ms-lg-4">
+						<li class="nav-item"><a class="nav-link" aria-current="page" href="index.html"><i
+									class="fa-solid fa-house me-1"></i>首頁</a></li>
+						<li class="nav-item"><a class="nav-link active" href="forms-CRUD-C.html"><i
+									class="fa-solid fa-square-plus me-1"></i>產品建檔</a></li>
+						<li class="nav-item"><a class="nav-link" href="forms-CRUD-R.html"><i
+									class="fa-solid fa-list me-1"></i>產品列表</a></li>
+					</ul>
+				</div>
+			</div>
+		</nav>
+	</header>
+
+	<main class="container-fluid page-wrap py-4 py-lg-5">
+		<nav aria-label="breadcrumb">
+			<ol class="breadcrumb mb-3">
+				<li class="breadcrumb-item"><a href="index.html">首頁</a></li>
+				<li class="breadcrumb-item">產品管理</li>
+				<li class="breadcrumb-item active" aria-current="page">產品建檔</li>
+			</ol>
+		</nav>
+		<div class="d-flex flex-column flex-md-row justify-content-between align-items-md-end gap-2 mb-4">
+			<div>
+				<h1 class="page-title h3 mb-2"><i class="fa-solid fa-square-plus me-2"></i>產品建檔</h1>
+				<p class="page-description mb-0">建立產品基本資料、價格、庫存數量及分類資訊。</p>
+			</div>
+			<div class="small text-muted"><i class="fa-solid fa-circle-info me-1"></i>請確認資料正確後再送出建檔</div>
+		</div>
+
+		<div class="row g-4 align-items-stretch">
+			<div class="col-lg-8">
+				<div class="erp-card">
+					<div class="form-card-header d-flex align-items-center gap-3">
+						<span class="info-icon" style="background:rgba(255,255,255,.14);color:#fff"><i
+								class="fa-solid fa-file-circle-plus"></i></span>
+						<div>
+							<h2 class="h5 mb-1 fw-bold">新增產品資料</h2>
+							<div class="subheading">填寫以下欄位，完成產品建檔流程</div>
+						</div>
+					</div>
+					<div class="form-card-body">
+						<form id="productForm" novalidate>
+							<!-- 產品基本資訊 -->
+							<div class="section-label"><i class="fa-solid fa-circle-info me-2"></i>產品基本資訊</div>
+							<div class="form-floating mb-4">
+								<input type="text" name="product_name" id="product_name" class="form-control"
+									placeholder="產品名稱">
+								<label for="product_name"><i class="fa-solid fa-tag input-icon me-1"></i>產品名稱</label>
+								<div class="invalid-feedback">必填欄位，且名稱字數限制 2 ~ 10 字內</div>
+							</div>
+							<div class="row g-3 mb-4">
+								<div class="col-md-6">
+									<div class="form-floating">
+										<input type="number" name="product_price" id="product_price"
+											class="form-control" placeholder="價格" min="0">
+										<label for="product_price"><i
+												class="fa-solid fa-dollar-sign input-icon me-1"></i>產品價格</label>
+										<div class="invalid-feedback">必填欄位，且金額不能為 0</div>
+									</div>
+								</div>
+								<div class="col-md-6">
+									<div class="form-floating">
+										<select name="product_category" id="product_category" class="form-select">
+											<option value="" disabled selected>請選擇類別</option>
+											<option value="零食">零食</option>
+											<option value="乳製品">乳製品</option>
+											<option value="飲料">飲料</option>
+											<option value="日用品">日用品</option>
+										</select>
+										<label for="product_category"><i
+												class="fa-solid fa-folder-open input-icon me-1"></i>產品類別</label>
+									</div>
+								</div>
+							</div>
+							<!-- 庫存數量 -->
+							<div class="section-label"><i class="fa-solid fa-boxes-stacked me-2"></i>庫存設定</div>
+							<div class="range-panel mb-4">
+								<div class="d-flex justify-content-between align-items-center mb-3"><label
+										for="product_num" class="form-label mb-0 fw-semibold"><i
+											class="fa-solid fa-cubes input-icon me-1"></i>初始庫存數量</label>
+									<div><span class="range-value" id="product_num_val">50</span><span
+											class="text-muted small ms-1">個</span></div>
+								</div>
+								<input type="range" class="form-range" id="product_num" name="product_num" min="1"
+									max="100" step="1" value="50">
+								<div class="d-flex justify-content-between small text-muted mt-1"><span>1
+										個</span><span>100 個</span>
+								</div>
+							</div>
+							<!-- 備註資訊 -->
+							<div class="section-label"><i class="fa-solid fa-note-sticky me-2"></i>補充說明</div>
+							<div class="form-floating mb-2">
+								<textarea name="product_remark" id="product_remark" class="form-control"
+									placeholder="產品說明及注意事項，上限200字" style="height:130px"></textarea>
+								<label for="product_remark"><i class="fa-solid fa-pen input-icon me-1"></i>產品備註（上限 200
+									字）</label>
+							</div>
+							<div class="small text-muted"><i class="fa-solid fa-lightbulb me-1"></i>可填寫產品說明、注意事項或其他補充資訊。
+							</div>
+						</form>
+					</div>
+					<div class="form-actions d-flex flex-column flex-sm-row justify-content-sm-end gap-2">
+						<button type="button" class="btn btn-erp-secondary px-4" id="cancel"><i
+								class="fa-solid fa-rotate-left me-1"></i>取消</button>
+						<button type="button" form="productForm" class="btn btn-erp-primary px-4 fw-bold"
+							id="confirm"><i class="fa-solid fa-clipboard-check me-1"></i>確認建檔</button>
+					</div>
+				</div>
+			</div>
+			<div class="col-lg-4">
+				<div class="info-card mb-4">
+					<div class="d-flex align-items-center gap-3 mb-3"><span class="info-icon"><i
+								class="fa-solid fa-list-check"></i></span>
+						<h2 class="info-title h6 mb-0">建檔流程</h2>
+					</div>
+					<div class="step-item"><span class="step-number">1</span>
+						<div>
+							<div class="fw-semibold text-dark">填寫產品資訊</div>
+							<div class="info-text">輸入產品名稱、價格、類別與庫存數量。</div>
+						</div>
+					</div>
+					<div class="step-item"><span class="step-number">2</span>
+						<div>
+							<div class="fw-semibold text-dark">確認資料內容</div>
+							<div class="info-text">系統將顯示資料摘要，供送出前再次確認。</div>
+						</div>
+					</div>
+					<div class="step-item"><span class="step-number">3</span>
+						<div>
+							<div class="fw-semibold text-dark">送出建檔</div>
+							<div class="info-text">確認後送至 API 建立產品資料。</div>
+						</div>
+					</div>
+				</div>
+				<div class="info-card">
+					<div class="d-flex align-items-center gap-3 mb-3"><span class="info-icon"><i
+								class="fa-solid fa-shield-halved"></i></span>
+						<h2 class="info-title h6 mb-0">填寫提醒</h2>
+					</div>
+					<ul class="info-text ps-3 mb-3">
+						<li class="mb-2">產品名稱需為 2～10 個字。</li>
+						<li class="mb-2">價格需大於 0。</li>
+						<li class="mb-2">庫存數量可使用滑桿調整（1～100）。</li>
+						<li>產品分類請選擇合適項目。</li>
+					</ul>
+					<div class="hint-box small text-muted"><i
+							class="fa-solid fa-circle-info me-1 text-primary"></i>以上為原始表單既有欄位規則與選項，未新增資料欄位或 API 功能。
+					</div>
+				</div>
+			</div>
+		</div>
+	</main>
+
+	<!-- 建檔確認 Modal：保留原本 ID 與資料顯示欄位 -->
+	<div class="modal fade erp-modal" tabindex="-1" id="confirmForm">
+		<div class="modal-dialog modal-dialog-centered">
+			<div class="modal-content">
+				<div class="modal-header">
+					<h5 class="modal-title"><i class="fa-solid fa-circle-check me-2"></i>產品建檔確認</h5><button
+						type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+				</div>
+				<div class="modal-body">
+					<p class="text-muted small mb-3">請確認以下資料，確認後將新增至產品資料庫。</p>
+					<div class="confirm-list">
+						<div class="confirm-row"><span class="confirm-label">產品名稱</span><span id="display_name"
+								class="confirm-value"></span></div>
+						<div class="confirm-row"><span class="confirm-label">產品價格</span><span id="display_price"
+								class="confirm-value"></span></div>
+						<div class="confirm-row"><span class="confirm-label">產品數量</span><span id="display_num"
+								class="confirm-value"></span></div>
+						<div class="confirm-row"><span class="confirm-label">產品類別</span><span id="display_category"
+								class="confirm-category"></span></div>
+						<div class="p-3"><span class="confirm-label d-block mb-2">產品備註</span><span id="display_remark"
+								class="confirm-remark d-block text-muted small"></span></div>
+					</div>
+				</div>
+				<div class="modal-footer"><button type="button" class="btn btn-erp-secondary px-4"
+						data-bs-dismiss="modal" id="close"><i class="fa-solid fa-pen me-1"></i>返回修改</button><button
+						type="submit" class="btn btn-erp-primary px-4 fw-bold" id="add"><i
+							class="fa-solid fa-check me-1"></i>確認送出</button></div>
+			</div>
+		</div>
+	</div>
+
+	<!-- Scripts：保留原本本機套件及 API 使用方式 -->
+	<script src="js/bootstrap.min.js"></script>
+	<script src="js/jquery-4.0.0.js"></script>
+	<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+	<script>
+		$(() => {
+			const confirmModal = new bootstrap.Modal('#confirmForm');
+
+			$("#product_name").on("change", function () {
+				$(this).removeClass("is-invalid");
+			});
+
+			$("#product_price").on("change", function () {
+				$(this).removeClass("is-invalid");
+			});
+
+			$("#product_num").on("input change", function () {
+				$("#product_num_val").text($(this).val());
+			});
+
+			$("#confirm").on("click", function () {
+				const name = $("#product_name").val().trim();
+				const price = $("#product_price").val();
+				const category = $("#product_category").val();
+				const num = $("#product_num").val();
+				const remark = $("#product_remark").val();
+
+				if (name === "" || name.length < 2 || name.length > 10) {
+					$("#product_name").addClass("is-invalid").focus();
+					return;
+				}
+
+				if (price === "" || price <= 0) {
+					$("#product_price").addClass("is-invalid").focus();
+					return;
+				}
+
+				// 將資料填入 Modal 預覽區
+				$("#display_name").text(name);
+				$("#display_price").text(price ? price + " 元" : "未填");
+				$("#display_num").text(num + " 個");
+				$("#display_category").text(category ? category : "未選擇");
+				$("#display_remark").text(remark ? remark : "無");
+
+				confirmModal.show();
+			});
+
+			// Form submit
+			$("#add").on("click", function () {
+				const name = $("#product_name").val();
+				const price = $("#product_price").val();
+				const category = $("#product_category").val();
+				const num = $("#product_num").val();
+				const remark = $("#product_remark").val();
+
+				const parms = {
+					"name": name,
+					"price": price,
+					"category": category,
+					"num": num,
+					"remark": remark
+				}
+
+				$.ajax({
+					url: 'http://localhost:3000/product',
+					type: "POST",
+					dataType: "JSON",
+					data: JSON.stringify(parms),
+					contentType: "application/json",
+					success: () => {
+						confirmModal.hide();
+						clear();
+
+						Swal.fire({
+							title: "新增成功",
+							icon: "success",
+							showConfirmButton: false,
+							timer: 1500
+						});
+					},
+					error: () => {
+						Swal.fire({
+							title: "新增產品資料失敗",
+							text: "請檢查資料格式或連線是否正常",
+							icon: "error",
+							confirmButtonColor: "#78857a"
+						});
+					}
+				})
+			});
+
+			function clear() {
+				$("#productForm").get(0).reset();
+				$("#product_num_val").text("50");
+				$("#product_num").val(50);
+				$("#productForm").find(".is-invalid").removeClass("is-invalid");
+			}
+		});
+	</script>
+</body>
+
+</html>

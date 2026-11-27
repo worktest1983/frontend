@@ -1,0 +1,225 @@
+/* ERP 產品管理系統 - 共用樣式表
+ * 適用頁面：產品建檔、產品列表
+ * Bootstrap 5 / Font Awesome 基礎上使用
+ */
+
+/* ===== 共用設計變數與基本樣式 ===== */
+:root {
+      --erp-navy: #172b4d;
+      --erp-blue: #315a83;
+      --erp-blue-light: #eaf1f8;
+      --erp-bg: #f3f6fa;
+      --erp-surface: #ffffff;
+      --erp-text: #26364a;
+      --erp-muted: #64748b;
+      --erp-border: #dfe6ee;
+      --erp-success: #16805d;
+      --erp-success-bg: #e6f5ef;
+      --erp-warning: #a86b12;
+      --erp-warning-bg: #fff4df;
+      --erp-danger: #b42332;
+      --erp-danger-bg: #fdebed;
+      --erp-shadow: 0 4px 18px rgba(23, 43, 77, .06);
+      --erp-radius: 14px;
+    }
+    body { background: var(--erp-bg); color: var(--erp-text); font-family: system-ui, -apple-system, "Segoe UI", "Noto Sans TC", sans-serif; }
+    .erp-navbar { background: var(--erp-navy); box-shadow: 0 2px 10px rgba(16,31,54,.15); }
+    .erp-navbar .navbar-brand { color:#fff; font-weight:700; letter-spacing:.03em; }
+    .erp-navbar .nav-link { color:rgba(255,255,255,.78); padding:.75rem 1rem; margin:.15rem .2rem; border-radius:8px; transition:background-color .18s ease,color .18s ease; }
+    .erp-navbar .nav-link:hover,.erp-navbar .nav-link:focus { color:#fff; background:rgba(255,255,255,.1); }
+    .erp-navbar .nav-link.active { color:#fff; background:rgba(255,255,255,.14); font-weight:600; }
+    .page-wrap { max-width:1440px; }
+    .breadcrumb { font-size:.875rem; }
+    .breadcrumb-item,.breadcrumb-item a { color:var(--erp-muted); text-decoration:none; }
+    .breadcrumb-item.active { color:var(--erp-blue); }
+    .page-title { color:var(--erp-navy); font-weight:750; letter-spacing:-.02em; }
+    .page-description { color:var(--erp-muted); }
+    .erp-card,.info-card { background:var(--erp-surface); border:1px solid var(--erp-border); border-radius:var(--erp-radius); box-shadow:var(--erp-shadow); }
+    .erp-card { overflow:hidden; }
+    .form-card-header { padding:1.25rem 1.5rem; background:var(--erp-navy); color:#fff; }
+    .form-card-header .subheading { color:rgba(255,255,255,.72); font-size:.875rem; }
+    .form-card-body { padding:1.5rem; }
+    .section-label { color:var(--erp-navy); font-weight:700; font-size:.95rem; margin-bottom:1rem; }
+    .form-label,.form-floating label { color:var(--erp-muted); }
+    .form-control,.form-select { border-color:#d5dee8; border-radius:9px; }
+    .form-control:focus,.form-select:focus { border-color:#7295b8; box-shadow:0 0 0 .2rem rgba(49,90,131,.12); }
+    .form-floating > .form-control,.form-floating > .form-select { min-height:3.6rem; }
+    .form-floating > textarea.form-control { min-height:130px; }
+    .input-icon { color:var(--erp-blue); }
+    .range-panel { background:#f5f8fb; border:1px solid var(--erp-border); border-radius:12px; padding:1.15rem; }
+    .range-value { color:var(--erp-blue); font-size:1.8rem; font-weight:750; line-height:1; }
+    .form-range::-webkit-slider-thumb { background:var(--erp-blue); }
+    .form-range::-moz-range-thumb { background:var(--erp-blue); }
+    .form-range::-webkit-slider-runnable-track { background:#d5e1ed; }
+    .form-actions { background:#f8fafc; border-top:1px solid var(--erp-border); padding:1rem 1.5rem; }
+    .btn-erp-primary { background:var(--erp-navy); border-color:var(--erp-navy); color:#fff; }
+    .btn-erp-primary:hover,.btn-erp-primary:focus { background:#24456c; border-color:#24456c; color:#fff; }
+    .btn-erp-secondary { background:#fff; color:#475569; border-color:#cbd5e1; }
+    .btn-erp-secondary:hover { background:#f1f5f9; color:#334155; }
+    .info-card { padding:1.25rem; height:100%; }
+    .info-icon { width:42px;height:42px;display:inline-flex;align-items:center;justify-content:center;border-radius:11px;background:var(--erp-blue-light);color:var(--erp-blue);font-size:1.05rem; }
+    .info-title { color:var(--erp-navy); font-weight:700; }
+    .info-text { color:var(--erp-muted); font-size:.9rem; }
+    .step-item { display:flex; gap:.75rem; align-items:flex-start; margin-bottom:1rem; }
+    .step-number { flex:0 0 28px; width:28px;height:28px;border-radius:50%;display:flex;align-items:center;justify-content:center;background:var(--erp-blue-light);color:var(--erp-blue);font-weight:700;font-size:.85rem; }
+    .step-item:last-child { margin-bottom:0; }
+    .hint-box { background:#f5f8fb;border:1px solid var(--erp-border);border-radius:10px;padding:.85rem; }
+    .erp-modal .modal-content { border:0;border-radius:16px;overflow:hidden;box-shadow:0 18px 48px rgba(16,31,54,.22); }
+    .erp-modal .modal-header { background:var(--erp-navy);color:#fff;border-bottom:0;padding:1.2rem 1.4rem; }
+    .erp-modal .modal-title { font-weight:700; }
+    .erp-modal .btn-close { filter:invert(1); }
+    .erp-modal .modal-body { padding:1.4rem;background:#f3f6fa; }
+    .confirm-list { border:1px solid var(--erp-border);border-radius:12px;overflow:hidden;background:#fff; }
+    .confirm-row { display:flex;justify-content:space-between;align-items:center;gap:1rem;padding:.9rem 1rem;border-bottom:1px solid var(--erp-border); }
+    .confirm-row:last-child { border-bottom:0; }
+    .confirm-label { color:var(--erp-muted);font-weight:600; }
+    .confirm-value { color:var(--erp-text);font-weight:650;text-align:right;overflow-wrap:anywhere; }
+    .confirm-category { display:inline-block;border-radius:999px;padding:.35rem .7rem;background:var(--erp-blue-light);color:var(--erp-blue);font-size:.8rem;font-weight:650; }
+    .confirm-remark { background:#f8fafc;border:1px solid var(--erp-border);border-radius:8px;padding:.75rem;white-space:pre-wrap;overflow-wrap:anywhere; }
+    .erp-modal .modal-footer { border-top:1px solid var(--erp-border);padding:1rem 1.4rem; }
+    @media (max-width:991.98px) { .form-card-body { padding:1.25rem; } }
+    @media (max-width:767.98px) { .page-wrap { padding-left:.85rem;padding-right:.85rem; } .form-card-header,.form-actions { padding:1rem; } .form-card-body { padding:1rem; } .confirm-row { align-items:flex-start; } .confirm-value { max-width:65%; } }
+
+/* ===== 產品列表頁專用樣式 ===== */
+:root {
+      --erp-navy: #172b4d;
+      --erp-blue: #315a83;
+      --erp-blue-light: #eaf1f8;
+      --erp-bg: #f3f6fa;
+      --erp-surface: #ffffff;
+      --erp-text: #26364a;
+      --erp-muted: #64748b;
+      --erp-border: #dfe6ee;
+      --erp-success: #16805d;
+      --erp-success-bg: #e6f5ef;
+      --erp-warning: #a86b12;
+      --erp-warning-bg: #fff4df;
+      --erp-danger: #b42332;
+      --erp-danger-bg: #fdebed;
+      --erp-shadow: 0 4px 18px rgba(23, 43, 77, .06);
+      --erp-radius: 14px;
+    }
+
+    body {
+      background: var(--erp-bg);
+      color: var(--erp-text);
+      font-family: system-ui, -apple-system, "Segoe UI", "Noto Sans TC", sans-serif;
+    }
+
+    /* 上方水平導覽列：不使用 Sidebar */
+    .erp-navbar {
+      background: var(--erp-navy);
+      box-shadow: 0 2px 10px rgba(16, 31, 54, .15);
+    }
+    .erp-navbar .navbar-brand {
+      color: #fff;
+      font-weight: 700;
+      letter-spacing: .03em;
+    }
+    .erp-navbar .nav-link {
+      color: rgba(255, 255, 255, .78);
+      padding: .75rem 1rem;
+      margin: .15rem .2rem;
+      border-radius: 8px;
+      transition: background-color .18s ease, color .18s ease;
+    }
+    .erp-navbar .nav-link:hover,
+    .erp-navbar .nav-link:focus {
+      color: #fff;
+      background: rgba(255, 255, 255, .1);
+    }
+    .erp-navbar .nav-link.active {
+      color: #fff;
+      background: rgba(255, 255, 255, .14);
+      font-weight: 600;
+    }
+
+    .page-wrap { max-width: 1440px; }
+    .breadcrumb { font-size: .875rem; }
+    .breadcrumb-item, .breadcrumb-item a { color: var(--erp-muted); text-decoration: none; }
+    .breadcrumb-item.active { color: var(--erp-blue); }
+    .page-title { color: var(--erp-navy); font-weight: 750; letter-spacing: -.02em; }
+    .page-description { color: var(--erp-muted); }
+
+    .stat-card, .table-card {
+      background: var(--erp-surface);
+      border: 1px solid var(--erp-border);
+      border-radius: var(--erp-radius);
+      box-shadow: var(--erp-shadow);
+    }
+    .stat-card { height: 100%; padding: 1.15rem; }
+    .stat-icon {
+      width: 42px; height: 42px; display: inline-flex; align-items: center; justify-content: center;
+      border-radius: 11px; background: var(--erp-blue-light); color: var(--erp-blue); font-size: 1.05rem;
+    }
+    .stat-label { color: var(--erp-muted); font-size: .875rem; font-weight: 600; }
+    .stat-value { color: var(--erp-navy); font-size: 1.6rem; font-weight: 750; line-height: 1.25; }
+    .stat-note { color: var(--erp-muted); font-size: .78rem; }
+
+    .table-card { overflow: hidden; }
+    .table-card-header { padding: 1.15rem 1.25rem; border-bottom: 1px solid var(--erp-border); }
+    .table-title { color: var(--erp-navy); font-weight: 700; }
+    .table-responsive { margin-bottom: 0; }
+    #product_list { margin-bottom: 0; vertical-align: middle; }
+    #product_list thead th {
+      background: #edf2f7; color: #41556e; font-size: .82rem; font-weight: 700;
+      white-space: nowrap; border-color: var(--erp-border); padding: .85rem .75rem;
+    }
+    #product_list tbody td { border-color: var(--erp-border); padding: .85rem .75rem; vertical-align: middle; }
+    #product_list tbody tr:hover { background: #f7faff; }
+    .product-name { color: var(--erp-navy); font-weight: 650; }
+    .price-cell { color: var(--erp-text); font-weight: 650; white-space: nowrap; }
+    .category-badge { display: inline-block; border-radius: 999px; padding: .35rem .65rem; font-size: .78rem; font-weight: 650; white-space: nowrap; }
+    .category-snack { color: #9a5a12; background: #fff2dc; }
+    .category-dairy { color: #32658c; background: #e8f3fb; }
+    .category-drink { color: #16735b; background: #e5f5ef; }
+    .category-daily { color: #6d50a2; background: #f0eafb; }
+    .category-other { color: #526174; background: #edf1f5; }
+    .stock-badge { display: inline-flex; align-items: center; gap: .35rem; border-radius: 999px; padding: .35rem .6rem; font-size: .78rem; font-weight: 650; white-space: nowrap; }
+    .stock-ok { background: var(--erp-success-bg); color: var(--erp-success); }
+    .stock-low { background: var(--erp-warning-bg); color: var(--erp-warning); }
+    .stock-out { background: var(--erp-danger-bg); color: var(--erp-danger); }
+    .remark-cell { color: var(--erp-muted); min-width: 180px; }
+    .action-group { display: flex; justify-content: center; gap: .4rem; white-space: nowrap; }
+    .btn-update, .btn-del { border-radius: 8px; font-size: .82rem; padding: .4rem .65rem; }
+    .btn-update { background: var(--erp-blue-light); border-color: var(--erp-blue-light); color: var(--erp-blue); }
+    .btn-update:hover { background: var(--erp-blue); border-color: var(--erp-blue); color: #fff; }
+    .btn-del { background: var(--erp-danger-bg); border-color: var(--erp-danger-bg); color: var(--erp-danger); }
+    .btn-del:hover { background: var(--erp-danger); border-color: var(--erp-danger); color: #fff; }
+    .pagination .page-link { color: var(--erp-blue); border-color: var(--erp-border); border-radius: 8px; margin-left: .2rem; }
+    .pagination .page-item.active .page-link { background: var(--erp-navy); border-color: var(--erp-navy); color: #fff; }
+    .pagination .page-item.disabled .page-link { color: #9aa7b6; }
+
+    /* 編輯視窗 */
+    .erp-modal .modal-content { border: 0; border-radius: 16px; overflow: hidden; box-shadow: 0 18px 48px rgba(16, 31, 54, .22); }
+    .erp-modal .modal-header { background: var(--erp-navy); color: #fff; border-bottom: 0; padding: 1.2rem 1.4rem; }
+    .erp-modal .modal-title { font-weight: 700; }
+    .erp-modal .btn-close { filter: invert(1); }
+    .erp-modal .modal-body { padding: 1.4rem; }
+    .erp-modal .form-control, .erp-modal .form-select { border-color: #d5dee8; border-radius: 9px; }
+    .erp-modal .form-control:focus, .erp-modal .form-select:focus { border-color: #7295b8; box-shadow: 0 0 0 .2rem rgba(49, 90, 131, .12); }
+    .readonly-field { background: #f1f4f7 !important; color: #69788b !important; }
+    .range-panel { background: #f5f8fb; border: 1px solid var(--erp-border); border-radius: 12px; padding: 1rem; }
+    .range-value { color: var(--erp-blue); font-size: 1.55rem; font-weight: 750; }
+    .erp-modal .modal-footer { border-top: 1px solid var(--erp-border); padding: 1rem 1.4rem; }
+    .btn-erp-primary { background: var(--erp-navy); border-color: var(--erp-navy); color: #fff; }
+    .btn-erp-primary:hover { background: #24456c; border-color: #24456c; color: #fff; }
+    .btn-erp-secondary { background: #fff; color: #475569; border-color: #cbd5e1; }
+    .btn-erp-secondary:hover { background: #f1f5f9; }
+
+    @media (max-width: 767.98px) {
+      .page-wrap { padding-left: .85rem; padding-right: .85rem; }
+      .stat-value { font-size: 1.35rem; }
+      .table-card-header { padding: 1rem; }
+      /* 保留原有 Table RWD 卡片化方式，補上視覺樣式 */
+      .table-rwd thead { display: none; }
+      .table-rwd tbody tr { display: block; border: 1px solid var(--erp-border); border-radius: 12px; margin: .7rem 0; overflow: hidden; background: #fff; }
+      .table-rwd tbody td { display: flex; align-items: flex-start; justify-content: space-between; gap: 1rem; text-align: right !important; border: 0; border-bottom: 1px solid #edf1f5; padding: .7rem .85rem; }
+      .table-rwd tbody td:last-child { border-bottom: 0; }
+      .table-rwd tbody td::before { content: attr(data-th); color: var(--erp-muted); font-weight: 650; text-align: left; flex: 0 0 5.5rem; }
+      .table-rwd tbody td[data-th="功能操作"] { display: block; }
+      .table-rwd tbody td[data-th="功能操作"]::before { display: block; margin-bottom: .55rem; }
+      .action-group { justify-content: flex-end; }
+      .remark-cell { min-width: 0; }
+      .pagination { flex-wrap: wrap; }
+    }
